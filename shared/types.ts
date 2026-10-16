@@ -62,6 +62,8 @@ export interface AvatarInfo {
   description: string;
 }
 
+export type LadyVoiceId = 'lily_cheerful' | 'maya_gentle' | 'chloe_energetic' | 'tara_zen';
+
 export interface UserPreferences {
   theme: 'light' | 'dark' | 'system';
   soundEnabled: boolean;
@@ -76,6 +78,9 @@ export interface UserPreferences {
   waterDailyGoalMl: number;
   remindersPaused: boolean;
   pauseUntil: number | null; // null if paused indefinitely or not paused
+  language?: 'en' | 'ta';
+  ladyVoiceId?: LadyVoiceId;
+  selectedVoiceName?: string;
 }
 
 export interface DailyProgressSummary {
@@ -146,6 +151,7 @@ export interface WellBuddyAPI {
   setStartAtLogin: (enable: boolean) => Promise<boolean>;
   getStartAtLogin: () => Promise<boolean>;
   setIgnoreMouseEvents: (ignore: boolean, forward?: boolean) => void;
+  getTamilAudioDataUri: (text: string) => Promise<string | null>;
 
   // Events (from Main to Renderer)
   onReminderTriggered: (callback: (prompt: ActivePromptInfo) => void) => () => void;

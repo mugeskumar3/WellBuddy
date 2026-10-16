@@ -47,6 +47,9 @@ export const userPreferencesSchema = z.object({
   waterDailyGoalMl: z.number().int().min(500).max(10000).optional(),
   remindersPaused: z.boolean().optional(),
   pauseUntil: z.number().nullable().optional(),
+  language: z.enum(['en', 'ta']).optional(),
+  ladyVoiceId: z.enum(['lily_cheerful', 'maya_gentle', 'chloe_energetic', 'tara_zen']).optional(),
+  selectedVoiceName: z.string().optional(),
 });
 
 export const avatarUploadSchema = z.object({

@@ -64,6 +64,8 @@ const api: WellBuddyAPI = {
   getStartAtLogin: () => ipcRenderer.invoke('wellbuddy:get-start-at-login'),
   setIgnoreMouseEvents: (ignore: boolean, forward?: boolean) =>
     ipcRenderer.send('wellbuddy:set-ignore-mouse-events', ignore, forward),
+  getTamilAudioDataUri: (text: string) =>
+    ipcRenderer.invoke('wellbuddy:get-tamil-audio', text),
 
   // Events (from Main to Renderer)
   onReminderTriggered: (callback: (prompt: ActivePromptInfo) => void) => {

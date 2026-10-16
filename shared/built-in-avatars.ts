@@ -829,4 +829,164 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
       </svg>
     `)}`,
   },
+  {
+    id: 'doraemon',
+    name: 'Doraemon (டோரேமான்)',
+    type: 'builtin',
+    description: 'Beloved robotic cat with magical 4D pocket, waving hand, stepping shoes, and cheerful speaking animations.',
+    src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
+        <style>
+          /* Walking and Bouncing Rhythm */
+          @keyframes doremonWalk {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-4px) rotate(-2deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-4px) rotate(2deg); }
+          }
+          /* Waving Left Hand */
+          @keyframes doremonWaveArm {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-16deg); }
+            50% { transform: rotate(10deg); }
+            75% { transform: rotate(-12deg); }
+          }
+          /* Stepping Feet */
+          @keyframes doremonFootL {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(0.96); }
+          }
+          @keyframes doremonFootR {
+            0%, 100% { transform: translateY(-4px) scale(0.96); }
+            50% { transform: translateY(0) scale(1); }
+          }
+          /* Eye Blink */
+          @keyframes doremonBlink {
+            0%, 45%, 49%, 95%, 100% { transform: scaleY(1); }
+            47%, 97% { transform: scaleY(0.12); }
+          }
+          /* Bell Jingle */
+          @keyframes doremonBell {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(8deg); }
+          }
+          /* Speaking Mouth Movement Animation */
+          @keyframes doremonSpeak {
+            0%, 100% { transform: scale(1, 1); }
+            25% { transform: scale(1.12, 1.35); }
+            50% { transform: scale(0.96, 0.82); }
+            75% { transform: scale(1.08, 1.25); }
+          }
+          .doremon-body-group { animation: doremonWalk 1.4s ease-in-out infinite; transform-origin: 65px 105px; }
+          .doremon-wave-arm { animation: doremonWaveArm 1.5s ease-in-out infinite; transform-origin: 36px 74px; }
+          .doremon-foot-l { animation: doremonFootL 0.7s ease-in-out infinite; transform-origin: 47px 118px; }
+          .doremon-foot-r { animation: doremonFootR 0.7s ease-in-out infinite; transform-origin: 83px 118px; }
+          .doremon-eyes { animation: doremonBlink 3.8s ease-in-out infinite; transform-origin: 65px 33px; }
+          .doremon-bell-elem { animation: doremonBell 1.4s ease-in-out infinite; transform-origin: 65px 83px; }
+          .doremon-voice-mouth {
+            animation: doremonSpeak 0.38s ease-in-out infinite;
+            transform-origin: 65px 60px;
+          }
+        </style>
+
+        <!-- Ground Shadow -->
+        <ellipse cx="65" cy="122" rx="32" ry="4.5" fill="#000000" opacity="0.18"/>
+
+        <!-- Stepping White Feet -->
+        <g>
+          <ellipse class="doremon-foot-l" cx="47" cy="118" rx="12" ry="6" fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
+          <ellipse class="doremon-foot-r" cx="83" cy="118" rx="12" ry="6" fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
+        </g>
+
+        <!-- Main Doraemon Character Body Group -->
+        <g class="doremon-body-group">
+          <!-- Red Round Tail -->
+          <circle cx="93" cy="104" r="5.5" fill="#ef4444" stroke="#182230" stroke-width="2.4"/>
+
+          <!-- Blue Body Legs and Torso -->
+          <path d="M45 80 L40 108 Q40 114 47 114 L62 114 L62 107 L68 107 L68 114 L83 114 Q90 114 90 108 L85 80 Z" 
+                fill="#0298d7" stroke="#182230" stroke-width="2.8" stroke-linejoin="round"/>
+
+          <!-- White Tummy -->
+          <ellipse cx="65" cy="94" rx="19" ry="14" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+
+          <!-- 4D Pocket -->
+          <path d="M50 92 L80 92 Q65 109 50 92 Z" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+
+          <!-- Right Arm and Hand -->
+          <g>
+            <path d="M84 89 L99 96" stroke="#0298d7" stroke-width="10" stroke-linecap="round"/>
+            <path d="M84 89 L99 96" stroke="#182230" stroke-width="2.4" fill="none"/>
+            <circle cx="104" cy="99" r="7" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+          </g>
+
+          <!-- Left Arm and Hand (Waving High!) -->
+          <g class="doremon-wave-arm">
+            <path d="M45 82 L28 62" stroke="#0298d7" stroke-width="11" stroke-linecap="round"/>
+            <path d="M45 82 L28 62" stroke="#182230" stroke-width="2.4" fill="none"/>
+            <circle cx="23" cy="56" r="7.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+          </g>
+
+          <!-- Red Collar Band -->
+          <path d="M40 76 Q65 84 90 76" stroke="#dc2626" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M40 76 Q65 84 90 76" stroke="#182230" stroke-width="2.4" fill="none"/>
+
+          <!-- Golden Bell -->
+          <g class="doremon-bell-elem">
+            <circle cx="65" cy="83" r="6.8" fill="#facc15" stroke="#182230" stroke-width="1.8"/>
+            <line x1="59.5" y1="81.2" x2="70.5" y2="81.2" stroke="#182230" stroke-width="1.6"/>
+            <circle cx="65" cy="84.8" r="1.8" fill="#182230"/>
+            <line x1="65" y1="86.6" x2="65" y2="89.5" stroke="#182230" stroke-width="1.6"/>
+          </g>
+
+          <!-- Round Blue Head -->
+          <circle cx="65" cy="46" r="37" fill="#0298d7" stroke="#182230" stroke-width="2.8"/>
+
+          <!-- White Face Mask -->
+          <path d="M38 51 C38 30 50 26 65 26 C80 26 92 30 92 51 C92 68 80 75 65 75 C50 75 38 68 38 51 Z" 
+                fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
+
+          <!-- Eyes Group with Blinking Animation -->
+          <g class="doremon-eyes">
+            <ellipse cx="57.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+            <ellipse cx="72.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+            <circle cx="60" cy="33" r="2.6" fill="#182230"/>
+            <circle cx="70" cy="33" r="2.6" fill="#182230"/>
+            <circle cx="61" cy="32" r="0.9" fill="#ffffff"/>
+            <circle cx="71" cy="32" r="0.9" fill="#ffffff"/>
+          </g>
+
+          <!-- Red Round Nose -->
+          <circle cx="65" cy="40" r="5.2" fill="#ef4444" stroke="#182230" stroke-width="2"/>
+          <circle cx="63.6" cy="38.6" r="1.3" fill="#ffffff"/>
+
+          <!-- Nose-to-Mouth Vertical Seam Line -->
+          <line x1="65" y1="45.2" x2="65" y2="53" stroke="#182230" stroke-width="2.2"/>
+
+          <!-- Cheerful Wide Open Mouth with Speaking Animation -->
+          <g class="doremon-voice-mouth">
+            <path d="M44 54 Q65 57 86 54 Q86 78 65 78 Q44 78 44 54 Z" 
+                  fill="#b91c1c" stroke="#182230" stroke-width="2.4" stroke-linejoin="round"/>
+            <!-- Tongue inside mouth -->
+            <path d="M52 68 Q65 58 78 68 Q65 78 52 68 Z" 
+                  fill="#f97316" stroke="#182230" stroke-width="1.6"/>
+            <!-- Upper smile lip outline -->
+            <path d="M43 54 Q65 57 87 54" fill="none" stroke="#182230" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+
+          <!-- Whiskers (3 on Left, 3 on Right) -->
+          <g stroke="#182230" stroke-width="2" stroke-linecap="round">
+            <!-- Left Whiskers -->
+            <line x1="33" y1="44" x2="55" y2="47"/>
+            <line x1="30" y1="52" x2="55" y2="52"/>
+            <line x1="33" y1="59" x2="55" y2="57"/>
+            <!-- Right Whiskers -->
+            <line x1="75" y1="47" x2="97" y2="44"/>
+            <line x1="75" y1="52" x2="100" y2="52"/>
+            <line x1="75" y1="57" x2="97" y2="59"/>
+          </g>
+        </g>
+      </svg>
+    `)}`,
+  },
 ];

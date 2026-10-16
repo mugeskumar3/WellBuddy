@@ -13,6 +13,7 @@ import { RemindersView } from '../features/reminders/RemindersView';
 import { WellnessView } from '../features/wellness/WellnessView';
 import { AvatarSettingsView } from '../features/avatars/AvatarSettingsView';
 import { GeneralSettingsView } from '../features/settings/GeneralSettingsView';
+import { applyTheme } from '../utils/theme';
 import {
   LayoutDashboard,
   Droplet,
@@ -54,23 +55,17 @@ export const DashboardApp: React.FC = () => {
       setAvatars(fetchedAvatars);
 
       // Apply theme to html root
-      if (fetchedPrefs.theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else if (fetchedPrefs.theme === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        // System preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (prefersDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
+      applyTheme(fetchedPrefs.theme);
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
     }
   }, []);
+
+  useEffect(() => {
+    if (prefs?.theme) {
+      return applyTheme(prefs.theme);
+    }
+  }, [prefs?.theme]);
 
   useEffect(() => {
     refreshData();

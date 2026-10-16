@@ -31,6 +31,8 @@ class MockWellBuddyAPI implements WellBuddyAPI {
     waterDailyGoalMl: 2000,
     remindersPaused: false,
     pauseUntil: null,
+    language: 'en',
+    ladyVoiceId: 'lily_cheerful',
   };
 
   private reminders: ReminderSettings[] = [
@@ -249,6 +251,9 @@ class MockWellBuddyAPI implements WellBuddyAPI {
   }
 
   setIgnoreMouseEvents(_ignore: boolean, _forward?: boolean): void {}
+  async getTamilAudioDataUri(_text: string): Promise<string | null> {
+    return null;
+  }
 
   onReminderTriggered(): () => void {
     return () => {};

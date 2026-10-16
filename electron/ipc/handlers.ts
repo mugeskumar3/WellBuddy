@@ -269,6 +269,36 @@ export function registerIpcHandlers(options: {
     return startupManager.isStartAtLogin();
   });
 
+  // In-memory cache for Tamil voice MP3 audio Data URIs
+  const tamilAudioCache = new Map<string, string>();
+
+  ipcMain.handle('wellbuddy:get-tamil-audio', async (_event, text: string): Promise<string | null> => {
+    try {
+      const cleanText = text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+      if (!cleanText) return null;
+
+      if (tamilAudioCache.has(cleanText)) {
+        return tamilAudioCache.get(cleanText)!;
+      }
+
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ta&client=tw-ob&q=${encodeURIComponent(cleanText)}`;
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        },
+      });
+      if (!res.ok) return null;
+      const buffer = await res.arrayBuffer();
+      const base64 = Buffer.from(buffer).toString('base64');
+      const dataUri = `data:audio/mp3;base64,${base64}`;
+      tamilAudioCache.set(cleanText, dataUri);
+      return dataUri;
+    } catch (err) {
+      console.error('Failed to fetch Tamil TTS audio:', err);
+      return null;
+    }
+  });
+
   ipcMain.on('wellbuddy:set-ignore-mouse-events', (event, ignore: boolean, forward?: boolean) => {
     const win = BrowserWindow.fromWebContents(event.sender);
     if (win && !win.isDestroyed()) {

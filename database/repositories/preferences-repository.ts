@@ -40,6 +40,9 @@ export class PreferencesRepository {
       waterDailyGoalMl: parseInt(map.get('waterDailyGoalMl') || '2000', 10),
       remindersPaused: map.get('remindersPaused') === 'true',
       pauseUntil: map.get('pauseUntil') ? parseInt(map.get('pauseUntil')!, 10) : null,
+      language: (map.get('language') as 'en' | 'ta') || 'en',
+      ladyVoiceId: (map.get('ladyVoiceId') as any) || 'lily_cheerful',
+      selectedVoiceName: map.get('selectedVoiceName') || '',
     };
   }
 

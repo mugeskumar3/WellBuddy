@@ -3,6 +3,113 @@ import { api } from '../services/api';
 import { ActivePromptInfo, AvatarInfo, UserPreferences } from '@shared/types';
 import { BUILT_IN_AVATARS } from '@shared/built-in-avatars';
 import { Check, Clock, X, ExternalLink, EyeOff } from 'lucide-react';
+import { speakText } from '../utils/speech';
+import { applyTheme } from '../utils/theme';
+
+interface LanguageStrings {
+  greeting: string;
+  done: string;
+  keepItUp: string;
+  snoozed: string;
+  skipped: string;
+  btnDone: string;
+  btnSnooze: string;
+  btnSkip: string;
+  btnWalk: string;
+  btnStay: string;
+  btnApp: string;
+  btnHide: string;
+  reminderTag: string;
+  funQuotes: string[];
+  reminderMap: Record<string, { title: string; message: string }>;
+}
+
+const STRINGS: Record<'en' | 'ta', LanguageStrings> = {
+  en: {
+    greeting: 'Stay refreshed! 💧',
+    done: 'Great job! 🎉',
+    keepItUp: 'Keep it up! ⭐',
+    snoozed: 'Snoozed for 5m ⏱️',
+    skipped: 'Skipped for now 👍',
+    btnDone: 'Done',
+    btnSnooze: '5m',
+    btnSkip: 'Skip',
+    btnWalk: '🚶 Walk',
+    btnStay: '⏸️ Stay',
+    btnApp: 'App',
+    btnHide: 'Hide',
+    reminderTag: 'Reminder',
+    funQuotes: [
+      'Take a deep breath! 🌿',
+      'Hydration is key! 💧',
+      'You are doing great! ⭐',
+      'Remember your posture! 🧘',
+      'Blink and rest those eyes! 👀',
+      'Time for some water! 🥤',
+      'Stretch and refresh! ✨',
+    ],
+    reminderMap: {
+      water: {
+        title: 'Hydration Break',
+        message: 'Drink a glass of water to stay fresh and hydrated.',
+      },
+      standing: {
+        title: 'Stand & Move',
+        message: 'Stand up and take a quick walk to boost your circulation.',
+      },
+      eye_rest: {
+        title: '20-20-20 Eye Rest',
+        message: 'Look at an object 20 feet away for 20 seconds.',
+      },
+      stretching: {
+        title: 'Quick Stretch',
+        message: 'Gently stretch your neck, shoulders, and back.',
+      },
+    },
+  },
+  ta: {
+    greeting: 'ஆரோக்கியமாக இருங்கள்! 💧',
+    done: 'அருமை! நன்று செய்தீர்கள்! 🎉',
+    keepItUp: 'தொடர்ந்து செய்யுங்கள்! ⭐',
+    snoozed: '5 நிமிடம் தள்ளிவைக்கப்பட்டது ⏱️',
+    skipped: 'இப்போது தவிர்க்கப்பட்டது 👍',
+    btnDone: 'முடிந்தது',
+    btnSnooze: '5நி',
+    btnSkip: 'தவிர்',
+    btnWalk: '🚶 நடை',
+    btnStay: '⏸️ நில்',
+    btnApp: 'செயலி',
+    btnHide: 'மறை',
+    reminderTag: 'நினைவூட்டல்',
+    funQuotes: [
+      'ஆழமாக சுவாசியுங்கள்! 🌿',
+      'தண்ணீர் குடிக்க மறக்காதீர்கள்! 💧',
+      'மிகச் சிறப்பாக செய்கிறீர்கள்! ⭐',
+      'நேராக அமர்ந்து வேலை செய்யுங்கள்! 🧘',
+      'கண்களுக்கு சிறிது ஓய்வு கொடுங்கள்! 👀',
+      'கொஞ்சம் தண்ணீர் குடியுங்கள்! 🥤',
+      'தோள்பட்டையை தளர்த்தி புத்துணர்ச்சி பெறுங்கள்! ✨',
+    ],
+    reminderMap: {
+      water: {
+        title: 'தண்ணீர் குடிக்கும் நேரம்',
+        message: 'உடலை புத்துணர்ச்சியாக வைத்திருக்க ஒரு டம்ளர் தண்ணீர் குடியுங்கள்.',
+      },
+      standing: {
+        title: 'எழுந்து நடக்கும் நேரம்',
+        message: 'ரத்த ஓட்டம் சீராக ஒரு நிமிடம் எழுந்து நடந்து வாருங்கள்.',
+      },
+      eye_rest: {
+        title: 'கண்களுக்கு ஓய்வு நேரம்',
+        message: '20 விநாடிகள் தூரத்திலுள்ள பொருளைப் பார்த்து கண்களுக்கு ஓய்வு கொடுங்கள்.',
+      },
+      stretching: {
+        title: 'உடற்பயிற்சி / ஸ்ட்ரெட்ச்',
+        message: 'கழுத்து, தோள்பட்டை மற்றும் முதுகை மெதுவாக நீட்டி பயிற்சி செய்யுங்கள்.',
+      },
+    },
+  },
+};
 
 export const CompanionApp: React.FC = () => {
   const [prefs, setPrefs] = useState<UserPreferences | null>(null);
@@ -12,107 +119,68 @@ export const CompanionApp: React.FC = () => {
   const [isWaving, setIsWaving] = useState<boolean>(false);
   const [isWalking, setIsWalking] = useState<boolean>(true);
 
-  // Select a natural female / lady voice
-  const getLadyVoice = (): SpeechSynthesisVoice | null => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return null;
-    const voices = window.speechSynthesis.getVoices();
-    if (!voices || voices.length === 0) return null;
+  const lang: 'en' | 'ta' = prefs?.language === 'ta' ? 'ta' : 'en';
+  const t = STRINGS[lang];
 
-    // Female voice names common across Windows, Mac, and Chromium
-    const femaleKeywords = [
-      'zira',
-      'jenny',
-      'aria',
-      'samantha',
-      'victoria',
-      'karen',
-      'susan',
-      'female',
-      'woman',
-      'eva',
-      'hazel',
-      'catherine',
-      'serena',
-      'amy',
-      'fiona',
-    ];
+  const [speechActive, setSpeechActive] = useState<boolean>(false);
 
-    // Priority 1: English female voice (e.g. Microsoft Zira on Windows)
-    const englishFemale = voices.find((v) => {
-      const name = v.name.toLowerCase();
-      const isEnglish = v.lang.toLowerCase().startsWith('en');
-      return isEnglish && femaleKeywords.some((keyword) => name.includes(keyword));
+  // Friendly Bilingual Text-to-Speech synthesis with selected Lady voice
+  const playSpeech = (
+    text: string,
+    targetLang?: 'en' | 'ta',
+    customPrefs?: UserPreferences | null
+  ) => {
+    const activePrefs = customPrefs !== undefined ? customPrefs : prefs;
+    if (activePrefs && activePrefs.soundEnabled === false) return;
+    speakText(text, {
+      lang: targetLang || (activePrefs?.language === 'ta' ? 'ta' : 'en'),
+      ladyVoiceId: activePrefs?.ladyVoiceId,
+      voiceName: activePrefs?.selectedVoiceName,
+      onStart: () => setSpeechActive(true),
+      onEnd: () => setSpeechActive(false),
     });
-    if (englishFemale) return englishFemale;
-
-    // Priority 2: Any available female voice
-    const anyFemale = voices.find((v) => {
-      const name = v.name.toLowerCase();
-      return femaleKeywords.some((keyword) => name.includes(keyword));
-    });
-    if (anyFemale) return anyFemale;
-
-    // Priority 3: First English voice
-    const englishVoice = voices.find((v) => v.lang.toLowerCase().startsWith('en'));
-    return englishVoice || voices[0] || null;
   };
 
-  // Friendly Lady Text-to-Speech synthesis
-  const speakText = (text: string) => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
-    if (prefs && prefs.soundEnabled === false) return;
-    try {
-      window.speechSynthesis.cancel();
-      // Remove emojis from speech text for clean pronunciation
-      const cleanText = text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
-      if (!cleanText) return;
-
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      const ladyVoice = getLadyVoice();
-      if (ladyVoice) {
-        utterance.voice = ladyVoice;
-      }
-      utterance.pitch = 1.35; // gentle, melodious female companion tone
-      utterance.rate = 1.0;
-      utterance.volume = 0.95;
-      window.speechSynthesis.speak(utterance);
-    } catch {
-      // Speech synthesis silent fallback
-    }
-  };
-
-  // Pre-load synthesis voices
+  // Sync light / dark / system theme
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.getVoices();
-      const handleVoices = () => {
-        window.speechSynthesis.getVoices();
-      };
-      window.speechSynthesis.addEventListener('voiceschanged', handleVoices);
-      return () => {
-        window.speechSynthesis.removeEventListener('voiceschanged', handleVoices);
-      };
+    if (prefs?.theme) {
+      return applyTheme(prefs.theme);
     }
-  }, []);
+  }, [prefs?.theme]);
 
   useEffect(() => {
     // Initial fetch
-    api.getPreferences().then(setPrefs);
+    api.getPreferences().then((loadedPrefs) => {
+      setPrefs(loadedPrefs);
+      const currentLang = loadedPrefs?.language === 'ta' ? 'ta' : 'en';
+      const initialGreeting = STRINGS[currentLang].greeting;
+      setSpeechText(initialGreeting);
+      playSpeech(initialGreeting, currentLang, loadedPrefs);
+    });
     api.getAvatars().then(setAvatars);
 
-    // Initial greeting speech
-    speakText('Stay refreshed!');
     const greetingTimer = setTimeout(() => {
       setSpeechText('');
     }, 4500);
 
     // Listen for reminder triggers
     const unsubReminder = api.onReminderTriggered((prompt) => {
-      setActivePrompt(prompt);
-      setSpeechText(prompt.title);
-      speakText(`${prompt.title}. ${prompt.message}`);
-      setIsWaving(true);
-      setTimeout(() => setIsWaving(false), 3000);
+      api.getPreferences().then((currentPrefs) => {
+        const currentL = currentPrefs?.language === 'ta' ? 'ta' : 'en';
+        const str = STRINGS[currentL];
+        const title = currentL === 'ta' ? (str.reminderMap[prompt.type]?.title || prompt.title) : prompt.title;
+        const message = currentL === 'ta' ? (str.reminderMap[prompt.type]?.message || prompt.message) : prompt.message;
+
+        setActivePrompt({
+          ...prompt,
+          title,
+          message,
+        });
+        setSpeechText(title);
+        playSpeech(`${title}. ${message}`, currentL, currentPrefs);
+        setIsWaving(true);
+        setTimeout(() => setIsWaving(false), 3000);
+      });
     });
 
     // Listen for preference updates
@@ -177,11 +245,11 @@ export const CompanionApp: React.FC = () => {
   const handleDone = async () => {
     if (!activePrompt) return;
     await api.completeReminder(activePrompt.occurrenceId, activePrompt.type);
-    setSpeechText('Great job! 🎉');
-    speakText('Great job!');
+    setSpeechText(t.done);
+    playSpeech(t.done);
     setActivePrompt(null);
     setTimeout(() => {
-      setSpeechText('Keep it up!');
+      setSpeechText(t.keepItUp);
       setTimeout(() => setSpeechText(''), 3000);
     }, 2000);
   };
@@ -189,8 +257,8 @@ export const CompanionApp: React.FC = () => {
   const handleSnooze = async () => {
     if (!activePrompt) return;
     await api.snoozeReminder(activePrompt.occurrenceId, activePrompt.type, 5);
-    setSpeechText('Snoozed for 5m ⏱️');
-    speakText('Snoozed for 5 minutes');
+    setSpeechText(t.snoozed);
+    playSpeech(t.snoozed);
     setActivePrompt(null);
     setTimeout(() => setSpeechText(''), 3000);
   };
@@ -198,29 +266,33 @@ export const CompanionApp: React.FC = () => {
   const handleSkip = async () => {
     if (!activePrompt) return;
     await api.skipReminder(activePrompt.occurrenceId, activePrompt.type);
-    setSpeechText('Skipped for now 👍');
-    speakText('Skipped for now');
+    setSpeechText(t.skipped);
+    playSpeech(t.skipped);
     setActivePrompt(null);
     setTimeout(() => setSpeechText(''), 3000);
   };
 
   const handleMascotClick = () => {
     setIsWaving(true);
-    const funQuotes = [
-      'Take a deep breath! 🌿',
-      'Hydration is key! 💧',
-      'You are doing great! ⭐',
-      'Remember your posture! 🧘',
-      'Blink and rest those eyes! 👀',
-    ];
-    const quote = funQuotes[Math.floor(Math.random() * funQuotes.length)];
+    const quotes = t.funQuotes;
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
     setSpeechText(quote);
-    speakText(quote);
+    playSpeech(quote);
     setTimeout(() => setIsWaving(false), 2000);
     setTimeout(() => setSpeechText(''), 4500);
   };
 
-  const isSpeaking = Boolean(activePrompt || speechText);
+  const toggleLanguage = async () => {
+    const nextLang: 'en' | 'ta' = lang === 'en' ? 'ta' : 'en';
+    const updated = await api.updatePreferences({ language: nextLang });
+    setPrefs(updated);
+    const greet = STRINGS[nextLang].greeting;
+    setSpeechText(greet);
+    playSpeech(greet, nextLang);
+    setTimeout(() => setSpeechText(''), 4000);
+  };
+
+  const isSpeaking = Boolean(activePrompt || speechText || speechActive);
 
   const size = prefs?.companionSize || 'standard';
   const sizeClasses = {
@@ -252,7 +324,7 @@ export const CompanionApp: React.FC = () => {
                   </span>
                 </span>
                 <span className="text-[10px] bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
-                  Reminder
+                  {t.reminderTag}
                 </span>
               </div>
               <p className="text-slate-600 dark:text-slate-300 line-clamp-2 text-[11px] leading-tight">
@@ -263,17 +335,17 @@ export const CompanionApp: React.FC = () => {
               <div className="flex items-center gap-1.5 pt-1">
                 <button
                   onClick={handleDone}
-                  title="Mark as completed"
+                  title="Done"
                   className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg py-1 px-2 text-[11px] font-medium flex items-center justify-center gap-1 shadow-sm transition-colors"
                 >
-                  <Check size={12} strokeWidth={3} /> Done
+                  <Check size={12} strokeWidth={3} /> {t.btnDone}
                 </button>
                 <button
                   onClick={handleSnooze}
-                  title="Snooze 5 minutes"
+                  title="Snooze"
                   className="bg-amber-100 dark:bg-amber-900/50 hover:bg-amber-200 dark:hover:bg-amber-900 text-amber-700 dark:text-amber-300 rounded-lg py-1 px-2 text-[11px] font-medium flex items-center justify-center gap-1 transition-colors"
                 >
-                  <Clock size={12} /> 5m
+                  <Clock size={12} /> {t.btnSnooze}
                 </button>
                 <button
                   onClick={handleSkip}
@@ -311,7 +383,15 @@ export const CompanionApp: React.FC = () => {
             title={isWalking ? 'Switch to Stationary' : 'Switch to Walking'}
             className="hover:text-amber-300 flex items-center gap-0.5 px-1 py-0.5 font-medium transition-colors"
           >
-            {isWalking ? '🚶 Walk' : '⏸️ Stay'}
+            {isWalking ? t.btnWalk : t.btnStay}
+          </button>
+          <span className="text-slate-600">|</span>
+          <button
+            onClick={toggleLanguage}
+            title={lang === 'en' ? 'Switch to தமிழ்' : 'Switch to English'}
+            className="hover:text-emerald-300 flex items-center gap-0.5 px-1 py-0.5 font-bold transition-colors"
+          >
+            🌐 {lang === 'en' ? 'தமிழ்' : 'EN'}
           </button>
           <span className="text-slate-600">|</span>
           <button
@@ -319,7 +399,7 @@ export const CompanionApp: React.FC = () => {
             title="Open Dashboard"
             className="hover:text-teal-300 flex items-center gap-0.5 px-1 py-0.5 transition-colors"
           >
-            <ExternalLink size={10} /> App
+            <ExternalLink size={10} /> {t.btnApp}
           </button>
           <span className="text-slate-600">|</span>
           <button
@@ -327,7 +407,7 @@ export const CompanionApp: React.FC = () => {
             title="Hide Companion"
             className="hover:text-rose-300 flex items-center gap-0.5 px-1 py-0.5 transition-colors"
           >
-            <EyeOff size={10} /> Hide
+            <EyeOff size={10} /> {t.btnHide}
           </button>
         </div>
 
