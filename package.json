@@ -1,0 +1,56 @@
+{
+  "name": "wellbuddy",
+  "version": "1.0.0",
+  "description": "Personal desktop wellness companion for hydration, eye rest, posture, and stretching",
+  "main": "dist-electron/electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build:renderer": "tsc -b && vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:renderer && npm run build:electron",
+    "start": "electron .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dist": "npm run build && electron-builder"
+  },
+  "keywords": [
+    "wellness",
+    "companion",
+    "desktop",
+    "electron",
+    "react",
+    "habits",
+    "health"
+  ],
+  "author": "WellBuddy Team",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.58.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "autoprefixer": "^10.6.1",
+    "cross-env": "^10.1.0",
+    "electron": "^44.8.0",
+    "electron-builder": "^26.15.3",
+    "jsdom": "^30.1.3",
+    "postcss": "^8.5.30",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  }
+}

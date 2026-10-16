@@ -1,0 +1,37 @@
+{
+  "appId": "com.wellbuddy.app",
+  "productName": "WellBuddy",
+  "artifactName": "${productName}-Setup-${version}.${ext}",
+  "npmRebuild": false,
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "dist-electron/electron/main.js"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "WellBuddy"
+  }
+}
