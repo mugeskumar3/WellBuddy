@@ -145,6 +145,7 @@ export interface WellBuddyAPI {
   exitApp: () => Promise<void>;
   setStartAtLogin: (enable: boolean) => Promise<boolean>;
   getStartAtLogin: () => Promise<boolean>;
+  setIgnoreMouseEvents: (ignore: boolean, forward?: boolean) => void;
 
   // Events (from Main to Renderer)
   onReminderTriggered: (callback: (prompt: ActivePromptInfo) => void) => () => void;

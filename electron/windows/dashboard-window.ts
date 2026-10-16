@@ -26,13 +26,20 @@ export class DashboardWindowManager {
       minHeight: 600,
       title: 'WellBuddy — Desktop Wellness Companion',
       backgroundColor: '#f8fafc',
-      show: false,
+      show: true,
       webPreferences: {
         preload: this.preloadPath,
         contextIsolation: true,
         nodeIntegration: false,
-        sandbox: true,
       },
+    });
+
+    this.window.webContents.on('did-fail-load', (_event, errorCode, errorDescription) => {
+      console.error('Dashboard failed to load:', errorCode, errorDescription);
+    });
+
+    this.window.webContents.on('console-message', (_event, level, message) => {
+      console.log(`[Dashboard Console ${level}]: ${message}`);
     });
 
     // Handle close button -> minimize to tray unless app is quitting
@@ -47,10 +54,6 @@ export class DashboardWindowManager {
       this.window = null;
     });
 
-    this.window.once('ready-to-show', () => {
-      this.window?.show();
-    });
-
     // Load URL or local index.html
     const isDev = !app.isPackaged && process.env.NODE_ENV !== 'production';
     if (isDev && process.env.VITE_DEV_SERVER_URL) {
@@ -60,6 +63,8 @@ export class DashboardWindowManager {
       this.window.loadFile(indexPath);
     }
 
+    this.window.show();
+    this.window.focus();
     return this.window;
   }
 

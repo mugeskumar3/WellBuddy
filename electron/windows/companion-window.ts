@@ -40,6 +40,7 @@ export class CompanionWindowManager {
       x: posX,
       y: posY,
       transparent: true,
+      backgroundColor: '#00000000',
       frame: false,
       alwaysOnTop: true,
       resizable: false,
@@ -50,8 +51,15 @@ export class CompanionWindowManager {
         preload: this.preloadPath,
         contextIsolation: true,
         nodeIntegration: false,
-        sandbox: true,
       },
+    });
+
+    this.window.webContents.on('did-fail-load', (_event, errorCode, errorDescription) => {
+      console.error('Companion failed to load:', errorCode, errorDescription);
+    });
+
+    this.window.webContents.on('console-message', (_event, level, message) => {
+      console.log(`[Companion Console ${level}]: ${message}`);
     });
 
     // Save position on move
@@ -77,10 +85,10 @@ export class CompanionWindowManager {
       this.window.loadFile(indexPath, { query: { window: 'companion' } });
     }
 
+    this.window.setIgnoreMouseEvents(true, { forward: true });
+
     if (prefs.companionVisible) {
-      this.window.once('ready-to-show', () => {
-        this.window?.showInactive();
-      });
+      this.window.showInactive();
     }
 
     return this.window;

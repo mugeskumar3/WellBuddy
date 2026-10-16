@@ -51,6 +51,6 @@ export const userPreferencesSchema = z.object({
 
 export const avatarUploadSchema = z.object({
   fileName: z.string().min(1).max(255),
-  mimeType: z.enum(['image/png', 'image/jpeg', 'image/jpg', 'image/webp']),
+  mimeType: z.enum(['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif']),
   sizeBytes: z.number().max(5 * 1024 * 1024, 'File size must not exceed 5MB'),
 });

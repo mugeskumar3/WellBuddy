@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+html, body, #root {
+  background-color: transparent !important;
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @layer utilities {
   .drag-region {
     -webkit-app-region: drag;
@@ -51,3 +60,87 @@
 .animate-float-slow {
   animation: float-slow 4s ease-in-out infinite;
 }
+
+@keyframes mascot-celebrate {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.15) rotate(-8deg) translateY(-6px);
+  }
+  50% {
+    transform: scale(1.18) rotate(8deg) translateY(-8px);
+  }
+  75% {
+    transform: scale(1.12) rotate(-4deg) translateY(-3px);
+  }
+}
+
+.animate-mascot-celebrate {
+  animation: mascot-celebrate 0.9s ease-in-out infinite;
+}
+
+@keyframes companion-pacing {
+  0% {
+    transform: translateX(-32px) scaleX(1);
+  }
+  45% {
+    transform: translateX(32px) scaleX(1);
+  }
+  48% {
+    transform: translateX(32px) scaleX(-1);
+  }
+  95% {
+    transform: translateX(-32px) scaleX(-1);
+  }
+  100% {
+    transform: translateX(-32px) scaleX(1);
+  }
+}
+
+.animate-companion-walk {
+  animation: companion-pacing 10s ease-in-out infinite;
+}
+
+/* Talking Gesture Cadence */
+@keyframes talking-bob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(-2deg) scale(1.03);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(2deg) scale(1.03);
+  }
+}
+
+.animate-talking-speech {
+  animation: talking-bob 0.7s ease-in-out infinite;
+}
+
+/* Voice Equalizer Waves */
+@keyframes voice-wave-1 {
+  0%, 100% { height: 3px; }
+  50% { height: 14px; }
+}
+@keyframes voice-wave-2 {
+  0%, 100% { height: 12px; }
+  50% { height: 4px; }
+}
+@keyframes voice-wave-3 {
+  0%, 100% { height: 5px; }
+  50% { height: 16px; }
+}
+@keyframes voice-wave-4 {
+  0%, 100% { height: 13px; }
+  50% { height: 4px; }
+}
+
+.voice-wave-1 { animation: voice-wave-1 0.45s ease-in-out infinite; }
+.voice-wave-2 { animation: voice-wave-2 0.55s ease-in-out infinite 0.1s; }
+.voice-wave-3 { animation: voice-wave-3 0.4s ease-in-out infinite 0.15s; }
+.voice-wave-4 { animation: voice-wave-4 0.6s ease-in-out infinite 0.05s; }

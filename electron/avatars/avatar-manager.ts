@@ -25,11 +25,18 @@ export class AvatarManager {
         const files = fs.readdirSync(this.avatarDir);
         for (const file of files) {
           const ext = path.extname(file).toLowerCase();
-          if (['.png', '.jpg', '.jpeg', '.webp'].includes(ext)) {
+          if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(ext)) {
             const filePath = path.join(this.avatarDir, file);
             const id = path.basename(file, ext);
             const base64Data = fs.readFileSync(filePath).toString('base64');
-            const mime = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
+            const mime =
+              ext === '.png'
+                ? 'image/png'
+                : ext === '.webp'
+                ? 'image/webp'
+                : ext === '.gif'
+                ? 'image/gif'
+                : 'image/jpeg';
 
             list.push({
               id,
@@ -66,6 +73,7 @@ export class AvatarManager {
     let ext = '.png';
     if (mimeType === 'image/jpeg' || mimeType === 'image/jpg') ext = '.jpg';
     if (mimeType === 'image/webp') ext = '.webp';
+    if (mimeType === 'image/gif') ext = '.gif';
 
     const safeId = `custom_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
     const targetFile = path.join(this.avatarDir, `${safeId}${ext}`);
@@ -132,6 +140,14 @@ export class AvatarManager {
       const headerStr = String.fromCharCode(...buffer.slice(0, 4)) + String.fromCharCode(...buffer.slice(8, 12));
       if (!headerStr.startsWith('RIFF') || !headerStr.endsWith('WEBP')) {
         throw new Error('Invalid WebP header');
+      }
+    }
+
+    // GIF: GIF87a or GIF89a
+    if (mimeType === 'image/gif') {
+      const headerStr = String.fromCharCode(...buffer.slice(0, 3));
+      if (headerStr !== 'GIF') {
+        throw new Error('Invalid GIF header');
       }
     }
   }

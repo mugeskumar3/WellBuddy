@@ -62,6 +62,8 @@ const api: WellBuddyAPI = {
   setStartAtLogin: (enable: boolean) =>
     ipcRenderer.invoke('wellbuddy:set-start-at-login', enable),
   getStartAtLogin: () => ipcRenderer.invoke('wellbuddy:get-start-at-login'),
+  setIgnoreMouseEvents: (ignore: boolean, forward?: boolean) =>
+    ipcRenderer.send('wellbuddy:set-ignore-mouse-events', ignore, forward),
 
   // Events (from Main to Renderer)
   onReminderTriggered: (callback: (prompt: ActivePromptInfo) => void) => {

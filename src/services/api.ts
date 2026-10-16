@@ -248,6 +248,8 @@ class MockWellBuddyAPI implements WellBuddyAPI {
     return this.prefs.startAtLogin;
   }
 
+  setIgnoreMouseEvents(_ignore: boolean, _forward?: boolean): void {}
+
   onReminderTriggered(): () => void {
     return () => {};
   }

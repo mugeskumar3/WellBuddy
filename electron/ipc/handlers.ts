@@ -268,4 +268,11 @@ export function registerIpcHandlers(options: {
   ipcMain.handle('wellbuddy:get-start-at-login', async () => {
     return startupManager.isStartAtLogin();
   });
+
+  ipcMain.on('wellbuddy:set-ignore-mouse-events', (event, ignore: boolean, forward?: boolean) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    if (win && !win.isDestroyed()) {
+      win.setIgnoreMouseEvents(ignore, forward ? { forward: true } : undefined);
+    }
+  });
 }
