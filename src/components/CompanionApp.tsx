@@ -242,6 +242,8 @@ export const CompanionApp: React.FC = () => {
   const currentAvatar =
     avatars.find((a) => a.id === prefs?.selectedAvatarId) || BUILT_IN_AVATARS[0];
 
+
+
   const handleDone = async () => {
     if (!activePrompt) return;
     await api.completeReminder(activePrompt.occurrenceId, activePrompt.type);
@@ -426,7 +428,9 @@ export const CompanionApp: React.FC = () => {
             <img
               src={currentAvatar.src}
               alt={currentAvatar.name}
-              className="w-full h-full object-contain pointer-events-none drop-shadow-md select-none"
+              className={`w-full h-full object-contain pointer-events-none drop-shadow-md select-none ${
+                !isWalking ? 'avatar-stationary-pose' : ''
+              }`}
               draggable={false}
             />
           </div>

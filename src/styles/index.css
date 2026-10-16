@@ -82,26 +82,126 @@ html, body, #root {
   animation: mascot-celebrate 0.9s ease-in-out infinite;
 }
 
-@keyframes companion-pacing {
+/* Lifelike Natural Companion Walk-and-Pose Cadence (Human Walking Locomotion) */
+@keyframes companion-natural-walk {
+  /* --- Phase 1: Walk to Right (0% to 28%): Authentic Footstep Strides --- */
   0% {
-    transform: translateX(-32px) scaleX(1);
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(1);
   }
-  45% {
-    transform: translateX(32px) scaleX(1);
+  3.5% {
+    transform: translateX(-27px) translateY(-3px) rotate(1.5deg) scaleX(1);
   }
+  7% {
+    transform: translateX(-18px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+  10.5% {
+    transform: translateX(-9px) translateY(-3px) rotate(-1.5deg) scaleX(1);
+  }
+  14% {
+    transform: translateX(0px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+  17.5% {
+    transform: translateX(9px) translateY(-3px) rotate(1.5deg) scaleX(1);
+  }
+  21% {
+    transform: translateX(18px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+  24.5% {
+    transform: translateX(27px) translateY(-3px) rotate(-1.5deg) scaleX(1);
+  }
+  28% {
+    transform: translateX(36px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+
+  /* --- Phase 2: POSE AT RIGHT! (28% to 46%): Feet Solidly Planted, Expressive Pose --- */
+  29% {
+    transform: translateX(36px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+  33% {
+    transform: translateX(36px) translateY(-3px) rotate(-3deg) scale(1.03) scaleX(1);
+  }
+  38% {
+    transform: translateX(36px) translateY(-3px) rotate(-3deg) scale(1.03) scaleX(1);
+  }
+  43% {
+    transform: translateX(36px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+  46% {
+    transform: translateX(36px) translateY(0px) rotate(0deg) scaleX(1);
+  }
+
+  /* --- Phase 3: Smooth Realistic Turnaround (46% to 50%) --- */
   48% {
-    transform: translateX(32px) scaleX(-1);
+    transform: translateX(36px) translateY(-2px) scaleX(0.15);
   }
-  95% {
-    transform: translateX(-32px) scaleX(-1);
+  50% {
+    transform: translateX(36px) translateY(0px) scaleX(-1);
+  }
+
+  /* --- Phase 4: Walk to Left (50% to 78%): Authentic Footstep Strides --- */
+  53.5% {
+    transform: translateX(27px) translateY(-3px) rotate(1.5deg) scaleX(-1);
+  }
+  57% {
+    transform: translateX(18px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+  60.5% {
+    transform: translateX(9px) translateY(-3px) rotate(-1.5deg) scaleX(-1);
+  }
+  64% {
+    transform: translateX(0px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+  67.5% {
+    transform: translateX(-9px) translateY(-3px) rotate(1.5deg) scaleX(-1);
+  }
+  71% {
+    transform: translateX(-18px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+  74.5% {
+    transform: translateX(-27px) translateY(-3px) rotate(-1.5deg) scaleX(-1);
+  }
+  78% {
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+
+  /* --- Phase 5: POSE AT LEFT! (78% to 96%): Feet Solidly Planted, Expressive Pose --- */
+  79% {
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+  83% {
+    transform: translateX(-36px) translateY(-3px) rotate(3deg) scale(1.03) scaleX(-1);
+  }
+  88% {
+    transform: translateX(-36px) translateY(-3px) rotate(3deg) scale(1.03) scaleX(-1);
+  }
+  93% {
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+  96% {
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(-1);
+  }
+
+  /* --- Phase 6: Smooth Turnaround back to Right (96% to 100%) --- */
+  98% {
+    transform: translateX(-36px) translateY(-2px) scaleX(-0.15);
   }
   100% {
-    transform: translateX(-32px) scaleX(1);
+    transform: translateX(-36px) translateY(0px) rotate(0deg) scaleX(1);
   }
 }
 
 .animate-companion-walk {
-  animation: companion-pacing 10s ease-in-out infinite;
+  animation: companion-natural-walk 12s linear infinite;
+}
+
+/* Stationary Mode: When user clicks Stay, freeze foot locomotion and keep resting pose */
+.avatar-stationary-pose [class*="-foot-"],
+.avatar-stationary-pose [class*="-step-"],
+.avatar-stationary-pose [class*="-leg-"],
+.avatar-stationary-pose [class*="paw-"],
+.avatar-stationary-pose [class*="root-"] {
+  animation: none !important;
+  transform: none !important;
 }
 
 /* Talking Gesture Cadence */

@@ -28,10 +28,19 @@ describe('AvatarManager', () => {
     expect(ids).toContain('sprout');
     expect(ids).toContain('robobuddy');
     expect(ids).toContain('zen-pebble');
+    expect(ids).toContain('doraemon');
+    expect(ids).toContain('human-buddy');
 
-    // Confirm avatars are valid SVG data URIs
+    // Confirm avatars are valid SVG data URIs and well-formed XML
     for (const av of avatars) {
       expect(av.src.startsWith('data:image/svg+xml')).toBe(true);
+      const commaIdx = av.src.indexOf(',');
+      const svgText = decodeURIComponent(av.src.substring(commaIdx + 1));
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgText, 'image/svg+xml');
+      const parserError = doc.querySelector('parsererror');
+      expect(parserError, `SVG XML error in ${av.id}: ${parserError?.textContent}`).toBeNull();
+      expect(doc.querySelector('svg')).not.toBeNull();
     }
   });
 

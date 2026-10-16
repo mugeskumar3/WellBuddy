@@ -26,10 +26,10 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
         <style>
           /* Liquid Walking and Bouncing Rhythm */
           @keyframes dropWalk {
-            0%, 100% { transform: translateY(0px) scale(1, 1); }
-            25% { transform: translateY(-7px) scale(0.94, 1.06) rotate(-2deg); }
-            50% { transform: translateY(0px) scale(1.05, 0.95); }
-            75% { transform: translateY(-7px) scale(0.94, 1.06) rotate(2deg); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-2.5deg) scale(0.96, 1.04); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(2.5deg) scale(0.96, 1.04); }
           }
           /* Splashing Droplet 1 (Left Fountain Arc) */
           @keyframes splashArcL {
@@ -57,23 +57,27 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             50% { transform: translateX(12px) rotate(6deg); }
             100% { transform: translateX(-12px) rotate(0deg); }
           }
-          /* Stepping Water Feet */
+          /* Natural Stepping Feet */
           @keyframes footStepL {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(0.9); }
+            0%, 100% { transform: translate(-3px, 0px) rotate(5deg); }
+            25% { transform: translate(-1px, -3px) rotate(10deg); }
+            50% { transform: translate(3px, -6px) rotate(-10deg); }
+            75% { transform: translate(4px, -1px) rotate(-4deg); }
           }
           @keyframes footStepR {
-            0%, 100% { transform: translateY(-5px) scale(0.9); }
-            50% { transform: translateY(0) scale(1); }
+            0%, 100% { transform: translate(3px, -6px) rotate(-10deg); }
+            25% { transform: translate(4px, -1px) rotate(-4deg); }
+            50% { transform: translate(-3px, 0px) rotate(5deg); }
+            75% { transform: translate(-1px, -3px) rotate(10deg); }
           }
-          /* Waving Liquid Hands */
-          @keyframes armWaveL {
-            0%, 100% { transform: rotate(-15deg); }
-            50% { transform: rotate(25deg); }
+          /* Swinging Liquid Arms */
+          @keyframes armSwingL {
+            0%, 100% { transform: rotate(18deg) translateY(-2px); }
+            50% { transform: rotate(-18deg) translateY(2px); }
           }
-          @keyframes armWaveR {
-            0%, 100% { transform: rotate(25deg); }
-            50% { transform: rotate(-15deg); }
+          @keyframes armSwingR {
+            0%, 100% { transform: rotate(-18deg) translateY(2px); }
+            50% { transform: rotate(18deg) translateY(-2px); }
           }
           /* Water Ripple at base */
           @keyframes rippleBase {
@@ -85,15 +89,15 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
             48%, 98% { transform: scaleY(0.12); }
           }
-          .drop-body-group { animation: dropWalk 1.6s ease-in-out infinite; transform-origin: 65px 95px; }
+          .drop-body-group { animation: dropWalk 0.75s ease-in-out infinite; transform-origin: 65px 95px; }
           .splash-l { animation: splashArcL 2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite; }
           .splash-r { animation: splashArcR 2.3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite 0.4s; }
           .splash-top { animation: splashCrown 1.8s ease-out infinite 0.2s; }
           .inner-wave { animation: waveChurn 3s ease-in-out infinite alternate; transform-origin: 65px 80px; }
-          .water-arm-l { animation: armWaveL 1.2s ease-in-out infinite; transform-origin: 36px 72px; }
-          .water-arm-r { animation: armWaveR 1.2s ease-in-out infinite; transform-origin: 94px 72px; }
-          .water-foot-l { animation: footStepL 0.8s ease-in-out infinite; }
-          .water-foot-r { animation: footStepR 0.8s ease-in-out infinite; }
+          .water-arm-l { animation: armSwingL 0.75s ease-in-out infinite; transform-origin: 36px 72px; }
+          .water-arm-r { animation: armSwingR 0.75s ease-in-out infinite; transform-origin: 94px 72px; }
+          .water-foot-l { animation: footStepL 0.75s ease-in-out infinite; transform-origin: 52px 113px; }
+          .water-foot-r { animation: footStepR 0.75s ease-in-out infinite; transform-origin: 78px 113px; }
           .puddle-ripple { animation: rippleBase 2s ease-out infinite; }
           .drop-eyes { animation: dropEyes 3.8s ease-in-out infinite; transform-origin: 65px 72px; }
           /* Speaking Mouth Movement Animation */
@@ -193,21 +197,25 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
         <style>
           /* Marching Walk Cycle: Left and Right Mechanical Legs */
           @keyframes legStrideL {
-            0%, 100% { transform: rotate(-18deg) translateY(0px); }
-            50% { transform: rotate(18deg) translateY(-5px); }
+            0%, 100% { transform: rotate(-16deg) translateY(1px); }
+            25% { transform: rotate(0deg) translateY(2px); }
+            50% { transform: rotate(16deg) translateY(-4px); }
+            75% { transform: rotate(4deg) translateY(-6px); }
           }
           @keyframes legStrideR {
-            0%, 100% { transform: rotate(18deg) translateY(-5px); }
-            50% { transform: rotate(-18deg) translateY(0px); }
+            0%, 100% { transform: rotate(16deg) translateY(-4px); }
+            25% { transform: rotate(4deg) translateY(-6px); }
+            50% { transform: rotate(-16deg) translateY(1px); }
+            75% { transform: rotate(0deg) translateY(2px); }
           }
-          /* Swinging Arms and Waving Tool */
+          /* Counter-Swinging Mechanical Arms */
           @keyframes armSwingL {
-            0%, 100% { transform: rotate(24deg); }
-            50% { transform: rotate(-24deg); }
+            0%, 100% { transform: rotate(20deg) translateY(-2px); }
+            50% { transform: rotate(-20deg) translateY(2px); }
           }
-          @keyframes armWaveR {
-            0%, 100% { transform: rotate(-35deg); }
-            50% { transform: rotate(10deg); }
+          @keyframes armSwingR {
+            0%, 100% { transform: rotate(-20deg) translateY(2px); }
+            50% { transform: rotate(20deg) translateY(-2px); }
           }
           /* Jet Thruster Exhaust Flames under Feet */
           @keyframes jetPulse {
@@ -216,9 +224,9 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           }
           /* Robot Torso Walk Bobbing */
           @keyframes roboWalkBob {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
             25% { transform: translateY(-4px) rotate(-1.5deg); }
-            50% { transform: translateY(0px); }
+            50% { transform: translateY(0px) rotate(0deg); }
             75% { transform: translateY(-4px) rotate(1.5deg); }
           }
           /* Visor Scanner Laser Sweep */
@@ -241,11 +249,11 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
             48%, 98% { transform: scaleY(0.12); }
           }
-          .robo-body-all { animation: roboWalkBob 0.8s ease-in-out infinite; transform-origin: 70px 70px; }
-          .robo-leg-l { animation: legStrideL 0.8s ease-in-out infinite; transform-origin: 54px 92px; }
-          .robo-leg-r { animation: legStrideR 0.8s ease-in-out infinite; transform-origin: 86px 92px; }
-          .robo-arm-l { animation: armSwingL 0.8s ease-in-out infinite; transform-origin: 40px 66px; }
-          .robo-arm-r { animation: armWaveR 1.2s ease-in-out infinite; transform-origin: 100px 66px; }
+          .robo-body-all { animation: roboWalkBob 0.75s ease-in-out infinite; transform-origin: 70px 70px; }
+          .robo-leg-l { animation: legStrideL 0.75s ease-in-out infinite; transform-origin: 54px 92px; }
+          .robo-leg-r { animation: legStrideR 0.75s ease-in-out infinite; transform-origin: 86px 92px; }
+          .robo-arm-l { animation: armSwingL 0.75s ease-in-out infinite; transform-origin: 40px 66px; }
+          .robo-arm-r { animation: armSwingR 0.75s ease-in-out infinite; transform-origin: 100px 66px; }
           .jet-flame-l { animation: jetPulse 0.22s ease-in-out infinite; transform-origin: 54px 116px; }
           .jet-flame-r { animation: jetPulse 0.22s ease-in-out infinite 0.1s; transform-origin: 86px 116px; }
           .scanner-bar { animation: scannerLaser 1.5s ease-in-out infinite alternate; }
@@ -401,17 +409,22 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           }
           /* Stepping Walking Roots */
           @keyframes rootStepL {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            0%, 100% { transform: translate(-3px, 0px) rotate(5deg); }
+            25% { transform: translate(-1px, -3px) rotate(10deg); }
+            50% { transform: translate(3px, -5px) rotate(-8deg); }
+            75% { transform: translate(4px, -1px) rotate(-4deg); }
           }
           @keyframes rootStepR {
-            0%, 100% { transform: translateY(-5px); }
-            50% { transform: translateY(0); }
+            0%, 100% { transform: translate(3px, -5px) rotate(-8deg); }
+            25% { transform: translate(4px, -1px) rotate(-4deg); }
+            50% { transform: translate(-3px, 0px) rotate(5deg); }
+            75% { transform: translate(-1px, -3px) rotate(10deg); }
           }
           /* Pot Walk Wiggle */
           @keyframes potWiggle {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             25% { transform: translateY(-4px) rotate(-3deg); }
+            50% { transform: translateY(0) rotate(0deg); }
             75% { transform: translateY(-4px) rotate(3deg); }
           }
           /* Eye Blink */
@@ -425,9 +438,9 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           .leaf-dance-r { animation: leafDanceR 1.4s ease-in-out infinite; transform-origin: 65px 50px; }
           .spore-1 { animation: sporeFloat1 2.5s ease-out infinite; }
           .spore-2 { animation: sporeFloat2 2.8s ease-out infinite 0.6s; }
-          .pot-group { animation: potWiggle 0.8s ease-in-out infinite; transform-origin: 65px 110px; }
-          .root-l { animation: rootStepL 0.8s ease-in-out infinite; }
-          .root-r { animation: rootStepR 0.8s ease-in-out infinite; }
+          .pot-group { animation: potWiggle 0.75s ease-in-out infinite; transform-origin: 65px 110px; }
+          .root-l { animation: rootStepL 0.75s ease-in-out infinite; transform-origin: 50px 120px; }
+          .root-r { animation: rootStepR 0.75s ease-in-out infinite; transform-origin: 80px 120px; }
           .sprout-eyes { animation: sproutEyes 3.6s ease-in-out infinite; transform-origin: 65px 95px; }
           /* Speaking Mouth Movement Animation */
           @keyframes sproutSpeak {
@@ -512,34 +525,109 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           </linearGradient>
         </defs>
         <style>
-          /* 4-Paw Walking Gait */
+          /* 12-Second Synchronized Walk-and-Pose Cadence */
+          @keyframes catWalkBob {
+            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
+            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
+            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            28% { transform: translateY(0px) rotate(0deg); }
+            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
+            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
+            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
+            46% { transform: translateY(0px) rotate(0deg); }
+            48% { transform: translateY(-1px) rotate(0deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
+            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
+            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            78% { transform: translateY(0px) rotate(0deg); }
+            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
+            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
+            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
+            96% { transform: translateY(0px) rotate(0deg); }
+            98% { transform: translateY(-1px) rotate(0deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+          }
           @keyframes pawWalkFL {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-7px) rotate(-15deg); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            7% { transform: translate(0, 0) rotate(0deg); }
+            10.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            14% { transform: translate(2px, 0px) rotate(-2deg); }
+            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            21% { transform: translate(0, 0) rotate(0deg); }
+            24.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            57% { transform: translate(2px, 0px) rotate(-2deg); }
+            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            64% { transform: translate(0, 0) rotate(0deg); }
+            67.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            71% { transform: translate(2px, 0px) rotate(-2deg); }
+            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
           @keyframes pawWalkFR {
-            0%, 100% { transform: translateY(-7px) rotate(-15deg); }
-            50% { transform: translateY(0); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            7% { transform: translate(2px, 0px) rotate(-2deg); }
+            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            14% { transform: translate(0, 0) rotate(0deg); }
+            17.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            21% { transform: translate(2px, 0px) rotate(-2deg); }
+            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            57% { transform: translate(0, 0) rotate(0deg); }
+            60.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            64% { transform: translate(2px, 0px) rotate(-2deg); }
+            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            71% { transform: translate(0, 0) rotate(0deg); }
+            74.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
           @keyframes pawWalkBL {
-            0%, 100% { transform: translateY(-6px); }
-            50% { transform: translateY(0); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            7% { transform: translate(2px, 0px) rotate(-2deg); }
+            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            14% { transform: translate(0, 0) rotate(0deg); }
+            17.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            21% { transform: translate(2px, 0px) rotate(-2deg); }
+            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            57% { transform: translate(0, 0) rotate(0deg); }
+            60.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            64% { transform: translate(2px, 0px) rotate(-2deg); }
+            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            71% { transform: translate(0, 0) rotate(0deg); }
+            74.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
           @keyframes pawWalkBR {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            7% { transform: translate(0, 0) rotate(0deg); }
+            10.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            14% { transform: translate(2px, 0px) rotate(-2deg); }
+            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            21% { transform: translate(0, 0) rotate(0deg); }
+            24.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            57% { transform: translate(2px, 0px) rotate(-2deg); }
+            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            64% { transform: translate(0, 0) rotate(0deg); }
+            67.5% { transform: translate(4px, -5px) rotate(-10deg); }
+            71% { transform: translate(2px, 0px) rotate(-2deg); }
+            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
           /* Swishing Cat Tail */
           @keyframes tailSwish {
-            0%, 100% { transform: rotate(-20deg); }
-            50% { transform: rotate(30deg); }
-          }
-          /* Body Walk Bobbing */
-          @keyframes catWalkBob {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(-2deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(2deg); }
+            0%, 28%, 50%, 78%, 100% { transform: rotate(-15deg); }
+            32%, 42%, 82%, 92% { transform: rotate(35deg) scale(1.08); }
           }
           /* Ear Twitch */
           @keyframes earTwitchL {
@@ -556,12 +644,12 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
             48%, 98% { transform: scaleY(0.12); }
           }
-          .cat-body-group { animation: catWalkBob 0.8s ease-in-out infinite; transform-origin: 65px 75px; }
-          .paw-fl { animation: pawWalkFL 0.8s ease-in-out infinite; transform-origin: 48px 105px; }
-          .paw-fr { animation: pawWalkFR 0.8s ease-in-out infinite; transform-origin: 82px 105px; }
-          .paw-bl { animation: pawWalkBL 0.8s ease-in-out infinite; transform-origin: 36px 105px; }
-          .paw-br { animation: pawWalkBR 0.8s ease-in-out infinite; transform-origin: 94px 105px; }
-          .cat-tail { animation: tailSwish 1.5s ease-in-out infinite; transform-origin: 95px 75px; }
+          .cat-body-group { animation: catWalkBob 12s linear infinite; transform-origin: 65px 75px; }
+          .paw-fl { animation: pawWalkFL 12s linear infinite; transform-origin: 50px 114px; }
+          .paw-fr { animation: pawWalkFR 12s linear infinite; transform-origin: 80px 114px; }
+          .paw-bl { animation: pawWalkBL 12s linear infinite; transform-origin: 38px 116px; }
+          .paw-br { animation: pawWalkBR 12s linear infinite; transform-origin: 92px 116px; }
+          .cat-tail { animation: tailSwish 12s linear infinite; transform-origin: 95px 75px; }
           .cat-ear-l { animation: earTwitchL 3.8s ease-in-out infinite; transform-origin: 40px 38px; }
           .cat-ear-r { animation: earTwitchR 3.8s ease-in-out infinite; transform-origin: 90px 38px; }
           .cat-eyes { animation: catBlink 3.8s ease-in-out infinite; transform-origin: 65px 62px; }
@@ -648,10 +736,12 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           </filter>
         </defs>
         <style>
-          /* Levitating Meditation Bob */
+          /* Levitating Meditation Bobbing and Gliding */
           @keyframes zenFloat {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-7px) rotate(1.5deg); }
+            25% { transform: translateY(-5px) rotate(-2deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(2deg); }
           }
           /* Orbiting Chakra Orb 1 */
           @keyframes orbitOrb1 {
@@ -678,7 +768,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.25); }
           }
-          .zen-root-group { animation: zenFloat 3.8s ease-in-out infinite; transform-origin: 65px 70px; }
+          .zen-root-group { animation: zenFloat 1.5s ease-in-out infinite; transform-origin: 65px 70px; }
           .zen-breath-ring { animation: breathWave 3.5s ease-out infinite; }
           .chakra-1 { animation: orbitOrb1 4s linear infinite; transform-origin: 65px 70px; }
           .chakra-2 { animation: orbitOrb2 4s linear infinite; transform-origin: 65px 70px; }
@@ -752,19 +842,25 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           </filter>
         </defs>
         <style>
+          /* Natural Stepping Cosmic Boots */
           @keyframes starStepL {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-7px) rotate(-10deg); }
+            0%, 100% { transform: translate(-4px, 0px) rotate(6deg); }
+            25% { transform: translate(-2px, -3px) rotate(12deg); }
+            50% { transform: translate(3px, -6px) rotate(-12deg); }
+            75% { transform: translate(4px, -1px) rotate(-5deg); }
           }
           @keyframes starStepR {
-            0%, 100% { transform: translateY(-7px) rotate(10deg); }
-            50% { transform: translateY(0); }
+            0%, 100% { transform: translate(3px, -6px) rotate(-12deg); }
+            25% { transform: translate(4px, -1px) rotate(-5deg); }
+            50% { transform: translate(-4px, 0px) rotate(6deg); }
+            75% { transform: translate(-2px, -3px) rotate(12deg); }
           }
+          /* Body Walk Bobbing */
           @keyframes starBodyWalk {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(-4deg); }
+            25% { transform: translateY(-4px) rotate(-3.5deg); }
             50% { transform: translateY(0) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(4deg); }
+            75% { transform: translateY(-4px) rotate(3.5deg); }
           }
           @keyframes sparkleSpin {
             0% { transform: rotate(0deg) scale(0.8); opacity: 0.4; }
@@ -775,9 +871,9 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
             48%, 98% { transform: scaleY(0.12); }
           }
-          .star-step-l { animation: starStepL 0.8s ease-in-out infinite; transform-origin: 52px 105px; }
-          .star-step-r { animation: starStepR 0.8s ease-in-out infinite; transform-origin: 78px 105px; }
-          .star-body-walk { animation: starBodyWalk 0.8s ease-in-out infinite; transform-origin: 65px 65px; }
+          .star-step-l { animation: starStepL 0.75s ease-in-out infinite; transform-origin: 52px 116px; }
+          .star-step-r { animation: starStepR 0.75s ease-in-out infinite; transform-origin: 78px 116px; }
+          .star-body-walk { animation: starBodyWalk 0.75s ease-in-out infinite; transform-origin: 65px 65px; }
           .sparkle-orbit { animation: sparkleSpin 3s linear infinite; transform-origin: 65px 65px; }
           .star-eyes { animation: starEyes 3.8s ease-in-out infinite; transform-origin: 65px 68px; }
           /* Speaking Mouth Movement Animation */
@@ -837,52 +933,105 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
         <style>
-          /* Walking and Bouncing Rhythm */
+          /* 12-Second Synchronized Walk-and-Pose Cadence */
           @keyframes doremonWalk {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(-2deg); }
+            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
+            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
+            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            28% { transform: translateY(0px) rotate(0deg); }
+            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
+            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
+            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
+            46% { transform: translateY(0px) rotate(0deg); }
+            48% { transform: translateY(-1px) rotate(0deg); }
             50% { transform: translateY(0px) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(2deg); }
+            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
+            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
+            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            78% { transform: translateY(0px) rotate(0deg); }
+            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
+            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
+            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
+            96% { transform: translateY(0px) rotate(0deg); }
+            98% { transform: translateY(-1px) rotate(0deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
           }
-          /* Waving Left Hand */
-          @keyframes doremonWaveArm {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-16deg); }
-            50% { transform: rotate(10deg); }
-            75% { transform: rotate(-12deg); }
-          }
-          /* Stepping Feet */
           @keyframes doremonFootL {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-4px) scale(0.96); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            7% { transform: translate(0, 0) rotate(0deg); }
+            10.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            14% { transform: translate(2px, 0px) rotate(-2deg); }
+            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            21% { transform: translate(0, 0) rotate(0deg); }
+            24.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            57% { transform: translate(2px, 0px) rotate(-2deg); }
+            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            64% { transform: translate(0, 0) rotate(0deg); }
+            67.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            71% { transform: translate(2px, 0px) rotate(-2deg); }
+            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
           @keyframes doremonFootR {
-            0%, 100% { transform: translateY(-4px) scale(0.96); }
-            50% { transform: translateY(0) scale(1); }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            7% { transform: translate(2px, 0px) rotate(-2deg); }
+            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            14% { transform: translate(0, 0) rotate(0deg); }
+            17.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            21% { transform: translate(2px, 0px) rotate(-2deg); }
+            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            57% { transform: translate(0, 0) rotate(0deg); }
+            60.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            64% { transform: translate(2px, 0px) rotate(-2deg); }
+            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            71% { transform: translate(0, 0) rotate(0deg); }
+            74.5% { transform: translate(4px, -6px) rotate(-10deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
           }
-          /* Eye Blink */
+          @keyframes doremonWaveArm {
+            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
+            32%, 42% { transform: rotate(-24deg) scale(1.06); }
+            82%, 92% { transform: rotate(-24deg) scale(1.06); }
+          }
+          @keyframes doremonArmR {
+            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
+            3.5%, 17.5% { transform: rotate(16deg) translateY(-2px); }
+            10.5%, 24.5% { transform: rotate(-14deg) translateY(2px); }
+            28%, 46% { transform: rotate(0deg); }
+            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
+            53.5%, 67.5% { transform: rotate(-14deg) translateY(2px); }
+            60.5%, 74.5% { transform: rotate(16deg) translateY(-2px); }
+            78%, 100% { transform: rotate(0deg); }
+          }
           @keyframes doremonBlink {
             0%, 45%, 49%, 95%, 100% { transform: scaleY(1); }
             47%, 97% { transform: scaleY(0.12); }
           }
-          /* Bell Jingle */
           @keyframes doremonBell {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(8deg); }
+            0%, 28%, 46%, 78%, 96%, 100% { transform: rotate(0deg); }
+            3.5%, 17.5%, 53.5%, 67.5% { transform: rotate(-6deg); }
+            10.5%, 24.5%, 60.5%, 74.5% { transform: rotate(6deg); }
+            34%, 40%, 84%, 90% { transform: rotate(8deg); }
           }
-          /* Speaking Mouth Movement Animation */
           @keyframes doremonSpeak {
             0%, 100% { transform: scale(1, 1); }
             25% { transform: scale(1.12, 1.35); }
             50% { transform: scale(0.96, 0.82); }
             75% { transform: scale(1.08, 1.25); }
           }
-          .doremon-body-group { animation: doremonWalk 1.4s ease-in-out infinite; transform-origin: 65px 105px; }
-          .doremon-wave-arm { animation: doremonWaveArm 1.5s ease-in-out infinite; transform-origin: 36px 74px; }
-          .doremon-foot-l { animation: doremonFootL 0.7s ease-in-out infinite; transform-origin: 47px 118px; }
-          .doremon-foot-r { animation: doremonFootR 0.7s ease-in-out infinite; transform-origin: 83px 118px; }
+          .doremon-body-group { animation: doremonWalk 12s linear infinite; transform-origin: 65px 105px; }
+          .doremon-wave-arm { animation: doremonWaveArm 12s linear infinite; transform-origin: 36px 74px; }
+          .doremon-arm-r { animation: doremonArmR 12s linear infinite; transform-origin: 84px 89px; }
+          .doremon-foot-l { animation: doremonFootL 12s linear infinite; transform-origin: 47px 118px; }
+          .doremon-foot-r { animation: doremonFootR 12s linear infinite; transform-origin: 83px 118px; }
           .doremon-eyes { animation: doremonBlink 3.8s ease-in-out infinite; transform-origin: 65px 33px; }
-          .doremon-bell-elem { animation: doremonBell 1.4s ease-in-out infinite; transform-origin: 65px 83px; }
+          .doremon-bell-elem { animation: doremonBell 12s linear infinite; transform-origin: 65px 83px; }
           .doremon-voice-mouth {
             animation: doremonSpeak 0.38s ease-in-out infinite;
             transform-origin: 65px 60px;
@@ -913,8 +1062,8 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
           <!-- 4D Pocket -->
           <path d="M50 92 L80 92 Q65 109 50 92 Z" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
 
-          <!-- Right Arm and Hand -->
-          <g>
+          <!-- Right Arm and Hand with Counter-Stride Swing -->
+          <g class="doremon-arm-r">
             <path d="M84 89 L99 96" stroke="#0298d7" stroke-width="10" stroke-linecap="round"/>
             <path d="M84 89 L99 96" stroke="#182230" stroke-width="2.4" fill="none"/>
             <circle cx="104" cy="99" r="7" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
@@ -985,6 +1134,223 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
             <line x1="75" y1="52" x2="100" y2="52"/>
             <line x1="75" y1="57" x2="97" y2="59"/>
           </g>
+        </g>
+      </svg>
+    `)}`,
+  },
+  {
+    id: 'human-buddy',
+    name: 'Alex the Buddy (மனித நண்பன்)',
+    type: 'builtin',
+    description: 'Proper human companion with walking sneakers, swinging arms, head tilt, expressive smile, and charming idle poses.',
+    src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
+        <defs>
+          <linearGradient id="alexHair" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#451a03"/>
+            <stop offset="100%" stop-color="#1c1917"/>
+          </linearGradient>
+          <linearGradient id="alexSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffedd5"/>
+            <stop offset="100%" stop-color="#fed7aa"/>
+          </linearGradient>
+          <linearGradient id="alexHoodie" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#0369a1"/>
+          </linearGradient>
+          <linearGradient id="alexPants" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e3a8a"/>
+            <stop offset="100%" stop-color="#172554"/>
+          </linearGradient>
+          <filter id="alexShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <style>
+          /* 12-Second Human Walk-and-Pose Cadence */
+          @keyframes humanBodyGroup {
+            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
+            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
+            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            28% { transform: translateY(0px) rotate(0deg); }
+            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
+            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
+            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
+            46% { transform: translateY(0px) rotate(0deg); }
+            48% { transform: translateY(-1px) rotate(0deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
+            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
+            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
+            78% { transform: translateY(0px) rotate(0deg); }
+            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
+            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
+            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
+            96% { transform: translateY(0px) rotate(0deg); }
+            98% { transform: translateY(-1px) rotate(0deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+          }
+          @keyframes humanLegL {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            7% { transform: translate(0, 0) rotate(0deg); }
+            10.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            14% { transform: translate(2px, 0px) rotate(-2deg); }
+            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            21% { transform: translate(0, 0) rotate(0deg); }
+            24.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            57% { transform: translate(2px, 0px) rotate(-2deg); }
+            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            64% { transform: translate(0, 0) rotate(0deg); }
+            67.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            71% { transform: translate(2px, 0px) rotate(-2deg); }
+            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+          }
+          @keyframes humanLegR {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            3.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            7% { transform: translate(2px, 0px) rotate(-2deg); }
+            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            14% { transform: translate(0, 0) rotate(0deg); }
+            17.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            21% { transform: translate(2px, 0px) rotate(-2deg); }
+            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            28%, 50% { transform: translate(0, 0) rotate(0deg); }
+            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            57% { transform: translate(0, 0) rotate(0deg); }
+            60.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            64% { transform: translate(2px, 0px) rotate(-2deg); }
+            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
+            71% { transform: translate(0, 0) rotate(0deg); }
+            74.5% { transform: translate(5px, -6px) rotate(-12deg); }
+            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+          }
+          @keyframes humanArmL {
+            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
+            3.5%, 17.5% { transform: rotate(18deg) translateY(-2px); }
+            10.5%, 24.5% { transform: rotate(-18deg) translateY(2px); }
+            28% { transform: rotate(0deg); }
+            32%, 42% { transform: rotate(26deg) translateY(-2px); }
+            46% { transform: rotate(0deg); }
+            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
+            53.5%, 67.5% { transform: rotate(-18deg) translateY(2px); }
+            60.5%, 74.5% { transform: rotate(18deg) translateY(-2px); }
+            78% { transform: rotate(0deg); }
+            82%, 92% { transform: rotate(-48deg) translateY(-8px) scale(1.05); }
+            96%, 100% { transform: rotate(0deg); }
+          }
+          @keyframes humanArmR {
+            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
+            3.5%, 17.5% { transform: rotate(-18deg) translateY(2px); }
+            10.5%, 24.5% { transform: rotate(18deg) translateY(-2px); }
+            28% { transform: rotate(0deg); }
+            32%, 42% { transform: rotate(-48deg) translateY(-8px) scale(1.05); }
+            46% { transform: rotate(0deg); }
+            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
+            53.5%, 67.5% { transform: rotate(18deg) translateY(-2px); }
+            60.5%, 74.5% { transform: rotate(-18deg) translateY(2px); }
+            78% { transform: rotate(0deg); }
+            82%, 92% { transform: rotate(26deg) translateY(-2px); }
+            96%, 100% { transform: rotate(0deg); }
+          }
+          @keyframes humanEyes {
+            0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
+            48%, 98% { transform: scaleY(0.1); }
+          }
+          @keyframes humanMouthSpeak {
+            0%, 100% { transform: scale(1, 1); }
+            25% { transform: scale(1.15, 1.4); }
+            50% { transform: scale(0.95, 0.85); }
+            75% { transform: scale(1.1, 1.3); }
+          }
+          .human-body-group { animation: humanBodyGroup 12s linear infinite; transform-origin: 65px 115px; }
+          .human-leg-l { animation: humanLegL 12s linear infinite; transform-origin: 52px 88px; }
+          .human-leg-r { animation: humanLegR 12s linear infinite; transform-origin: 78px 88px; }
+          .human-arm-l { animation: humanArmL 12s linear infinite; transform-origin: 39px 62px; }
+          .human-arm-r { animation: humanArmR 12s linear infinite; transform-origin: 91px 62px; }
+          .human-eyes { animation: humanEyes 3.8s ease-in-out infinite; transform-origin: 65px 44px; }
+          .human-voice-mouth { animation: humanMouthSpeak 0.38s ease-in-out infinite; transform-origin: 65px 50px; }
+        </style>
+
+        <!-- Ground Shadow -->
+        <ellipse cx="65" cy="123" rx="30" ry="4.5" fill="#000000" opacity="0.18"/>
+
+        <!-- Left Leg and Sneaker -->
+        <g class="human-leg-l">
+          <rect x="47" y="86" width="10" height="26" rx="4" fill="url(#alexPants)"/>
+          <path d="M43 112 L61 112 Q65 112 65 116 L65 119 Q65 122 59 122 L41 122 Q39 122 39 119 L39 115 Q39 112 43 112 Z" 
+                fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
+          <path d="M40 120 L64 120" stroke="#ef4444" stroke-width="2"/>
+          <line x1="48" y1="113" x2="56" y2="113" stroke="#0f172a" stroke-width="1.2"/>
+          <line x1="48" y1="116" x2="56" y2="116" stroke="#0f172a" stroke-width="1.2"/>
+        </g>
+
+        <!-- Right Leg and Sneaker -->
+        <g class="human-leg-r">
+          <rect x="73" y="86" width="10" height="26" rx="4" fill="url(#alexPants)"/>
+          <path d="M69 112 L87 112 Q91 112 91 116 L91 119 Q91 122 85 122 L67 122 Q65 122 65 119 L65 115 Q65 112 69 112 Z" 
+                fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
+          <path d="M66 120 L90 120" stroke="#ef4444" stroke-width="2"/>
+          <line x1="74" y1="113" x2="82" y2="113" stroke="#0f172a" stroke-width="1.2"/>
+          <line x1="74" y1="116" x2="82" y2="116" stroke="#0f172a" stroke-width="1.2"/>
+        </g>
+
+        <!-- Main Body Group (Torso, Arms, Head) -->
+        <g class="human-body-group" filter="url(#alexShadow)">
+          <!-- Left Arm -->
+          <g class="human-arm-l">
+            <rect x="34" y="60" width="10" height="25" rx="5" fill="url(#alexHoodie)"/>
+            <circle cx="39" cy="87" r="5" fill="url(#alexSkin)"/>
+          </g>
+
+          <!-- Right Arm -->
+          <g class="human-arm-r">
+            <rect x="86" y="60" width="10" height="25" rx="5" fill="url(#alexHoodie)"/>
+            <circle cx="91" cy="87" r="5" fill="url(#alexSkin)"/>
+          </g>
+
+          <!-- Torso / Hoodie -->
+          <path d="M44 58 L86 58 L89 88 L41 88 Z" fill="url(#alexHoodie)" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Kangaroo Pocket -->
+          <path d="M52 74 L78 74 L75 86 L55 86 Z" fill="#0369a1" stroke="#0f172a" stroke-width="1.5"/>
+          <!-- Drawstrings -->
+          <line x1="60" y1="58" x2="60" y2="69" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="70" y1="58" x2="70" y2="69" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+
+          <!-- Neck -->
+          <rect x="60" y="52" width="10" height="8" rx="2" fill="url(#alexSkin)"/>
+
+          <!-- Head and Face -->
+          <ellipse cx="65" cy="42" rx="22" ry="20" fill="url(#alexSkin)" stroke="#0f172a" stroke-width="2"/>
+
+          <!-- Stylish Hair -->
+          <path d="M43 40 C41 24 55 16 65 16 C78 16 89 24 87 40 C84 32 80 30 76 33 C72 28 65 29 61 34 C57 28 49 32 43 40 Z" 
+                fill="url(#alexHair)" stroke="#0f172a" stroke-width="2"/>
+          <path d="M48 30 Q56 36 64 30 Q72 37 82 32" stroke="#1c1917" stroke-width="1.8" fill="none"/>
+
+          <!-- Eyes Group with Blink -->
+          <g class="human-eyes">
+            <ellipse cx="55" cy="44" rx="4.5" ry="5.5" fill="#1e293b"/>
+            <ellipse cx="75" cy="44" rx="4.5" ry="5.5" fill="#1e293b"/>
+            <circle cx="56.5" cy="42.5" r="1.8" fill="white"/>
+            <circle cx="76.5" cy="42.5" r="1.8" fill="white"/>
+            <circle cx="53.5" cy="45.5" r="0.9" fill="white"/>
+            <circle cx="73.5" cy="45.5" r="0.9" fill="white"/>
+          </g>
+
+          <!-- Eyebrows -->
+          <path d="M51 36 Q55 34 59 36" stroke="#451a03" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          <path d="M71 36 Q75 34 79 36" stroke="#451a03" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+
+          <!-- Rosy Cheeks -->
+          <circle cx="48" cy="47" r="3.5" fill="#f43f5e" opacity="0.45"/>
+          <circle cx="82" cy="47" r="3.5" fill="#f43f5e" opacity="0.45"/>
+
+          <!-- Smile with Speaking Animation -->
+          <path class="human-voice-mouth" d="M60 49 Q65 55 70 49" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </g>
       </svg>
     `)}`,
