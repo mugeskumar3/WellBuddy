@@ -515,205 +515,287 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     id: 'pippy-cat',
     name: 'Pippy the Kitty',
     type: 'builtin',
-    description: 'Walkable 4-legged animated kitten mascot with walking paws, swishing tail, and curious ears.',
-    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+    description: 'Walkable 4-legged animated kitten mascot who trots in side profile, turns front to sit and wave playfully.',
+    src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
         <defs>
           <linearGradient id="catGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#fdba74"/>
-            <stop offset="100%" stop-color="#f97316"/>
+            <stop offset="50%" stop-color="#fb923c"/>
+            <stop offset="100%" stop-color="#ea580c"/>
           </linearGradient>
+          <linearGradient id="catCream" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#ffedd5"/>
+          </linearGradient>
+          <filter id="catShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.2"/>
+          </filter>
         </defs>
         <style>
-          /* 12-Second Synchronized Walk-and-Pose Cadence */
-          @keyframes catWalkBob {
-            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
-            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
-            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            28% { transform: translateY(0px) rotate(0deg); }
-            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
-            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
-            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
-            46% { transform: translateY(0px) rotate(0deg); }
-            48% { transform: translateY(-1px) rotate(0deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
-            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
-            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            78% { transform: translateY(0px) rotate(0deg); }
-            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
-            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
-            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
-            96% { transform: translateY(0px) rotate(0deg); }
-            98% { transform: translateY(-1px) rotate(0deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+          /* Toggle Side Profile Trot vs Front Posing View */
+          @keyframes toggleSideWalk {
+            0%, 28% { opacity: 1; visibility: visible; }
+            28.1%, 49.9% { opacity: 0; visibility: hidden; }
+            50%, 78% { opacity: 1; visibility: visible; }
+            78.1%, 100% { opacity: 0; visibility: hidden; }
           }
-          @keyframes pawWalkFL {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            7% { transform: translate(0, 0) rotate(0deg); }
-            10.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            14% { transform: translate(2px, 0px) rotate(-2deg); }
-            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            21% { transform: translate(0, 0) rotate(0deg); }
-            24.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            57% { transform: translate(2px, 0px) rotate(-2deg); }
-            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            64% { transform: translate(0, 0) rotate(0deg); }
-            67.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            71% { transform: translate(2px, 0px) rotate(-2deg); }
-            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+          @keyframes toggleFrontPose {
+            0%, 28% { opacity: 0; visibility: hidden; }
+            28.1%, 49.9% { opacity: 1; visibility: visible; }
+            50%, 78% { opacity: 0; visibility: hidden; }
+            78.1%, 100% { opacity: 1; visibility: visible; }
           }
-          @keyframes pawWalkFR {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            7% { transform: translate(2px, 0px) rotate(-2deg); }
-            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            14% { transform: translate(0, 0) rotate(0deg); }
-            17.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            21% { transform: translate(2px, 0px) rotate(-2deg); }
-            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            57% { transform: translate(0, 0) rotate(0deg); }
-            60.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            64% { transform: translate(2px, 0px) rotate(-2deg); }
-            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            71% { transform: translate(0, 0) rotate(0deg); }
-            74.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+
+          /* Side Quadruped Leg Strides */
+          /* Diagonal Pair 1: Front-Right and Back-Left */
+          @keyframes sideCatStridePair1 {
+            0% { transform: rotate(24deg) translateY(0px); }
+            3.5% { transform: rotate(0deg) translateY(0px); }
+            7% { transform: rotate(-24deg) translateY(-2px); }
+            10.5% { transform: rotate(6deg) translateY(-5px); }
+            14% { transform: rotate(24deg) translateY(0px); }
+            17.5% { transform: rotate(0deg) translateY(0px); }
+            21% { transform: rotate(-24deg) translateY(-2px); }
+            24.5% { transform: rotate(6deg) translateY(-5px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(24deg) translateY(0px); }
+            57% { transform: rotate(0deg) translateY(0px); }
+            60.5% { transform: rotate(-24deg) translateY(-2px); }
+            64% { transform: rotate(6deg) translateY(-5px); }
+            67.5% { transform: rotate(24deg) translateY(0px); }
+            71% { transform: rotate(0deg) translateY(0px); }
+            74.5% { transform: rotate(-24deg) translateY(-2px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes pawWalkBL {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            7% { transform: translate(2px, 0px) rotate(-2deg); }
-            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            14% { transform: translate(0, 0) rotate(0deg); }
-            17.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            21% { transform: translate(2px, 0px) rotate(-2deg); }
-            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            57% { transform: translate(0, 0) rotate(0deg); }
-            60.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            64% { transform: translate(2px, 0px) rotate(-2deg); }
-            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            71% { transform: translate(0, 0) rotate(0deg); }
-            74.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+
+          /* Diagonal Pair 2: Front-Left and Back-Right */
+          @keyframes sideCatStridePair2 {
+            0% { transform: rotate(-24deg) translateY(-2px); }
+            3.5% { transform: rotate(6deg) translateY(-5px); }
+            7% { transform: rotate(24deg) translateY(0px); }
+            10.5% { transform: rotate(0deg) translateY(0px); }
+            14% { transform: rotate(-24deg) translateY(-2px); }
+            17.5% { transform: rotate(6deg) translateY(-5px); }
+            21% { transform: rotate(24deg) translateY(0px); }
+            24.5% { transform: rotate(0deg) translateY(0px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(-24deg) translateY(-2px); }
+            57% { transform: rotate(6deg) translateY(-5px); }
+            60.5% { transform: rotate(24deg) translateY(0px); }
+            64% { transform: rotate(0deg) translateY(0px); }
+            67.5% { transform: rotate(-24deg) translateY(-2px); }
+            71% { transform: rotate(6deg) translateY(-5px); }
+            74.5% { transform: rotate(24deg) translateY(0px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes pawWalkBR {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            7% { transform: translate(0, 0) rotate(0deg); }
-            10.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            14% { transform: translate(2px, 0px) rotate(-2deg); }
-            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            21% { transform: translate(0, 0) rotate(0deg); }
-            24.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            57% { transform: translate(2px, 0px) rotate(-2deg); }
-            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            64% { transform: translate(0, 0) rotate(0deg); }
-            67.5% { transform: translate(4px, -5px) rotate(-10deg); }
-            71% { transform: translate(2px, 0px) rotate(-2deg); }
-            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+
+          /* Side Body Step Bobbing */
+          @keyframes sideCatBob {
+            0%, 7%, 14%, 21%, 28%, 50%, 57%, 64%, 71%, 78% { transform: translateY(0px); }
+            3.5%, 10.5%, 17.5%, 24.5%, 53.5%, 60.5%, 67.5%, 74.5% { transform: translateY(-3px); }
           }
-          /* Swishing Cat Tail */
-          @keyframes tailSwish {
-            0%, 28%, 50%, 78%, 100% { transform: rotate(-15deg); }
-            32%, 42%, 82%, 92% { transform: rotate(35deg) scale(1.08); }
+
+          /* Side Swishing Tail */
+          @keyframes sideCatTailSwish {
+            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
+            7%, 21%, 57%, 71% { transform: rotate(18deg); }
+            14%, 28%, 64%, 78% { transform: rotate(-12deg); }
           }
-          /* Ear Twitch */
-          @keyframes earTwitchL {
-            0%, 85%, 100% { transform: rotate(0deg); }
-            90% { transform: rotate(-12deg); }
-            95% { transform: rotate(6deg); }
+
+          /* Front Pose Idle Breathing and Maneki-Neko Wave */
+          @keyframes frontCatIdle {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            35%, 85% { transform: translateY(-2.5px) scale(1.02); }
+            42%, 92% { transform: translateY(-1px) scale(1.01); }
           }
-          @keyframes earTwitchR {
-            0%, 85%, 100% { transform: rotate(0deg); }
-            90% { transform: rotate(12deg); }
-            95% { transform: rotate(-6deg); }
+          @keyframes frontCatPawWave {
+            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
+            31%, 37%, 43%, 81%, 87%, 93% { transform: rotate(-24deg); }
+            34%, 40%, 46%, 84%, 90%, 96% { transform: rotate(16deg); }
+          }
+          @keyframes frontCatTailSway {
+            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
+            35%, 85% { transform: rotate(14deg); }
+            42%, 92% { transform: rotate(-8deg); }
           }
           @keyframes catBlink {
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
-            48%, 98% { transform: scaleY(0.12); }
+            48%, 98% { transform: scaleY(0.1); }
           }
-          .cat-body-group { animation: catWalkBob 12s linear infinite; transform-origin: 65px 75px; }
-          .paw-fl { animation: pawWalkFL 12s linear infinite; transform-origin: 50px 114px; }
-          .paw-fr { animation: pawWalkFR 12s linear infinite; transform-origin: 80px 114px; }
-          .paw-bl { animation: pawWalkBL 12s linear infinite; transform-origin: 38px 116px; }
-          .paw-br { animation: pawWalkBR 12s linear infinite; transform-origin: 92px 116px; }
-          .cat-tail { animation: tailSwish 12s linear infinite; transform-origin: 95px 75px; }
-          .cat-ear-l { animation: earTwitchL 3.8s ease-in-out infinite; transform-origin: 40px 38px; }
-          .cat-ear-r { animation: earTwitchR 3.8s ease-in-out infinite; transform-origin: 90px 38px; }
-          .cat-eyes { animation: catBlink 3.8s ease-in-out infinite; transform-origin: 65px 62px; }
-          /* Speaking Mouth Movement Animation */
-          @keyframes catMeowSpeak {
+          @keyframes catSpeak {
             0%, 100% { transform: scale(1, 1); }
-            25% { transform: scale(1.2, 1.8); }
-            50% { transform: scale(0.9, 0.8); }
-            75% { transform: scale(1.15, 1.6); }
+            25% { transform: scale(1.18, 1.45); }
+            50% { transform: scale(0.95, 0.85); }
+            75% { transform: scale(1.12, 1.3); }
           }
-          .cat-voice-mouth {
-            animation: catMeowSpeak 0.38s ease-in-out infinite;
-            transform-origin: 65px 67px;
-          }
+
+          .side-walk-view { animation: toggleSideWalk 12s linear infinite; }
+          .front-pose-view { animation: toggleFrontPose 12s linear infinite; }
+          .side-cat-pair1 { animation: sideCatStridePair1 12s linear infinite; }
+          .side-cat-pair2 { animation: sideCatStridePair2 12s linear infinite; }
+          .side-cat-body { animation: sideCatBob 12s linear infinite; transform-origin: 65px 105px; }
+          .side-cat-tail { animation: sideCatTailSwish 12s linear infinite; transform-origin: 40px 84px; }
+          .front-cat-body { animation: frontCatIdle 12s linear infinite; transform-origin: 65px 115px; }
+          .front-cat-wave-paw { animation: frontCatPawWave 12s linear infinite; transform-origin: 82px 84px; }
+          .front-cat-tail { animation: frontCatTailSway 12s linear infinite; transform-origin: 94px 104px; }
+          .cat-eyes { animation: catBlink 3.8s ease-in-out infinite; transform-origin: 65px 54px; }
+          .cat-side-eye { animation: catBlink 3.8s ease-in-out infinite; transform-origin: 86px 57px; }
+          .cat-mouth { animation: catSpeak 0.38s ease-in-out infinite; transform-origin: 65px 67px; }
         </style>
 
-        <!-- Swishing Tail in back -->
-        <path class="cat-tail" d="M92 78 Q118 70 114 42 Q108 42 102 62" stroke="#ea580c" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <!-- Ground Shadow -->
+        <ellipse cx="65" cy="122" rx="34" ry="4" fill="#000000" opacity="0.18"/>
 
-        <!-- Back Stepping Paws -->
-        <g>
-          <ellipse class="paw-bl" cx="38" cy="116" rx="6.5" ry="4.5" fill="#c2410c"/>
-          <ellipse class="paw-br" cx="92" cy="116" rx="6.5" ry="4.5" fill="#c2410c"/>
-        </g>
-
-        <!-- Walking Cat Body and Head -->
-        <g class="cat-body-group">
-          <!-- Torso -->
-          <ellipse cx="65" cy="80" rx="32" ry="24" fill="url(#catGrad)"/>
-
-          <!-- Front Stepping Paws -->
-          <ellipse class="paw-fl" cx="50" cy="114" rx="7" ry="5" fill="#ffedd5"/>
-          <ellipse class="paw-fr" cx="80" cy="114" rx="7" ry="5" fill="#ffedd5"/>
-
-          <!-- Head -->
-          <circle cx="65" cy="58" r="30" fill="url(#catGrad)"/>
-
-          <!-- Ears with Twitch Animation -->
-          <polygon class="cat-ear-l" points="38,40 48,16 62,34" fill="url(#catGrad)"/>
-          <polygon class="cat-ear-r" points="92,40 82,16 68,34" fill="url(#catGrad)"/>
-          <polygon points="41,38 48,22 58,34" fill="#f472b6" opacity="0.6"/>
-          <polygon points="89,38 82,22 72,34" fill="#f472b6" opacity="0.6"/>
-
-          <!-- Cheeks / Muzzle -->
-          <ellipse cx="59" cy="68" rx="7" ry="5.5" fill="#ffedd5"/>
-          <ellipse cx="71" cy="68" rx="7" ry="5.5" fill="#ffedd5"/>
-
-          <!-- Eyes with Blink -->
-          <g class="cat-eyes">
-            <ellipse cx="52" cy="54" rx="4.5" ry="6" fill="#1e293b"/>
-            <ellipse cx="78" cy="54" rx="4.5" ry="6" fill="#1e293b"/>
-            <circle cx="54" cy="52" r="1.8" fill="white"/>
-            <circle cx="80" cy="52" r="1.8" fill="white"/>
+        <!-- ============================================== -->
+        <!-- 1. SIDE-PROFILE TROT VIEW (Walk Phase)         -->
+        <!-- ============================================== -->
+        <g class="side-walk-view" filter="url(#catShadow)">
+          <!-- Background Legs: Back-Left and Front-Left -->
+          <!-- Back-Left Leg (Background, Pair 1) -->
+          <g class="side-cat-pair1" style="transform-origin: 46px 88px;">
+            <path d="M46 88 L42 106 L40 118" stroke="#c2410c" stroke-width="7" stroke-linecap="round"/>
+            <ellipse cx="40" cy="118" rx="5" ry="3.5" fill="#ffedd5"/>
           </g>
 
-          <!-- Nose and Mouth with Speaking Animation -->
-          <polygon points="65,63 61,60 69,60" fill="#f43f5e"/>
-          <path class="cat-voice-mouth" d="M59 65 Q65 70 65 65 Q65 70 71 65" stroke="#1e293b" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Front-Left Leg (Background, Pair 2) -->
+          <g class="side-cat-pair2" style="transform-origin: 78px 86px;">
+            <path d="M78 86 L74 104 L72 118" stroke="#c2410c" stroke-width="7" stroke-linecap="round"/>
+            <ellipse cx="72" cy="118" rx="5" ry="3.5" fill="#ffedd5"/>
+          </g>
 
-          <!-- Whiskers -->
-          <line x1="34" y1="62" x2="48" y2="64" stroke="#9a3412" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="33" y1="68" x2="48" y2="67" stroke="#9a3412" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="96" y1="62" x2="82" y2="64" stroke="#9a3412" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="97" y1="68" x2="82" y2="67" stroke="#9a3412" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Side Body, Head and Swishing Tail -->
+          <g class="side-cat-body">
+            <!-- Swishing Tail Behind -->
+            <path class="side-cat-tail" d="M40 84 Q20 76 22 50 Q26 44 30 58" stroke="#ea580c" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+
+            <!-- Torso -->
+            <path d="M42 80 C40 68 54 66 74 70 C84 72 88 84 82 92 C66 96 46 94 42 80 Z" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+
+            <!-- Tabby Stripes -->
+            <path d="M54 68 Q58 76 56 82" stroke="#9a3412" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M64 69 Q68 77 66 84" stroke="#9a3412" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M74 71 Q76 78 74 84" stroke="#9a3412" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+            <!-- White Underbelly Fur -->
+            <path d="M50 88 Q65 92 78 88" stroke="#ffedd5" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+            <!-- Cat Head Profile -->
+            <circle cx="84" cy="60" r="16" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+
+            <!-- Pointed Ear in Profile -->
+            <polygon points="76,52 84,32 92,48" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+            <polygon points="79,49 84,36 89,47" fill="#f472b6" opacity="0.65"/>
+
+            <!-- Profile Eye with Blink -->
+            <g class="cat-side-eye">
+              <ellipse cx="86" cy="57" rx="3.8" ry="5.2" fill="#1e293b"/>
+              <circle cx="87" cy="55.5" r="1.4" fill="#ffffff"/>
+            </g>
+
+            <!-- Pink Nose -->
+            <polygon points="97,63 94,60 94,66" fill="#f43f5e"/>
+
+            <!-- Side Cheerful Whiskers -->
+            <g stroke="#9a3412" stroke-width="1.6" stroke-linecap="round">
+              <line x1="94" y1="63" x2="108" y2="60"/>
+              <line x1="94" y1="65" x2="110" y2="65"/>
+              <line x1="94" y1="67" x2="108" y2="70"/>
+            </g>
+          </g>
+
+          <!-- Foreground Legs: Back-Right and Front-Right -->
+          <!-- Back-Right Leg (Foreground, Pair 2) -->
+          <g class="side-cat-pair2" style="transform-origin: 52px 88px;">
+            <path d="M52 88 L50 106 L54 118" stroke="url(#catGrad)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M52 88 L50 106 L54 118" stroke="#c2410c" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="54" cy="118" rx="5.5" ry="3.5" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+          </g>
+
+          <!-- Front-Right Leg (Foreground, Pair 1) -->
+          <g class="side-cat-pair1" style="transform-origin: 84px 86px;">
+            <path d="M84 86 L84 104 L88 118" stroke="url(#catGrad)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M84 86 L84 104 L88 118" stroke="#c2410c" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="88" cy="118" rx="5.5" ry="3.5" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+          </g>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- 2. FRONT-FACING SITTING POSE VIEW (Pause/Wave) -->
+        <!-- ============================================== -->
+        <g class="front-pose-view" filter="url(#catShadow)">
+          <!-- Sitting Hindquarters Haunches -->
+          <ellipse cx="44" cy="106" rx="14" ry="11" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+          <ellipse cx="86" cy="106" rx="14" ry="11" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+
+          <!-- Hind Paws Flat on Ground -->
+          <ellipse cx="43" cy="116" rx="7" ry="4.2" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+          <ellipse cx="87" cy="116" rx="7" ry="4.2" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+
+          <!-- Front Sitting Body Group -->
+          <g class="front-cat-body">
+            <!-- Tail Curling Up Beside Right Haunch -->
+            <path class="front-cat-tail" d="M96 106 Q116 98 112 68 Q106 64 102 78" stroke="#ea580c" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+
+            <!-- Upright Cat Chest -->
+            <path d="M48 76 Q65 64 82 76 L85 112 Q65 116 45 112 Z" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+
+            <!-- White Fluffy Chest Bib -->
+            <path d="M55 76 Q65 72 75 76 Q78 94 65 106 Q52 94 55 76 Z" fill="url(#catCream)"/>
+
+            <!-- Left Front Paw Resting Neatly -->
+            <g>
+              <path d="M56 86 L54 112" stroke="url(#catGrad)" stroke-width="8.5" stroke-linecap="round"/>
+              <ellipse cx="54" cy="115" rx="6" ry="4" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+            </g>
+
+            <!-- Right Front Paw (Maneki-Neko Lucky Paw Wave!) -->
+            <g class="front-cat-wave-paw">
+              <path d="M78 86 Q90 78 88 66" stroke="url(#catGrad)" stroke-width="9" stroke-linecap="round"/>
+              <ellipse cx="88" cy="64" rx="6.5" ry="5.5" fill="#ffedd5" stroke="#c2410c" stroke-width="1.8"/>
+              <circle cx="88" cy="64" r="2.2" fill="#f472b6"/>
+              <circle cx="85" cy="60" r="1.1" fill="#f472b6"/>
+              <circle cx="88" cy="59" r="1.1" fill="#f472b6"/>
+              <circle cx="91" cy="60" r="1.1" fill="#f472b6"/>
+            </g>
+
+            <!-- Head -->
+            <circle cx="65" cy="56" r="28" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2.2"/>
+
+            <!-- Ears -->
+            <polygon points="38,38 48,14 62,32" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+            <polygon points="92,38 82,14 68,32" fill="url(#catGrad)" stroke="#c2410c" stroke-width="2"/>
+            <polygon points="41,36 48,20 58,32" fill="#f472b6" opacity="0.6"/>
+            <polygon points="89,36 82,20 72,32" fill="#f472b6" opacity="0.6"/>
+
+            <!-- White Cheeks / Muzzle -->
+            <ellipse cx="59" cy="66" rx="7.5" ry="6" fill="#ffedd5"/>
+            <ellipse cx="71" cy="66" rx="7.5" ry="6" fill="#ffedd5"/>
+
+            <!-- Eyes with Blink -->
+            <g class="cat-eyes">
+              <ellipse cx="52" cy="52" rx="4.8" ry="6.5" fill="#1e293b"/>
+              <ellipse cx="78" cy="52" rx="4.8" ry="6.5" fill="#1e293b"/>
+              <circle cx="54" cy="50" r="2" fill="#ffffff"/>
+              <circle cx="80" cy="50" r="2" fill="#ffffff"/>
+            </g>
+
+            <!-- Pink Nose -->
+            <polygon points="65,61 61,58 69,58" fill="#f43f5e"/>
+
+            <!-- Sweet Meow Smile with Speaking Animation -->
+            <g class="cat-mouth">
+              <path d="M59 63 Q65 68 65 63 Q65 68 71 63" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            </g>
+
+            <!-- Whiskers -->
+            <g stroke="#9a3412" stroke-width="1.8" stroke-linecap="round">
+              <line x1="32" y1="60" x2="48" y2="62"/>
+              <line x1="31" y1="66" x2="48" y2="65"/>
+              <line x1="98" y1="60" x2="82" y2="62"/>
+              <line x1="99" y1="66" x2="82" y2="65"/>
+            </g>
+          </g>
         </g>
       </svg>
     `)}`,
@@ -929,210 +1011,319 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     id: 'doraemon',
     name: 'Doraemon (டோரேமான்)',
     type: 'builtin',
-    description: 'Beloved robotic cat with magical 4D pocket, waving hand, stepping shoes, and cheerful speaking animations.',
+    description: 'Beloved robotic cat who walks in side profile with counter-swinging arms, turns front to wave cheerfully and speak.',
     src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
+        <defs>
+          <linearGradient id="doreBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="50%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#0369a1"/>
+          </linearGradient>
+          <linearGradient id="doreBell" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fef08a"/>
+            <stop offset="60%" stop-color="#facc15"/>
+            <stop offset="100%" stop-color="#ca8a04"/>
+          </linearGradient>
+          <filter id="doreShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.2"/>
+          </filter>
+        </defs>
         <style>
-          /* 12-Second Synchronized Walk-and-Pose Cadence */
-          @keyframes doremonWalk {
-            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
-            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
-            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            28% { transform: translateY(0px) rotate(0deg); }
-            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
-            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
-            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
-            46% { transform: translateY(0px) rotate(0deg); }
-            48% { transform: translateY(-1px) rotate(0deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
-            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
-            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            78% { transform: translateY(0px) rotate(0deg); }
-            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
-            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
-            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
-            96% { transform: translateY(0px) rotate(0deg); }
-            98% { transform: translateY(-1px) rotate(0deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+          /* Toggle Side Profile Walk vs Front Posing View */
+          @keyframes toggleSideWalk {
+            0%, 28% { opacity: 1; visibility: visible; }
+            28.1%, 49.9% { opacity: 0; visibility: hidden; }
+            50%, 78% { opacity: 1; visibility: visible; }
+            78.1%, 100% { opacity: 0; visibility: hidden; }
           }
-          @keyframes doremonFootL {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            7% { transform: translate(0, 0) rotate(0deg); }
-            10.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            14% { transform: translate(2px, 0px) rotate(-2deg); }
-            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            21% { transform: translate(0, 0) rotate(0deg); }
-            24.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            57% { transform: translate(2px, 0px) rotate(-2deg); }
-            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            64% { transform: translate(0, 0) rotate(0deg); }
-            67.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            71% { transform: translate(2px, 0px) rotate(-2deg); }
-            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+          @keyframes toggleFrontPose {
+            0%, 28% { opacity: 0; visibility: hidden; }
+            28.1%, 49.9% { opacity: 1; visibility: visible; }
+            50%, 78% { opacity: 0; visibility: hidden; }
+            78.1%, 100% { opacity: 1; visibility: visible; }
           }
-          @keyframes doremonFootR {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            7% { transform: translate(2px, 0px) rotate(-2deg); }
-            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            14% { transform: translate(0, 0) rotate(0deg); }
-            17.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            21% { transform: translate(2px, 0px) rotate(-2deg); }
-            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            57% { transform: translate(0, 0) rotate(0deg); }
-            60.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            64% { transform: translate(2px, 0px) rotate(-2deg); }
-            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            71% { transform: translate(0, 0) rotate(0deg); }
-            74.5% { transform: translate(4px, -6px) rotate(-10deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+
+          /* Side Profile Stride: Front Leg */
+          @keyframes sideDoreLegFront {
+            0% { transform: rotate(26deg) translateY(0px); }
+            3.5% { transform: rotate(0deg) translateY(0px); }
+            7% { transform: rotate(-26deg) translateY(-2px); }
+            10.5% { transform: rotate(8deg) translateY(-6px); }
+            14% { transform: rotate(26deg) translateY(0px); }
+            17.5% { transform: rotate(0deg) translateY(0px); }
+            21% { transform: rotate(-26deg) translateY(-2px); }
+            24.5% { transform: rotate(8deg) translateY(-6px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(26deg) translateY(0px); }
+            57% { transform: rotate(0deg) translateY(0px); }
+            60.5% { transform: rotate(-26deg) translateY(-2px); }
+            64% { transform: rotate(8deg) translateY(-6px); }
+            67.5% { transform: rotate(26deg) translateY(0px); }
+            71% { transform: rotate(0deg) translateY(0px); }
+            74.5% { transform: rotate(-26deg) translateY(-2px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes doremonWaveArm {
-            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
-            32%, 42% { transform: rotate(-24deg) scale(1.06); }
-            82%, 92% { transform: rotate(-24deg) scale(1.06); }
+
+          /* Side Profile Stride: Back Leg */
+          @keyframes sideDoreLegBack {
+            0% { transform: rotate(-26deg) translateY(-2px); }
+            3.5% { transform: rotate(8deg) translateY(-6px); }
+            7% { transform: rotate(26deg) translateY(0px); }
+            10.5% { transform: rotate(0deg) translateY(0px); }
+            14% { transform: rotate(-26deg) translateY(-2px); }
+            17.5% { transform: rotate(8deg) translateY(-6px); }
+            21% { transform: rotate(26deg) translateY(0px); }
+            24.5% { transform: rotate(0deg) translateY(0px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(-26deg) translateY(-2px); }
+            57% { transform: rotate(8deg) translateY(-6px); }
+            60.5% { transform: rotate(26deg) translateY(0px); }
+            64% { transform: rotate(0deg) translateY(0px); }
+            67.5% { transform: rotate(-26deg) translateY(-2px); }
+            71% { transform: rotate(8deg) translateY(-6px); }
+            74.5% { transform: rotate(26deg) translateY(0px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes doremonArmR {
-            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
-            3.5%, 17.5% { transform: rotate(16deg) translateY(-2px); }
-            10.5%, 24.5% { transform: rotate(-14deg) translateY(2px); }
-            28%, 46% { transform: rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
-            53.5%, 67.5% { transform: rotate(-14deg) translateY(2px); }
-            60.5%, 74.5% { transform: rotate(16deg) translateY(-2px); }
+
+          /* Side Arms Counter-Swinging */
+          @keyframes sideDoreArmFront {
+            0% { transform: rotate(-28deg); }
+            7% { transform: rotate(28deg); }
+            14% { transform: rotate(-28deg); }
+            21% { transform: rotate(28deg); }
+            28%, 50% { transform: rotate(0deg); }
+            57% { transform: rotate(28deg); }
+            64% { transform: rotate(-28deg); }
+            71% { transform: rotate(28deg); }
             78%, 100% { transform: rotate(0deg); }
           }
-          @keyframes doremonBlink {
-            0%, 45%, 49%, 95%, 100% { transform: scaleY(1); }
-            47%, 97% { transform: scaleY(0.12); }
+          @keyframes sideDoreArmBack {
+            0% { transform: rotate(28deg); }
+            7% { transform: rotate(-28deg); }
+            14% { transform: rotate(28deg); }
+            21% { transform: rotate(-28deg); }
+            28%, 50% { transform: rotate(0deg); }
+            57% { transform: rotate(-28deg); }
+            64% { transform: rotate(28deg); }
+            71% { transform: rotate(-28deg); }
+            78%, 100% { transform: rotate(0deg); }
           }
-          @keyframes doremonBell {
-            0%, 28%, 46%, 78%, 96%, 100% { transform: rotate(0deg); }
-            3.5%, 17.5%, 53.5%, 67.5% { transform: rotate(-6deg); }
-            10.5%, 24.5%, 60.5%, 74.5% { transform: rotate(6deg); }
-            34%, 40%, 84%, 90% { transform: rotate(8deg); }
+
+          /* Side Body Step Bobbing */
+          @keyframes sideDoreBob {
+            0%, 7%, 14%, 21%, 28%, 50%, 57%, 64%, 71%, 78% { transform: translateY(0px); }
+            3.5%, 10.5%, 17.5%, 24.5%, 53.5%, 60.5%, 67.5%, 74.5% { transform: translateY(-3px); }
           }
-          @keyframes doremonSpeak {
+
+          /* Front Pose Idle Breathing and High Wave */
+          @keyframes frontDoreIdle {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            35%, 85% { transform: translateY(-2.5px) scale(1.02); }
+            42%, 92% { transform: translateY(-1px) scale(1.01); }
+          }
+          @keyframes frontDoreWave {
+            0%, 28%, 50%, 78%, 100% { transform: rotate(0deg); }
+            31%, 37%, 43%, 81%, 87%, 93% { transform: rotate(-22deg); }
+            34%, 40%, 46%, 84%, 90%, 96% { transform: rotate(18deg); }
+          }
+          @keyframes doreBlink {
+            0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
+            48%, 98% { transform: scaleY(0.1); }
+          }
+          @keyframes doreSpeak {
             0%, 100% { transform: scale(1, 1); }
-            25% { transform: scale(1.12, 1.35); }
-            50% { transform: scale(0.96, 0.82); }
-            75% { transform: scale(1.08, 1.25); }
+            25% { transform: scale(1.15, 1.4); }
+            50% { transform: scale(0.95, 0.85); }
+            75% { transform: scale(1.1, 1.3); }
           }
-          .doremon-body-group { animation: doremonWalk 12s linear infinite; transform-origin: 65px 105px; }
-          .doremon-wave-arm { animation: doremonWaveArm 12s linear infinite; transform-origin: 36px 74px; }
-          .doremon-arm-r { animation: doremonArmR 12s linear infinite; transform-origin: 84px 89px; }
-          .doremon-foot-l { animation: doremonFootL 12s linear infinite; transform-origin: 47px 118px; }
-          .doremon-foot-r { animation: doremonFootR 12s linear infinite; transform-origin: 83px 118px; }
-          .doremon-eyes { animation: doremonBlink 3.8s ease-in-out infinite; transform-origin: 65px 33px; }
-          .doremon-bell-elem { animation: doremonBell 12s linear infinite; transform-origin: 65px 83px; }
-          .doremon-voice-mouth {
-            animation: doremonSpeak 0.38s ease-in-out infinite;
-            transform-origin: 65px 60px;
-          }
+
+          .side-walk-view { animation: toggleSideWalk 12s linear infinite; }
+          .front-pose-view { animation: toggleFrontPose 12s linear infinite; }
+          .side-dore-leg-front { animation: sideDoreLegFront 12s linear infinite; transform-origin: 70px 92px; }
+          .side-dore-leg-back { animation: sideDoreLegBack 12s linear infinite; transform-origin: 62px 92px; }
+          .side-dore-arm-front { animation: sideDoreArmFront 12s linear infinite; transform-origin: 70px 72px; }
+          .side-dore-arm-back { animation: sideDoreArmBack 12s linear infinite; transform-origin: 58px 72px; }
+          .side-dore-body { animation: sideDoreBob 12s linear infinite; transform-origin: 65px 105px; }
+          .front-dore-body { animation: frontDoreIdle 12s linear infinite; transform-origin: 65px 115px; }
+          .front-dore-wave-arm { animation: frontDoreWave 12s linear infinite; transform-origin: 40px 75px; }
+          .dore-eyes { animation: doreBlink 3.8s ease-in-out infinite; transform-origin: 65px 33px; }
+          .dore-side-eye { animation: doreBlink 3.8s ease-in-out infinite; transform-origin: 76px 33px; }
+          .dore-mouth { animation: doreSpeak 0.38s ease-in-out infinite; transform-origin: 65px 62px; }
         </style>
 
         <!-- Ground Shadow -->
-        <ellipse cx="65" cy="122" rx="32" ry="4.5" fill="#000000" opacity="0.18"/>
+        <ellipse cx="65" cy="122" rx="32" ry="4" fill="#000000" opacity="0.18"/>
 
-        <!-- Stepping White Feet -->
-        <g>
-          <ellipse class="doremon-foot-l" cx="47" cy="118" rx="12" ry="6" fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
-          <ellipse class="doremon-foot-r" cx="83" cy="118" rx="12" ry="6" fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
+        <!-- ============================================== -->
+        <!-- 1. SIDE-PROFILE WALKING VIEW (Walk Phase)     -->
+        <!-- ============================================== -->
+        <g class="side-walk-view" filter="url(#doreShadow)">
+          <!-- Side Back Arm (Background) -->
+          <g class="side-dore-arm-back">
+            <path d="M58 72 L46 84" stroke="#0284c7" stroke-width="10" stroke-linecap="round"/>
+            <path d="M58 72 L46 84" stroke="#182230" stroke-width="2.2" fill="none"/>
+            <circle cx="44" cy="86" r="6.5" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+          </g>
+
+          <!-- Side Back Leg and White Shoe -->
+          <g class="side-dore-leg-back">
+            <path d="M58 88 L52 110 L64 110 L68 88 Z" fill="#0284c7" stroke="#182230" stroke-width="2.2"/>
+            <ellipse cx="56" cy="116" rx="12" ry="5.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+          </g>
+
+          <!-- Side Front Leg and White Shoe -->
+          <g class="side-dore-leg-front">
+            <path d="M66 88 L72 110 L84 110 L78 88 Z" fill="url(#doreBlue)" stroke="#182230" stroke-width="2.2"/>
+            <ellipse cx="78" cy="116" rx="12" ry="5.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+          </g>
+
+          <!-- Side Body, Head, Collar and Belly -->
+          <g class="side-dore-body">
+            <!-- Red Tail (Back Left) -->
+            <circle cx="42" cy="94" r="5" fill="#ef4444" stroke="#182230" stroke-width="2.2"/>
+
+            <!-- Blue Torso Profile -->
+            <path d="M48 68 C44 82 48 100 65 100 C80 100 86 86 84 68 Z" fill="url(#doreBlue)" stroke="#182230" stroke-width="2.4"/>
+
+            <!-- White Tummy Pouch (Front Right Profile) -->
+            <path d="M62 70 C62 86 66 96 76 96 C82 96 85 86 84 70 Z" fill="#ffffff" stroke="#182230" stroke-width="2"/>
+
+            <!-- 4D Pocket Side View -->
+            <path d="M68 76 C76 76 82 80 82 85 C76 88 70 86 68 76 Z" fill="#ffffff" stroke="#182230" stroke-width="1.8"/>
+
+            <!-- Red Collar Band -->
+            <path d="M50 63 Q68 67 86 63" stroke="#dc2626" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M50 63 Q68 67 86 63" stroke="#182230" stroke-width="2.2" fill="none"/>
+
+            <!-- Golden Bell hanging in front -->
+            <circle cx="82" cy="70" r="5.5" fill="url(#doreBell)" stroke="#182230" stroke-width="1.8"/>
+            <circle cx="82" cy="71" r="1.5" fill="#182230"/>
+
+            <!-- Blue Head Side View -->
+            <circle cx="68" cy="42" r="32" fill="url(#doreBlue)" stroke="#182230" stroke-width="2.6"/>
+
+            <!-- White Face Profile Mask -->
+            <path d="M62 24 C78 24 92 34 90 52 C88 64 74 66 62 62 Z" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+
+            <!-- Side Profile Eye with Blink -->
+            <g class="dore-side-eye">
+              <ellipse cx="76" cy="33" rx="6.5" ry="9" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+              <circle cx="78.5" cy="33.5" r="2.4" fill="#182230"/>
+              <circle cx="79.5" cy="32.5" r="0.8" fill="#ffffff"/>
+            </g>
+
+            <!-- Red Nose (Facing Right) -->
+            <circle cx="90" cy="38" r="4.8" fill="#ef4444" stroke="#182230" stroke-width="2"/>
+            <circle cx="88.5" cy="36.5" r="1.2" fill="#ffffff"/>
+
+            <!-- Whiskers (Pointing Right) -->
+            <g stroke="#182230" stroke-width="1.8" stroke-linecap="round">
+              <line x1="82" y1="44" x2="98" y2="42"/>
+              <line x1="82" y1="49" x2="100" y2="49"/>
+              <line x1="82" y1="54" x2="98" y2="56"/>
+            </g>
+
+            <!-- Cheerful Smile Line -->
+            <path d="M72 52 Q82 58 88 52" stroke="#182230" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </g>
+
+          <!-- Side Front Arm and Hand (Foreground Counter-Swing) -->
+          <g class="side-dore-arm-front">
+            <path d="M70 72 L84 84" stroke="url(#doreBlue)" stroke-width="10.5" stroke-linecap="round"/>
+            <path d="M70 72 L84 84" stroke="#182230" stroke-width="2.2" fill="none"/>
+            <circle cx="86" cy="86" r="6.5" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+          </g>
         </g>
 
-        <!-- Main Doraemon Character Body Group -->
-        <g class="doremon-body-group">
-          <!-- Red Round Tail -->
-          <circle cx="93" cy="104" r="5.5" fill="#ef4444" stroke="#182230" stroke-width="2.4"/>
+        <!-- ============================================== -->
+        <!-- 2. FRONT-FACING POSE VIEW (Pause and Toast/Wave) -->
+        <!-- ============================================== -->
+        <g class="front-pose-view" filter="url(#doreShadow)">
+          <!-- Ground Feet Together -->
+          <ellipse cx="48" cy="116" rx="12" ry="5.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+          <ellipse cx="82" cy="116" rx="12" ry="5.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
 
-          <!-- Blue Body Legs and Torso -->
-          <path d="M45 80 L40 108 Q40 114 47 114 L62 114 L62 107 L68 107 L68 114 L83 114 Q90 114 90 108 L85 80 Z" 
-                fill="#0298d7" stroke="#182230" stroke-width="2.8" stroke-linejoin="round"/>
+          <!-- Front Resting Body -->
+          <g class="front-dore-body">
+            <!-- Red Tail Behind -->
+            <circle cx="93" cy="102" r="5" fill="#ef4444" stroke="#182230" stroke-width="2.2"/>
 
-          <!-- White Tummy -->
-          <ellipse cx="65" cy="94" rx="19" ry="14" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+            <!-- Blue Body and Legs -->
+            <path d="M44 80 L40 108 Q40 114 47 114 L62 114 L62 107 L68 107 L68 114 L83 114 Q90 114 90 108 L86 80 Z" 
+                  fill="url(#doreBlue)" stroke="#182230" stroke-width="2.6" stroke-linejoin="round"/>
 
-          <!-- 4D Pocket -->
-          <path d="M50 92 L80 92 Q65 109 50 92 Z" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+            <!-- White Tummy -->
+            <ellipse cx="65" cy="94" rx="19" ry="14" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
 
-          <!-- Right Arm and Hand with Counter-Stride Swing -->
-          <g class="doremon-arm-r">
-            <path d="M84 89 L99 96" stroke="#0298d7" stroke-width="10" stroke-linecap="round"/>
-            <path d="M84 89 L99 96" stroke="#182230" stroke-width="2.4" fill="none"/>
-            <circle cx="104" cy="99" r="7" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
-          </g>
+            <!-- 4D Pocket -->
+            <path d="M50 92 L80 92 Q65 109 50 92 Z" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
 
-          <!-- Left Arm and Hand (Waving High!) -->
-          <g class="doremon-wave-arm">
-            <path d="M45 82 L28 62" stroke="#0298d7" stroke-width="11" stroke-linecap="round"/>
-            <path d="M45 82 L28 62" stroke="#182230" stroke-width="2.4" fill="none"/>
-            <circle cx="23" cy="56" r="7.5" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
-          </g>
+            <!-- Right Arm Resting on Side -->
+            <g>
+              <path d="M85 86 L98 94" stroke="url(#doreBlue)" stroke-width="10" stroke-linecap="round"/>
+              <path d="M85 86 L98 94" stroke="#182230" stroke-width="2.2" fill="none"/>
+              <circle cx="102" cy="97" r="6.8" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+            </g>
 
-          <!-- Red Collar Band -->
-          <path d="M40 76 Q65 84 90 76" stroke="#dc2626" stroke-width="6.5" stroke-linecap="round"/>
-          <path d="M40 76 Q65 84 90 76" stroke="#182230" stroke-width="2.4" fill="none"/>
+            <!-- Left Arm Raised High Waving to User! -->
+            <g class="front-dore-wave-arm">
+              <path d="M45 80 L26 58" stroke="url(#doreBlue)" stroke-width="11" stroke-linecap="round"/>
+              <path d="M45 80 L26 58" stroke="#182230" stroke-width="2.2" fill="none"/>
+              <circle cx="21" cy="52" r="7.5" fill="#ffffff" stroke="#182230" stroke-width="2.2"/>
+            </g>
 
-          <!-- Golden Bell -->
-          <g class="doremon-bell-elem">
-            <circle cx="65" cy="83" r="6.8" fill="#facc15" stroke="#182230" stroke-width="1.8"/>
-            <line x1="59.5" y1="81.2" x2="70.5" y2="81.2" stroke="#182230" stroke-width="1.6"/>
-            <circle cx="65" cy="84.8" r="1.8" fill="#182230"/>
-            <line x1="65" y1="86.6" x2="65" y2="89.5" stroke="#182230" stroke-width="1.6"/>
-          </g>
+            <!-- Red Collar Band -->
+            <path d="M40 74 Q65 82 90 74" stroke="#dc2626" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M40 74 Q65 82 90 74" stroke="#182230" stroke-width="2.2" fill="none"/>
 
-          <!-- Round Blue Head -->
-          <circle cx="65" cy="46" r="37" fill="#0298d7" stroke="#182230" stroke-width="2.8"/>
+            <!-- Golden Bell -->
+            <circle cx="65" cy="81" r="6.5" fill="url(#doreBell)" stroke="#182230" stroke-width="1.8"/>
+            <line x1="59.5" y1="79.5" x2="70.5" y2="79.5" stroke="#182230" stroke-width="1.6"/>
+            <circle cx="65" cy="82.8" r="1.8" fill="#182230"/>
+            <line x1="65" y1="84.6" x2="65" y2="87.5" stroke="#182230" stroke-width="1.6"/>
 
-          <!-- White Face Mask -->
-          <path d="M38 51 C38 30 50 26 65 26 C80 26 92 30 92 51 C92 68 80 75 65 75 C50 75 38 68 38 51 Z" 
-                fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
+            <!-- Round Blue Head -->
+            <circle cx="65" cy="46" r="36" fill="url(#doreBlue)" stroke="#182230" stroke-width="2.8"/>
 
-          <!-- Eyes Group with Blinking Animation -->
-          <g class="doremon-eyes">
-            <ellipse cx="57.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
-            <ellipse cx="72.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
-            <circle cx="60" cy="33" r="2.6" fill="#182230"/>
-            <circle cx="70" cy="33" r="2.6" fill="#182230"/>
-            <circle cx="61" cy="32" r="0.9" fill="#ffffff"/>
-            <circle cx="71" cy="32" r="0.9" fill="#ffffff"/>
-          </g>
+            <!-- White Face Mask -->
+            <path d="M38 51 C38 30 50 26 65 26 C80 26 92 30 92 51 C92 68 80 75 65 75 C50 75 38 68 38 51 Z" 
+                  fill="#ffffff" stroke="#182230" stroke-width="2.6"/>
 
-          <!-- Red Round Nose -->
-          <circle cx="65" cy="40" r="5.2" fill="#ef4444" stroke="#182230" stroke-width="2"/>
-          <circle cx="63.6" cy="38.6" r="1.3" fill="#ffffff"/>
+            <!-- Eyes with Blink -->
+            <g class="dore-eyes">
+              <ellipse cx="57.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+              <ellipse cx="72.5" cy="32" rx="7.5" ry="11" fill="#ffffff" stroke="#182230" stroke-width="2.4"/>
+              <circle cx="60" cy="33" r="2.6" fill="#182230"/>
+              <circle cx="70" cy="33" r="2.6" fill="#182230"/>
+              <circle cx="61" cy="32" r="0.9" fill="#ffffff"/>
+              <circle cx="71" cy="32" r="0.9" fill="#ffffff"/>
+            </g>
 
-          <!-- Nose-to-Mouth Vertical Seam Line -->
-          <line x1="65" y1="45.2" x2="65" y2="53" stroke="#182230" stroke-width="2.2"/>
+            <!-- Red Nose -->
+            <circle cx="65" cy="40" r="5" fill="#ef4444" stroke="#182230" stroke-width="2"/>
+            <circle cx="63.6" cy="38.6" r="1.3" fill="#ffffff"/>
 
-          <!-- Cheerful Wide Open Mouth with Speaking Animation -->
-          <g class="doremon-voice-mouth">
-            <path d="M44 54 Q65 57 86 54 Q86 78 65 78 Q44 78 44 54 Z" 
-                  fill="#b91c1c" stroke="#182230" stroke-width="2.4" stroke-linejoin="round"/>
-            <!-- Tongue inside mouth -->
-            <path d="M52 68 Q65 58 78 68 Q65 78 52 68 Z" 
-                  fill="#f97316" stroke="#182230" stroke-width="1.6"/>
-            <!-- Upper smile lip outline -->
-            <path d="M43 54 Q65 57 87 54" fill="none" stroke="#182230" stroke-width="2.4" stroke-linecap="round"/>
-          </g>
+            <line x1="65" y1="45" x2="65" y2="53" stroke="#182230" stroke-width="2.2"/>
 
-          <!-- Whiskers (3 on Left, 3 on Right) -->
-          <g stroke="#182230" stroke-width="2" stroke-linecap="round">
-            <!-- Left Whiskers -->
-            <line x1="33" y1="44" x2="55" y2="47"/>
-            <line x1="30" y1="52" x2="55" y2="52"/>
-            <line x1="33" y1="59" x2="55" y2="57"/>
-            <!-- Right Whiskers -->
-            <line x1="75" y1="47" x2="97" y2="44"/>
-            <line x1="75" y1="52" x2="100" y2="52"/>
-            <line x1="75" y1="57" x2="97" y2="59"/>
+            <!-- Cheerful Speaking Mouth -->
+            <g class="dore-mouth">
+              <path d="M44 54 Q65 57 86 54 Q86 76 65 76 Q44 76 44 54 Z" 
+                    fill="#b91c1c" stroke="#182230" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M52 66 Q65 58 78 66 Q65 76 52 66 Z" 
+                    fill="#f97316" stroke="#182230" stroke-width="1.6"/>
+              <path d="M43 54 Q65 57 87 54" fill="none" stroke="#182230" stroke-width="2.4" stroke-linecap="round"/>
+            </g>
+
+            <!-- Whiskers -->
+            <g stroke="#182230" stroke-width="2" stroke-linecap="round">
+              <line x1="33" y1="44" x2="55" y2="47"/>
+              <line x1="30" y1="52" x2="55" y2="52"/>
+              <line x1="33" y1="59" x2="55" y2="57"/>
+              <line x1="75" y1="47" x2="97" y2="44"/>
+              <line x1="75" y1="52" x2="100" y2="52"/>
+              <line x1="75" y1="57" x2="97" y2="59"/>
+            </g>
           </g>
         </g>
       </svg>
@@ -1140,217 +1331,283 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'human-buddy',
-    name: 'Alex the Buddy (மனித நண்பன்)',
+    name: 'Dr. Buddy (நலன் நண்பன்)',
     type: 'builtin',
-    description: 'Proper human companion with walking sneakers, swinging arms, head tilt, expressive smile, and charming idle poses.',
+    description: 'Wellness companion who walks in side profile with a glass of water, turns front to toast you, and shares healthy reminders.',
     src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
         <defs>
-          <linearGradient id="alexHair" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#451a03"/>
-            <stop offset="100%" stop-color="#1c1917"/>
+          <linearGradient id="hbHair" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#94a3b8"/>
+            <stop offset="50%" stop-color="#475569"/>
+            <stop offset="100%" stop-color="#334155"/>
           </linearGradient>
-          <linearGradient id="alexSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffedd5"/>
-            <stop offset="100%" stop-color="#fed7aa"/>
+          <linearGradient id="hbSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fed7aa"/>
+            <stop offset="100%" stop-color="#fba068"/>
           </linearGradient>
-          <linearGradient id="alexHoodie" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0284c7"/>
-            <stop offset="100%" stop-color="#0369a1"/>
+          <linearGradient id="hbShirt" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#bfdbfe"/>
+            <stop offset="100%" stop-color="#60a5fa"/>
           </linearGradient>
-          <linearGradient id="alexPants" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e3a8a"/>
-            <stop offset="100%" stop-color="#172554"/>
+          <linearGradient id="hbPants" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#334155"/>
+            <stop offset="100%" stop-color="#1e293b"/>
           </linearGradient>
-          <filter id="alexShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <linearGradient id="hbShoe" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#78350f"/>
+            <stop offset="100%" stop-color="#451a03"/>
+          </linearGradient>
+          <linearGradient id="waterGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9"/>
+          </linearGradient>
+          <filter id="hbShadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
           </filter>
         </defs>
         <style>
-          /* 12-Second Human Walk-and-Pose Cadence */
-          @keyframes humanBodyGroup {
-            0%, 7%, 14%, 21%, 28% { transform: translateY(0px) rotate(0deg); }
-            3.5%, 17.5% { transform: translateY(-3px) rotate(1.5deg); }
-            10.5%, 24.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            28% { transform: translateY(0px) rotate(0deg); }
-            32% { transform: translateY(-3px) rotate(-3deg) scale(1.03); }
-            36% { transform: translateY(-4px) rotate(-3deg) scale(1.04); }
-            42% { transform: translateY(-2px) rotate(-2deg) scale(1.02); }
-            46% { transform: translateY(0px) rotate(0deg); }
-            48% { transform: translateY(-1px) rotate(0deg); }
-            50% { transform: translateY(0px) rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: translateY(0px) rotate(0deg); }
-            53.5%, 67.5% { transform: translateY(-3px) rotate(1.5deg); }
-            60.5%, 74.5% { transform: translateY(-3px) rotate(-1.5deg); }
-            78% { transform: translateY(0px) rotate(0deg); }
-            82% { transform: translateY(-3px) rotate(3deg) scale(1.03); }
-            86% { transform: translateY(-4px) rotate(3deg) scale(1.04); }
-            92% { transform: translateY(-2px) rotate(2deg) scale(1.02); }
-            96% { transform: translateY(0px) rotate(0deg); }
-            98% { transform: translateY(-1px) rotate(0deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+          /* Toggle Side Profile Walk vs Front Posing View */
+          @keyframes toggleSideWalk {
+            0%, 28% { opacity: 1; visibility: visible; }
+            28.1%, 49.9% { opacity: 0; visibility: hidden; }
+            50%, 78% { opacity: 1; visibility: visible; }
+            78.1%, 100% { opacity: 0; visibility: hidden; }
           }
-          @keyframes humanLegL {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            7% { transform: translate(0, 0) rotate(0deg); }
-            10.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            14% { transform: translate(2px, 0px) rotate(-2deg); }
-            17.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            21% { transform: translate(0, 0) rotate(0deg); }
-            24.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            57% { transform: translate(2px, 0px) rotate(-2deg); }
-            60.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            64% { transform: translate(0, 0) rotate(0deg); }
-            67.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            71% { transform: translate(2px, 0px) rotate(-2deg); }
-            74.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+          @keyframes toggleFrontPose {
+            0%, 28% { opacity: 0; visibility: hidden; }
+            28.1%, 49.9% { opacity: 1; visibility: visible; }
+            50%, 78% { opacity: 0; visibility: hidden; }
+            78.1%, 100% { opacity: 1; visibility: visible; }
           }
-          @keyframes humanLegR {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            3.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            7% { transform: translate(2px, 0px) rotate(-2deg); }
-            10.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            14% { transform: translate(0, 0) rotate(0deg); }
-            17.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            21% { transform: translate(2px, 0px) rotate(-2deg); }
-            24.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            28%, 50% { transform: translate(0, 0) rotate(0deg); }
-            53.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            57% { transform: translate(0, 0) rotate(0deg); }
-            60.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            64% { transform: translate(2px, 0px) rotate(-2deg); }
-            67.5% { transform: translate(-3px, -2px) rotate(8deg); }
-            71% { transform: translate(0, 0) rotate(0deg); }
-            74.5% { transform: translate(5px, -6px) rotate(-12deg); }
-            78%, 100% { transform: translate(0, 0) rotate(0deg); }
+
+          /* Side Profile Stride: Front Leg */
+          @keyframes sideLegFrontStride {
+            0% { transform: rotate(24deg) translateY(0px); }
+            3.5% { transform: rotate(0deg) translateY(0px); }
+            7% { transform: rotate(-24deg) translateY(-2px); }
+            10.5% { transform: rotate(6deg) translateY(-6px); }
+            14% { transform: rotate(24deg) translateY(0px); }
+            17.5% { transform: rotate(0deg) translateY(0px); }
+            21% { transform: rotate(-24deg) translateY(-2px); }
+            24.5% { transform: rotate(6deg) translateY(-6px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(24deg) translateY(0px); }
+            57% { transform: rotate(0deg) translateY(0px); }
+            60.5% { transform: rotate(-24deg) translateY(-2px); }
+            64% { transform: rotate(6deg) translateY(-6px); }
+            67.5% { transform: rotate(24deg) translateY(0px); }
+            71% { transform: rotate(0deg) translateY(0px); }
+            74.5% { transform: rotate(-24deg) translateY(-2px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes humanArmL {
-            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
-            3.5%, 17.5% { transform: rotate(18deg) translateY(-2px); }
-            10.5%, 24.5% { transform: rotate(-18deg) translateY(2px); }
-            28% { transform: rotate(0deg); }
-            32%, 42% { transform: rotate(26deg) translateY(-2px); }
-            46% { transform: rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
-            53.5%, 67.5% { transform: rotate(-18deg) translateY(2px); }
-            60.5%, 74.5% { transform: rotate(18deg) translateY(-2px); }
-            78% { transform: rotate(0deg); }
-            82%, 92% { transform: rotate(-48deg) translateY(-8px) scale(1.05); }
-            96%, 100% { transform: rotate(0deg); }
+
+          /* Side Profile Stride: Back Leg */
+          @keyframes sideLegBackStride {
+            0% { transform: rotate(-24deg) translateY(-2px); }
+            3.5% { transform: rotate(6deg) translateY(-6px); }
+            7% { transform: rotate(24deg) translateY(0px); }
+            10.5% { transform: rotate(0deg) translateY(0px); }
+            14% { transform: rotate(-24deg) translateY(-2px); }
+            17.5% { transform: rotate(6deg) translateY(-6px); }
+            21% { transform: rotate(24deg) translateY(0px); }
+            24.5% { transform: rotate(0deg) translateY(0px); }
+            28%, 50% { transform: rotate(0deg) translateY(0px); }
+            53.5% { transform: rotate(-24deg) translateY(-2px); }
+            57% { transform: rotate(6deg) translateY(-6px); }
+            60.5% { transform: rotate(24deg) translateY(0px); }
+            64% { transform: rotate(0deg) translateY(0px); }
+            67.5% { transform: rotate(-24deg) translateY(-2px); }
+            71% { transform: rotate(6deg) translateY(-6px); }
+            74.5% { transform: rotate(24deg) translateY(0px); }
+            78%, 100% { transform: rotate(0deg) translateY(0px); }
           }
-          @keyframes humanArmR {
-            0%, 7%, 14%, 21%, 28% { transform: rotate(0deg); }
-            3.5%, 17.5% { transform: rotate(-18deg) translateY(2px); }
-            10.5%, 24.5% { transform: rotate(18deg) translateY(-2px); }
-            28% { transform: rotate(0deg); }
-            32%, 42% { transform: rotate(-48deg) translateY(-8px) scale(1.05); }
-            46% { transform: rotate(0deg); }
-            50%, 57%, 64%, 71%, 78% { transform: rotate(0deg); }
-            53.5%, 67.5% { transform: rotate(18deg) translateY(-2px); }
-            60.5%, 74.5% { transform: rotate(-18deg) translateY(2px); }
-            78% { transform: rotate(0deg); }
-            82%, 92% { transform: rotate(26deg) translateY(-2px); }
-            96%, 100% { transform: rotate(0deg); }
+
+          /* Side Body Step Bobbing */
+          @keyframes sideBodyBob {
+            0%, 7%, 14%, 21%, 28%, 50%, 57%, 64%, 71%, 78% { transform: translateY(0px); }
+            3.5%, 10.5%, 17.5%, 24.5%, 53.5%, 60.5%, 67.5%, 74.5% { transform: translateY(-3px); }
           }
-          @keyframes humanEyes {
+
+          /* Front Pose Idle Breathing and Toast */
+          @keyframes frontPoseIdle {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            35%, 85% { transform: translateY(-2px) scale(1.02); }
+            42%, 92% { transform: translateY(-1px) scale(1.01); }
+          }
+
+          /* Eye Blink */
+          @keyframes hbBlink {
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
             48%, 98% { transform: scaleY(0.1); }
           }
-          @keyframes humanMouthSpeak {
+
+          /* Speaking Mouth */
+          @keyframes hbSpeak {
             0%, 100% { transform: scale(1, 1); }
             25% { transform: scale(1.15, 1.4); }
             50% { transform: scale(0.95, 0.85); }
             75% { transform: scale(1.1, 1.3); }
           }
-          .human-body-group { animation: humanBodyGroup 12s linear infinite; transform-origin: 65px 115px; }
-          .human-leg-l { animation: humanLegL 12s linear infinite; transform-origin: 52px 88px; }
-          .human-leg-r { animation: humanLegR 12s linear infinite; transform-origin: 78px 88px; }
-          .human-arm-l { animation: humanArmL 12s linear infinite; transform-origin: 39px 62px; }
-          .human-arm-r { animation: humanArmR 12s linear infinite; transform-origin: 91px 62px; }
-          .human-eyes { animation: humanEyes 3.8s ease-in-out infinite; transform-origin: 65px 44px; }
-          .human-voice-mouth { animation: humanMouthSpeak 0.38s ease-in-out infinite; transform-origin: 65px 50px; }
+
+          .side-walk-view { animation: toggleSideWalk 12s linear infinite; }
+          .front-pose-view { animation: toggleFrontPose 12s linear infinite; }
+          .side-leg-front-elem { animation: sideLegFrontStride 12s linear infinite; transform-origin: 72px 84px; }
+          .side-leg-back-elem { animation: sideLegBackStride 12s linear infinite; transform-origin: 66px 84px; }
+          .side-body-elem { animation: sideBodyBob 12s linear infinite; transform-origin: 70px 100px; }
+          .front-pose-body { animation: frontPoseIdle 12s linear infinite; transform-origin: 65px 115px; }
+          .hb-eyes { animation: hbBlink 3.8s ease-in-out infinite; transform-origin: 65px 44px; }
+          .hb-mouth { animation: hbSpeak 0.38s ease-in-out infinite; transform-origin: 65px 52px; }
         </style>
 
         <!-- Ground Shadow -->
-        <ellipse cx="65" cy="123" rx="30" ry="4.5" fill="#000000" opacity="0.18"/>
+        <ellipse cx="68" cy="123" rx="30" ry="4" fill="#000000" opacity="0.18"/>
 
-        <!-- Left Leg and Sneaker -->
-        <g class="human-leg-l">
-          <rect x="47" y="86" width="10" height="26" rx="4" fill="url(#alexPants)"/>
-          <path d="M43 112 L61 112 Q65 112 65 116 L65 119 Q65 122 59 122 L41 122 Q39 122 39 119 L39 115 Q39 112 43 112 Z" 
-                fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
-          <path d="M40 120 L64 120" stroke="#ef4444" stroke-width="2"/>
-          <line x1="48" y1="113" x2="56" y2="113" stroke="#0f172a" stroke-width="1.2"/>
-          <line x1="48" y1="116" x2="56" y2="116" stroke="#0f172a" stroke-width="1.2"/>
+        <!-- ============================================== -->
+        <!-- 1. SIDE-PROFILE WALKING VIEW (Active during Walk) -->
+        <!-- ============================================== -->
+        <g class="side-walk-view" filter="url(#hbShadow)">
+          <!-- Side Back Leg -->
+          <g class="side-leg-back-elem">
+            <path d="M62 82 L58 102 L56 116 L65 116 L68 102 L70 82 Z" fill="#1e293b"/>
+            <!-- Back Shoe -->
+            <path d="M52 115 L68 115 Q72 115 72 118 L72 122 L48 122 Q48 118 52 115 Z" fill="#451a03"/>
+          </g>
+
+          <!-- Side Front Leg -->
+          <g class="side-leg-front-elem">
+            <path d="M68 82 L72 102 L74 116 L83 116 L80 102 L76 82 Z" fill="url(#hbPants)"/>
+            <!-- Front Shoe -->
+            <path d="M68 115 L86 115 Q90 115 90 118 L90 122 L64 122 Q64 118 68 115 Z" fill="url(#hbShoe)"/>
+          </g>
+
+          <!-- Side Body, Head, and Arm holding water -->
+          <g class="side-body-elem">
+            <!-- Torso: Side Blue Shirt -->
+            <path d="M56 56 L78 56 L82 84 L58 84 Z" fill="url(#hbShirt)" stroke="#0f172a" stroke-width="1.8"/>
+            <path d="M58 82 L82 82 L82 86 L58 86 Z" fill="#0f172a"/>
+
+            <!-- Arm holding Water Glass -->
+            <g>
+              <path d="M68 58 L82 72 L88 70" stroke="url(#hbShirt)" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <circle cx="89" cy="70" r="4.5" fill="url(#hbSkin)"/>
+              <!-- Water Glass with Ice in Side View -->
+              <path d="M86 60 L98 60 L96 74 L88 74 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4" opacity="0.9"/>
+              <path d="M87 64 L97 64 L95 73 L89 73 Z" fill="url(#waterGlass)"/>
+              <rect x="89" y="66" width="3" height="3" rx="0.5" fill="white" opacity="0.8"/>
+            </g>
+
+            <!-- Neck in Side View -->
+            <rect x="64" y="48" width="9" height="9" fill="url(#hbSkin)"/>
+            <!-- White Collar -->
+            <polygon points="63,56 74,56 71,51" fill="white"/>
+
+            <!-- Head in Side Profile -->
+            <path d="M56 36 C56 22 70 18 80 26 C86 31 87 40 85 48 C81 54 70 54 62 50 C58 46 56 41 56 36 Z" 
+                  fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.8"/>
+
+            <!-- Beard and Mustache in Side View -->
+            <path d="M72 44 Q83 45 80 50 Q73 54 66 52 Z" fill="#64748b"/>
+            <path d="M75 42 Q83 42 81 45 Z" fill="#475569"/>
+
+            <!-- Side Hair (Swept Back Grey) -->
+            <path d="M54 36 C52 20 66 14 78 14 C84 14 86 19 82 23 C76 21 68 22 62 27 C58 31 56 36 54 36 Z" 
+                  fill="url(#hbHair)"/>
+
+            <!-- Glasses in Side View -->
+            <rect x="73" y="32" width="12" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
+            <line x1="64" y1="34" x2="73" y2="34" stroke="#0f172a" stroke-width="1.8"/>
+            <!-- Eye behind glasses -->
+            <circle cx="78" cy="36" r="1.8" fill="#0f172a"/>
+
+            <!-- Ear -->
+            <ellipse cx="62" cy="38" rx="3.5" ry="4.5" fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.2"/>
+          </g>
         </g>
 
-        <!-- Right Leg and Sneaker -->
-        <g class="human-leg-r">
-          <rect x="73" y="86" width="10" height="26" rx="4" fill="url(#alexPants)"/>
-          <path d="M69 112 L87 112 Q91 112 91 116 L91 119 Q91 122 85 122 L67 122 Q65 122 65 119 L65 115 Q65 112 69 112 Z" 
-                fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
-          <path d="M66 120 L90 120" stroke="#ef4444" stroke-width="2"/>
-          <line x1="74" y1="113" x2="82" y2="113" stroke="#0f172a" stroke-width="1.2"/>
-          <line x1="74" y1="116" x2="82" y2="116" stroke="#0f172a" stroke-width="1.2"/>
-        </g>
+        <!-- ============================================== -->
+        <!-- 2. FRONT-FACING POSE VIEW (Active during Pose) -->
+        <!-- ============================================== -->
+        <g class="front-pose-view" filter="url(#hbShadow)">
+          <g class="front-pose-body">
+            <!-- Both Legs Planted Side by Side -->
+            <g>
+              <rect x="48" y="82" width="12" height="34" rx="4" fill="url(#hbPants)"/>
+              <rect x="68" y="82" width="12" height="34" rx="4" fill="url(#hbPants)"/>
+              <!-- Shoes Planted -->
+              <path d="M44 114 L62 114 Q66 114 66 118 L66 122 L42 122 Q42 118 44 114 Z" fill="url(#hbShoe)"/>
+              <path d="M66 114 L84 114 Q88 114 88 118 L88 122 L64 122 Q64 118 66 114 Z" fill="url(#hbShoe)"/>
+            </g>
 
-        <!-- Main Body Group (Torso, Arms, Head) -->
-        <g class="human-body-group" filter="url(#alexShadow)">
-          <!-- Left Arm -->
-          <g class="human-arm-l">
-            <rect x="34" y="60" width="10" height="25" rx="5" fill="url(#alexHoodie)"/>
-            <circle cx="39" cy="87" r="5" fill="url(#alexSkin)"/>
+            <!-- Torso: Light Blue Polo Shirt with Placket -->
+            <path d="M43 56 L85 56 L88 84 L40 84 Z" fill="url(#hbShirt)" stroke="#0f172a" stroke-width="1.8"/>
+            <rect x="40" y="82" width="48" height="5" fill="#0f172a"/>
+            <!-- Placket and Pen in Pocket -->
+            <rect x="62" y="56" width="4" height="15" fill="#93c5fd"/>
+            <circle cx="64" cy="62" r="1" fill="#1e293b"/>
+            <circle cx="64" cy="68" r="1" fill="#1e293b"/>
+            <!-- Pocket with Pen -->
+            <path d="M72 65 L81 65 L80 73 L73 73 Z" fill="#93c5fd" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="77" y1="62" x2="77" y2="67" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round"/>
+
+            <!-- Left Arm: Resting at Waist / Hip -->
+            <g>
+              <path d="M42 58 L32 72 L36 78" stroke="url(#hbShirt)" stroke-width="9" stroke-linecap="round" fill="none"/>
+              <circle cx="37" cy="80" r="4.5" fill="url(#hbSkin)"/>
+              <!-- Watch -->
+              <rect x="33" y="74" width="7" height="2.5" rx="1" fill="#0f172a"/>
+            </g>
+
+            <!-- Right Arm: Raised Holding Water Glass in Cheers / Toast -->
+            <g>
+              <path d="M85 58 L98 64 L96 74" stroke="url(#hbShirt)" stroke-width="9" stroke-linecap="round" fill="none"/>
+              <circle cx="95" cy="76" r="4.5" fill="url(#hbSkin)"/>
+              <!-- Glass of Water with Ice -->
+              <path d="M91 62 L105 62 L103 76 L93 76 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.6" opacity="0.95"/>
+              <path d="M92 66 L104 66 L102 75 L94 75 Z" fill="url(#waterGlass)"/>
+              <rect x="94" y="68" width="3.5" height="3.5" rx="0.5" fill="white" opacity="0.85"/>
+              <rect x="99" y="70" width="2.5" height="2.5" rx="0.5" fill="white" opacity="0.75"/>
+            </g>
+
+            <!-- Neck and White Collar -->
+            <rect x="59" y="48" width="10" height="9" fill="url(#hbSkin)"/>
+            <polygon points="56,56 64,56 60,50" fill="white"/>
+            <polygon points="72,56 64,56 68,50" fill="white"/>
+
+            <!-- Head: Facing Front -->
+            <ellipse cx="64" cy="40" rx="18" ry="17" fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.8"/>
+
+            <!-- Salt-and-Pepper Hair -->
+            <path d="M46 36 C44 20 54 13 64 13 C74 13 84 20 82 36 C78 28 72 26 64 26 C56 26 50 28 46 36 Z" 
+                  fill="url(#hbHair)"/>
+            <!-- Side Hair Volume -->
+            <path d="M45 36 C43 40 45 44 47 46" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M83 36 C85 40 83 44 81 46" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+            <!-- Beard and Mustache -->
+            <path d="M52 42 C52 53 76 53 76 42 C74 48 70 51 64 51 C58 51 54 48 52 42 Z" fill="#64748b"/>
+            <path d="M57 43 Q64 41 71 43 Q64 46 57 43 Z" fill="#475569"/>
+
+            <!-- Glasses (Rectangular Black Frames) -->
+            <rect x="51" y="32" width="11" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
+            <rect x="66" y="32" width="11" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
+            <line x1="62" y1="36" x2="66" y2="36" stroke="#0f172a" stroke-width="2"/>
+
+            <!-- Eyes behind Glasses with Blink -->
+            <g class="hb-eyes">
+              <circle cx="56.5" cy="36" r="2.2" fill="#0f172a"/>
+              <circle cx="71.5" cy="36" r="2.2" fill="#0f172a"/>
+              <circle cx="57.5" cy="35" r="0.9" fill="white"/>
+              <circle cx="72.5" cy="35" r="0.9" fill="white"/>
+            </g>
+
+            <!-- Warm Friendly Smile -->
+            <path class="hb-mouth" d="M59 46 Q64 50 69 46" stroke="#0f172a" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+            <!-- Cheeks -->
+            <ellipse cx="50" cy="40" rx="3" ry="2" fill="#f43f5e" opacity="0.3"/>
+            <ellipse cx="78" cy="40" rx="3" ry="2" fill="#f43f5e" opacity="0.3"/>
           </g>
-
-          <!-- Right Arm -->
-          <g class="human-arm-r">
-            <rect x="86" y="60" width="10" height="25" rx="5" fill="url(#alexHoodie)"/>
-            <circle cx="91" cy="87" r="5" fill="url(#alexSkin)"/>
-          </g>
-
-          <!-- Torso / Hoodie -->
-          <path d="M44 58 L86 58 L89 88 L41 88 Z" fill="url(#alexHoodie)" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Kangaroo Pocket -->
-          <path d="M52 74 L78 74 L75 86 L55 86 Z" fill="#0369a1" stroke="#0f172a" stroke-width="1.5"/>
-          <!-- Drawstrings -->
-          <line x1="60" y1="58" x2="60" y2="69" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-          <line x1="70" y1="58" x2="70" y2="69" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-
-          <!-- Neck -->
-          <rect x="60" y="52" width="10" height="8" rx="2" fill="url(#alexSkin)"/>
-
-          <!-- Head and Face -->
-          <ellipse cx="65" cy="42" rx="22" ry="20" fill="url(#alexSkin)" stroke="#0f172a" stroke-width="2"/>
-
-          <!-- Stylish Hair -->
-          <path d="M43 40 C41 24 55 16 65 16 C78 16 89 24 87 40 C84 32 80 30 76 33 C72 28 65 29 61 34 C57 28 49 32 43 40 Z" 
-                fill="url(#alexHair)" stroke="#0f172a" stroke-width="2"/>
-          <path d="M48 30 Q56 36 64 30 Q72 37 82 32" stroke="#1c1917" stroke-width="1.8" fill="none"/>
-
-          <!-- Eyes Group with Blink -->
-          <g class="human-eyes">
-            <ellipse cx="55" cy="44" rx="4.5" ry="5.5" fill="#1e293b"/>
-            <ellipse cx="75" cy="44" rx="4.5" ry="5.5" fill="#1e293b"/>
-            <circle cx="56.5" cy="42.5" r="1.8" fill="white"/>
-            <circle cx="76.5" cy="42.5" r="1.8" fill="white"/>
-            <circle cx="53.5" cy="45.5" r="0.9" fill="white"/>
-            <circle cx="73.5" cy="45.5" r="0.9" fill="white"/>
-          </g>
-
-          <!-- Eyebrows -->
-          <path d="M51 36 Q55 34 59 36" stroke="#451a03" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M71 36 Q75 34 79 36" stroke="#451a03" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-
-          <!-- Rosy Cheeks -->
-          <circle cx="48" cy="47" r="3.5" fill="#f43f5e" opacity="0.45"/>
-          <circle cx="82" cy="47" r="3.5" fill="#f43f5e" opacity="0.45"/>
-
-          <!-- Smile with Speaking Animation -->
-          <path class="human-voice-mouth" d="M60 49 Q65 55 70 49" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </g>
       </svg>
     `)}`,

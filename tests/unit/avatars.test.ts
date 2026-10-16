@@ -30,6 +30,7 @@ describe('AvatarManager', () => {
     expect(ids).toContain('zen-pebble');
     expect(ids).toContain('doraemon');
     expect(ids).toContain('human-buddy');
+    expect(ids).toContain('pippy-cat');
 
     // Confirm avatars are valid SVG data URIs and well-formed XML
     for (const av of avatars) {

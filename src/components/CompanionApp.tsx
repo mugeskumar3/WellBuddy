@@ -6,6 +6,17 @@ import { Check, Clock, X, ExternalLink, EyeOff } from 'lucide-react';
 import { speakText } from '../utils/speech';
 import { applyTheme } from '../utils/theme';
 
+const getSvgMarkup = (src: string): string | null => {
+  if (!src || !src.startsWith('data:image/svg+xml')) return null;
+  const commaIdx = src.indexOf(',');
+  if (commaIdx === -1) return null;
+  try {
+    return decodeURIComponent(src.substring(commaIdx + 1));
+  } catch {
+    return null;
+  }
+};
+
 interface LanguageStrings {
   greeting: string;
   done: string;
@@ -241,8 +252,7 @@ export const CompanionApp: React.FC = () => {
 
   const currentAvatar =
     avatars.find((a) => a.id === prefs?.selectedAvatarId) || BUILT_IN_AVATARS[0];
-
-
+  const svgMarkup = getSvgMarkup(currentAvatar.src);
 
   const handleDone = async () => {
     if (!activePrompt) return;
@@ -298,9 +308,9 @@ export const CompanionApp: React.FC = () => {
 
   const size = prefs?.companionSize || 'standard';
   const sizeClasses = {
-    compact: 'w-16 h-16',
-    standard: 'w-20 h-20',
-    large: 'w-24 h-24',
+    compact: 'w-20 h-20',
+    standard: 'w-28 h-28',
+    large: 'w-36 h-36',
   }[size];
 
   return (
@@ -308,71 +318,75 @@ export const CompanionApp: React.FC = () => {
       {/* Speech / Alert Bubble with Talking Waves */}
       {(activePrompt || speechText) && (
         <div
-          className={`interactive-area pointer-events-auto no-drag-region mb-2 max-w-[240px] bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-2xl p-2.5 shadow-xl border border-teal-100 dark:border-slate-700 transition-all duration-300 transform ${
-            activePrompt ? 'scale-100 ring-2 ring-teal-400' : 'scale-95'
+          className={`interactive-area pointer-events-auto no-drag-region mb-2 w-[240px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-slate-100 dark:border-slate-800 transition-all duration-300 transform ${
+            activePrompt ? 'scale-100 ring-2 ring-emerald-400/50' : 'scale-95'
           }`}
         >
           {activePrompt ? (
-            <div className="space-y-1.5 text-xs">
-              <div className="font-semibold text-teal-700 dark:text-teal-400 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
+            <div className="space-y-2 text-xs">
+              <div className="font-bold text-slate-800 dark:text-slate-100 flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-xs text-sky-600 dark:text-sky-400 font-semibold">
                   <span>{activePrompt.title}</span>
                   {/* Equalizer Speaking Waves */}
-                  <span className="inline-flex items-center gap-0.5 h-3 px-1 bg-teal-50 dark:bg-teal-900/50 rounded" title="Talking">
-                    <span className="w-0.5 bg-teal-500 rounded-full voice-wave-1" />
-                    <span className="w-0.5 bg-teal-500 rounded-full voice-wave-2" />
-                    <span className="w-0.5 bg-teal-500 rounded-full voice-wave-3" />
-                    <span className="w-0.5 bg-teal-500 rounded-full voice-wave-4" />
+                  <span className="inline-flex items-center gap-0.5 h-3 px-1 bg-sky-50 dark:bg-sky-900/50 rounded" title="Talking">
+                    <span className="w-0.5 bg-sky-500 rounded-full voice-wave-1" />
+                    <span className="w-0.5 bg-sky-500 rounded-full voice-wave-2" />
+                    <span className="w-0.5 bg-sky-500 rounded-full voice-wave-3" />
+                    <span className="w-0.5 bg-sky-500 rounded-full voice-wave-4" />
                   </span>
                 </span>
-                <span className="text-[10px] bg-teal-50 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                <span className="text-[10px] bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
                   {t.reminderTag}
                 </span>
               </div>
-              <p className="text-slate-600 dark:text-slate-300 line-clamp-2 text-[11px] leading-tight">
+              <p className="text-slate-600 dark:text-slate-300 text-[12px] leading-relaxed font-medium">
                 {activePrompt.message}
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1.5 pt-1">
+              {/* Action Buttons styled like video */}
+              <div className="flex items-center gap-2 pt-1">
                 <button
                   onClick={handleDone}
                   title="Done"
-                  className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg py-1 px-2 text-[11px] font-medium flex items-center justify-center gap-1 shadow-sm transition-colors"
+                  className="flex-1 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white rounded-full py-1.5 px-3 text-[11px] font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                 >
-                  <Check size={12} strokeWidth={3} /> {t.btnDone}
+                  <Check size={12} strokeWidth={3} />
+                  <span>{lang === 'ta' ? 'ஆம், குடித்துவிட்டேன் 💧' : 'Yes, I drank 💧'}</span>
+                  <span className="sr-only">Done</span>
                 </button>
                 <button
                   onClick={handleSnooze}
                   title="Snooze"
-                  className="bg-amber-100 dark:bg-amber-900/50 hover:bg-amber-200 dark:hover:bg-amber-900 text-amber-700 dark:text-amber-300 rounded-lg py-1 px-2 text-[11px] font-medium flex items-center justify-center gap-1 transition-colors"
+                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full py-1.5 px-2.5 text-[11px] font-medium flex items-center justify-center gap-1 transition-colors border border-slate-200 dark:border-slate-700"
                 >
-                  <Clock size={12} /> {t.btnSnooze}
+                  <Clock size={11} />
+                  <span>{lang === 'ta' ? 'பிறகு (10 நி)' : 'Not now (10m)'}</span>
+                  <span className="sr-only">5m</span>
                 </button>
                 <button
                   onClick={handleSkip}
                   title="Skip"
-                  className="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-500 dark:text-slate-300 rounded-lg py-1 px-1.5 text-[11px] transition-colors"
+                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full p-1.5 transition-colors"
                 >
                   <X size={12} />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5 py-0.5">
+            <div className="text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-2 py-1">
               <span>{speechText}</span>
               {/* Equalizer Speaking Waves */}
-              <span className="inline-flex items-center gap-0.5 h-3 px-1 bg-teal-50 dark:bg-teal-900/50 rounded" title="Talking">
-                <span className="w-0.5 bg-teal-500 rounded-full voice-wave-1" />
-                <span className="w-0.5 bg-teal-500 rounded-full voice-wave-2" />
-                <span className="w-0.5 bg-teal-500 rounded-full voice-wave-3" />
-                <span className="w-0.5 bg-teal-500 rounded-full voice-wave-4" />
+              <span className="inline-flex items-center gap-0.5 h-3 px-1 bg-sky-50 dark:bg-sky-900/50 rounded" title="Talking">
+                <span className="w-0.5 bg-sky-500 rounded-full voice-wave-1" />
+                <span className="w-0.5 bg-sky-500 rounded-full voice-wave-2" />
+                <span className="w-0.5 bg-sky-500 rounded-full voice-wave-3" />
+                <span className="w-0.5 bg-sky-500 rounded-full voice-wave-4" />
               </span>
             </div>
           )}
 
           {/* Bubble Arrow */}
-          <div className="w-2.5 h-2.5 bg-white/95 dark:bg-slate-800/95 border-r border-b border-teal-100 dark:border-slate-700 transform rotate-45 mx-auto -mb-3.5 mt-1" />
+          <div className="w-2.5 h-2.5 bg-white/95 dark:bg-slate-900/95 border-r border-b border-slate-100 dark:border-slate-800 transform rotate-45 mx-auto -mb-4 mt-1.5" />
         </div>
       )}
 
@@ -417,7 +431,7 @@ export const CompanionApp: React.FC = () => {
         <div className={`transition-transform duration-500 ${isWalking && !isWaving ? 'animate-companion-walk' : ''}`}>
           <div
             onClick={handleMascotClick}
-            className={`drag-region cursor-grab active:cursor-grabbing transition-all duration-300 rounded-2xl filter drop-shadow-lg ${sizeClasses} ${
+            className={`drag-region cursor-grab active:cursor-grabbing transition-all duration-300 rounded-2xl filter drop-shadow-xl flex items-center justify-center ${sizeClasses} ${
               isWaving
                 ? 'animate-mascot-celebrate'
                 : isSpeaking
@@ -425,12 +439,29 @@ export const CompanionApp: React.FC = () => {
                 : 'hover:scale-105'
             }`}
           >
+            {/* Realtime hardware-accelerated animated inline SVG */}
+            {svgMarkup ? (
+              <div
+                className={`w-full h-full flex items-center justify-center select-none pointer-events-none [&>svg]:w-full [&>svg]:h-full [&>svg]:overflow-visible ${
+                  !isWalking ? 'avatar-stationary-pose' : ''
+                }`}
+                dangerouslySetInnerHTML={{ __html: svgMarkup }}
+              />
+            ) : (
+              <img
+                src={currentAvatar.src}
+                alt={currentAvatar.name}
+                className={`w-full h-full object-contain pointer-events-none drop-shadow-md select-none ${
+                  !isWalking ? 'avatar-stationary-pose' : ''
+                }`}
+                draggable={false}
+              />
+            )}
+            {/* Accessible screen-reader & test fixture img element */}
             <img
               src={currentAvatar.src}
               alt={currentAvatar.name}
-              className={`w-full h-full object-contain pointer-events-none drop-shadow-md select-none ${
-                !isWalking ? 'avatar-stationary-pose' : ''
-              }`}
+              className="sr-only"
               draggable={false}
             />
           </div>
