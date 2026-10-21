@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { api } from '../services/api';
-import { ActivePromptInfo, AvatarInfo, UserPreferences } from '@shared/types';
+import { ActivePromptInfo, AvatarInfo, ReminderType, UserPreferences } from '@shared/types';
 import { BUILT_IN_AVATARS } from '@shared/built-in-avatars';
 import { Check, Clock, X, ExternalLink, EyeOff } from 'lucide-react';
+import type { VoicePromptAction } from '../services/audio/types';
 import { speakText } from '../utils/speech';
 import { applyTheme } from '../utils/theme';
 import { AnimatedCharacter } from './AnimatedCharacter';
@@ -136,7 +137,9 @@ export const CompanionApp: React.FC = () => {
   const playSpeech = (
     text: string,
     targetLang?: 'en' | 'ta',
-    customPrefs?: UserPreferences | null
+    customPrefs?: UserPreferences | null,
+    reminderType?: ReminderType,
+    promptAction?: VoicePromptAction
   ) => {
     const activePrefs = customPrefs !== undefined ? customPrefs : prefs;
     if (activePrefs && activePrefs.soundEnabled === false) return;
@@ -144,6 +147,8 @@ export const CompanionApp: React.FC = () => {
       lang: targetLang || (activePrefs?.language === 'ta' ? 'ta' : 'en'),
       ladyVoiceId: activePrefs?.ladyVoiceId,
       voiceName: activePrefs?.selectedVoiceName,
+      reminderType,
+      promptAction,
       onStart: () => setSpeechActive(true),
       onEnd: () => setSpeechActive(false),
     });
@@ -166,7 +171,7 @@ export const CompanionApp: React.FC = () => {
       const currentLang = loadedPrefs?.language === 'ta' ? 'ta' : 'en';
       const initialGreeting = STRINGS[currentLang].greeting;
       setSpeechText(initialGreeting);
-      playSpeech(initialGreeting, currentLang, loadedPrefs);
+      playSpeech(initialGreeting, currentLang, loadedPrefs, undefined, 'greeting');
     });
     api.getCompanionPosition().then((pos) => {
       if (pos) windowPosRef.current = pos;
@@ -191,7 +196,7 @@ export const CompanionApp: React.FC = () => {
           message,
         });
         setSpeechText(title);
-        playSpeech(`${title}. ${message}`, currentL, currentPrefs);
+        playSpeech(`${title}. ${message}`, currentL, currentPrefs, prompt.type);
         setIsWaving(true);
         setTimeout(() => setIsWaving(false), 3000);
       });

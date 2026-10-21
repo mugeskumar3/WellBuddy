@@ -225,12 +225,12 @@ export const DashboardApp: React.FC = () => {
       <aside className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200/80 dark:border-slate-700/80 flex flex-col justify-between p-4 z-20 select-none">
         <div className="space-y-5">
           {/* Logo & Product Brand Header */}
-          <div className="flex items-center gap-3 px-2 py-2.5 rounded-2xl bg-slate-50/80 dark:bg-slate-700/40 border border-slate-200/60 dark:border-slate-700">
-            <div className="relative w-10 h-10 rounded-2xl overflow-hidden shadow-md ring-2 ring-teal-500/30 flex-shrink-0 group">
+          <div className="flex items-center gap-3 px-2.5 py-2.5 rounded-2xl bg-slate-100/70 dark:bg-slate-700/40 border border-slate-200/70 dark:border-slate-700 backdrop-blur-xs">
+            <div className="relative w-10 h-10 rounded-xl flex items-center justify-center p-1 bg-gradient-to-br from-teal-500/10 via-cyan-500/10 to-transparent dark:from-teal-400/15 dark:via-cyan-400/10 dark:to-slate-800/80 shadow-xs border border-teal-500/20 flex-shrink-0 group">
               <img
-                src="./logo.png"
+                src="./logo.svg"
                 alt="WellBuddy Logo"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(6,182,212,0.35)] transition-transform duration-300 group-hover:scale-110"
               />
             </div>
             <div className="min-w-0 flex-1">
@@ -465,7 +465,7 @@ export const DashboardApp: React.FC = () => {
           )}
 
           {activeTab === 'settings' && (
-            <GeneralSettingsView prefs={prefs} onRefresh={refreshData} />
+            <GeneralSettingsView prefs={prefs} onRefresh={refreshData} onNavigateTab={(tab) => setActiveTab(tab)} />
           )}
         </main>
       </div>

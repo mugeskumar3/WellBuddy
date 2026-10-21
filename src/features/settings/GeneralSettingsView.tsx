@@ -30,14 +30,20 @@ import {
   Square,
   Star,
   Radio,
+  ArrowRight,
 } from 'lucide-react';
 
 interface GeneralSettingsViewProps {
   prefs: UserPreferences | null;
   onRefresh: () => void;
+  onNavigateTab?: (tab: string) => void;
 }
 
-export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs, onRefresh }) => {
+export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({
+  prefs,
+  onRefresh,
+  onNavigateTab,
+}) => {
   const [testingVoice, setTestingVoice] = useState(false);
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
   const [voiceCategory, setVoiceCategory] = useState<'all' | 'celebrity' | 'companion'>('all');
@@ -257,6 +263,34 @@ export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs,
             </button>
           </div>
         </div>
+
+        {onNavigateTab && (
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-pink-500/10 dark:from-rose-950/40 dark:via-amber-950/20 dark:to-pink-950/30 border border-rose-300/50 dark:border-rose-800 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="p-2 bg-rose-500 text-white rounded-xl shadow-xs flex-shrink-0">
+                <Star size={16} className="fill-current text-amber-300" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-bold text-xs text-slate-900 dark:text-white truncate">
+                  {isTamil ? 'பிரபல குரல் ஸ்டுடியோ & 5-நினைவூட்டல் ஒலிப்பலகை' : 'Dedicated Celebrity Voice Studio'}
+                </h4>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                  {isTamil
+                    ? 'த்ரிஷா & சமந்தாவின் நேரடி குரல் பதிவுகளை கேட்க பிரத்யேக குரல் ஸ்டுடியோவை திறக்கவும்.'
+                    : 'Access interactive 5-action soundboards for Trisha & Samantha with live equalizer.'}
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigateTab('voice')}
+              className="px-3 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold transition-all flex items-center gap-1 shadow-xs cursor-pointer flex-shrink-0"
+            >
+              <span>{isTamil ? 'ஸ்டுடியோ திற' : 'Open Studio'}</span>
+              <ArrowRight size={13} />
+            </button>
+          </div>
+        )}
 
         {/* Lady Voice Options Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
