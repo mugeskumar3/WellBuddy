@@ -28,6 +28,8 @@ import {
   Check,
   Play,
   Square,
+  Star,
+  Radio,
 } from 'lucide-react';
 
 interface GeneralSettingsViewProps {
@@ -38,6 +40,7 @@ interface GeneralSettingsViewProps {
 export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs, onRefresh }) => {
   const [testingVoice, setTestingVoice] = useState(false);
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
+  const [voiceCategory, setVoiceCategory] = useState<'all' | 'celebrity' | 'companion'>('all');
   const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [customGoal, setCustomGoal] = useState(String(prefs?.waterDailyGoalMl || 2000));
   const [goalSaved, setGoalSaved] = useState(false);
@@ -202,43 +205,92 @@ export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs,
       </div>
 
       {/* 3. Lady Voice Personas / பெண் குரல் தேர்வு */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 flex items-center gap-2">
               <Sparkles size={16} className="text-pink-500" />
-              <span>{isTamil ? 'பெண் குரல் தோழிகள் தேர்வு / Lady Voice Personas' : 'Lady Voice Personas (Multiple Choices)'}</span>
+              <span>{isTamil ? 'குரல் மாடல்கள் & பெண் தோழிகள் / Voice Studio' : 'Voice Studio & Companion Models'}</span>
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {isTamil
-                ? 'உங்களுக்குப் பிடித்த பெண் தோழி குரலைத் தேர்வு செய்யவும். குரலைக் கேட்க "குரல் மாதிரி" பொத்தானை அழுத்தவும்.'
-                : 'Select your preferred companion voice personality. Click Preview on any card to hear her tone.'}
+                ? 'பிரபல நட்சத்திர குரல்கள் அல்லது தோழி குரல்களைத் தேர்வு செய்யவும். கேட்க "குரல் மாதிரி" அழுத்தவும்.'
+                : 'Select from authentic celebrity stars or studio companions. Click Preview on any model to listen.'}
             </p>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-700/60 rounded-xl self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={() => setVoiceCategory('all')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                voiceCategory === 'all'
+                  ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-xs'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              {isTamil ? 'அனைத்தும் (6)' : 'All (6)'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setVoiceCategory('celebrity')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer ${
+                voiceCategory === 'celebrity'
+                  ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-xs'
+                  : 'text-rose-600 dark:text-rose-400 hover:text-rose-700'
+              }`}
+            >
+              <Star size={11} className="fill-current" />
+              <span>{isTamil ? 'பிரபல நட்சத்திரங்கள்' : 'Cinema Stars'}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setVoiceCategory('companion')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                voiceCategory === 'companion'
+                  ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-xs'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              {isTamil ? 'தோழி குரல்கள்' : 'Companions'}
+            </button>
           </div>
         </div>
 
-        {/* 4 Lady Voice Options Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          {LADY_VOICE_PROFILES.map((profile) => {
+        {/* Lady Voice Options Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+          {LADY_VOICE_PROFILES.filter((p) => voiceCategory === 'all' || p.category === voiceCategory).map((profile) => {
             const isSelected = (prefs?.ladyVoiceId || 'lily_cheerful') === profile.id;
             const isPlaying = playingVoiceId === profile.id;
+            const isCelebrity = profile.category === 'celebrity';
 
             return (
               <div
                 key={profile.id}
                 onClick={() => updatePref({ ladyVoiceId: profile.id })}
-                className={`p-4 rounded-xl border relative flex flex-col justify-between gap-3 transition-all cursor-pointer ${
+                className={`p-4 rounded-xl border relative flex flex-col justify-between gap-3.5 transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-gradient-to-br from-pink-50/60 to-rose-50/40 dark:from-pink-950/30 dark:to-rose-950/20 border-pink-400 dark:border-pink-500 shadow-sm ring-1 ring-pink-400/20'
+                    ? isCelebrity
+                      ? 'bg-gradient-to-br from-rose-50/80 via-amber-50/40 to-pink-50/60 dark:from-rose-950/40 dark:via-amber-950/20 dark:to-pink-950/30 border-rose-400 dark:border-rose-500 shadow-sm ring-1 ring-rose-400/30'
+                      : 'bg-gradient-to-br from-pink-50/60 to-rose-50/40 dark:from-pink-950/30 dark:to-rose-950/20 border-pink-400 dark:border-pink-500 shadow-sm ring-1 ring-pink-400/20'
+                    : isCelebrity
+                    ? 'border-amber-200/80 dark:border-amber-900/40 bg-amber-50/20 dark:bg-amber-950/10 hover:border-amber-300 dark:hover:border-amber-700'
                     : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-1">
+                  {/* Top Bar with Badge & Selection Status */}
+                  <div className="flex items-center justify-between mb-2 gap-2">
                     <div className="flex items-center gap-2">
-                      <span className={`w-3 h-3 rounded-full bg-gradient-to-tr ${profile.avatarColor} shadow-xs`} />
-                      <span className="font-bold text-xs text-slate-800 dark:text-slate-100">
+                      <span className={`w-3.5 h-3.5 rounded-full bg-gradient-to-tr ${profile.avatarColor} shadow-xs flex items-center justify-center`}>
+                        {isCelebrity && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
+                      </span>
+                      <span className="font-bold text-xs text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
                         {isTamil ? profile.tamilName : profile.name}
+                        {isCelebrity && (
+                          <Star size={12} className="text-amber-500 fill-amber-500" />
+                        )}
                       </span>
                     </div>
 
@@ -253,29 +305,55 @@ export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs,
                     )}
                   </div>
 
+                  {/* Category & Studio Badge */}
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`px-2 py-0.5 text-[10px] font-semibold rounded-md border ${
+                      isCelebrity
+                        ? 'bg-amber-100/70 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-300/60 dark:border-amber-700/60'
+                        : 'bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-600'
+                    }`}>
+                      {profile.badge[isTamil ? 'ta' : 'en']}
+                    </span>
+
+                    {profile.hasPreRecordedAudio && (
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-md bg-gradient-to-r from-rose-500/15 to-pink-500/15 text-rose-600 dark:text-rose-400 border border-rose-300/40 dark:border-rose-700/40 flex items-center gap-1">
+                        <Radio size={10} className="text-rose-500" />
+                        <span>{isTamil ? 'ஸ்டுடியோ ஆடியோ' : 'Studio Audio'}</span>
+                      </span>
+                    )}
+                  </div>
+
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
                     {isTamil ? profile.tamilTagline : profile.tagline}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-700/60">
-                  <span className="text-[10px] text-slate-400">
-                    {profile.id === 'lily_cheerful'
-                      ? (isTamil ? 'மகிழ்ச்சி & உற்சாகம்' : 'Sweet & Cheerful')
-                      : profile.id === 'maya_gentle'
-                      ? (isTamil ? 'மென்மை & இதம்' : 'Soft & Soothing')
-                      : profile.id === 'chloe_energetic'
-                      ? (isTamil ? 'வேகம் & ஊக்கம்' : 'High Energy Coach')
-                      : (isTamil ? 'தியானம் & அமைதி' : 'Mindful & Relaxed')}
-                  </span>
+                {/* Bottom Bar: Accent Tag & Interactive Preview Audio */}
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/60">
+                  <div className="flex items-center gap-2">
+                    {isPlaying && (
+                      <div className="flex items-end gap-0.5 h-3">
+                        <span className="w-1 h-2 bg-pink-500 rounded-full animate-bounce" />
+                        <span className="w-1 h-3 bg-pink-500 rounded-full animate-bounce [animation-delay:150ms]" />
+                        <span className="w-1 h-1.5 bg-pink-500 rounded-full animate-bounce [animation-delay:300ms]" />
+                      </div>
+                    )}
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      {isCelebrity
+                        ? (isTamil ? 'தமிழ் & ஆங்கிலம் • HD' : 'Tamil & English • HD')
+                        : (isTamil ? 'இயற்கை குரல்' : 'Natural TTS')}
+                    </span>
+                  </div>
 
                   <button
                     type="button"
                     onClick={(e) => handlePreviewLadyVoice(profile, e)}
                     disabled={prefs?.soundEnabled === false}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                       isPlaying
-                        ? 'bg-pink-500 text-white shadow-xs'
+                        ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-xs'
+                        : isCelebrity
+                        ? 'bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-700/80 hover:bg-amber-50 dark:hover:bg-amber-950/40 text-amber-700 dark:text-amber-300'
                         : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-pink-300 dark:hover:border-pink-700 text-slate-700 dark:text-slate-200'
                     }`}
                     title={isTamil ? 'குரல் மாதிரியைக் கேட்கவும்' : 'Play voice preview audio'}
@@ -300,7 +378,7 @@ export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs,
 
         {/* Windows System Voice selection (if system has multiple voices installed) */}
         {systemVoices.length > 0 && (
-          <div className="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl space-y-1.5 mt-2">
+          <div className="p-3.5 bg-slate-50 dark:bg-slate-700/40 rounded-xl space-y-1.5 mt-2 border border-slate-100 dark:border-slate-700">
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
               {isTamil ? 'விண்டோஸ் கணினி குரல் தேர்வு (விருப்பப்படி)' : 'Windows System Voice (Optional)'}
             </label>
@@ -312,7 +390,7 @@ export const GeneralSettingsView: React.FC<GeneralSettingsViewProps> = ({ prefs,
             <select
               value={prefs?.selectedVoiceName || ''}
               onChange={(e) => updatePref({ selectedVoiceName: e.target.value })}
-              className="w-full text-xs p-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-teal-500 cursor-pointer"
             >
               <option value="">{isTamil ? 'தானியங்கி / பரிந்துரைக்கப்பட்ட பெண் குரல் (Default Auto Lady)' : 'Auto / Recommended Lady Voice'}</option>
               {systemVoices.map((v) => (
