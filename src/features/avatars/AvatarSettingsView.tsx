@@ -2,6 +2,7 @@ import React from 'react';
 import { AvatarInfo, UserPreferences } from '@shared/types';
 import { api } from '../../services/api';
 import { Eye, EyeOff, Move } from 'lucide-react';
+import { AnimatedCharacter } from '../../components/AnimatedCharacter';
 
 interface AvatarSettingsViewProps {
   avatars: AvatarInfo[];
@@ -119,11 +120,11 @@ export const AvatarSettingsView: React.FC<AvatarSettingsViewProps> = ({
                       : 'border-slate-200/80 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
-                  <div className="w-24 h-24 mb-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center transform group-hover:scale-105 transition-transform">
-                    <img
-                      src={avatar.src}
-                      alt={avatar.name}
-                      className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none"
+                  <div className="w-24 h-24 mb-3 p-2 rounded-xl bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center transform group-hover:scale-105 transition-transform overflow-hidden">
+                    <AnimatedCharacter
+                      avatar={avatar}
+                      sizeClasses="w-full h-full"
+                      isWalking={isSelected}
                     />
                   </div>
                   <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">

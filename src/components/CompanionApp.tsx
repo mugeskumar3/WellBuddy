@@ -5,17 +5,7 @@ import { BUILT_IN_AVATARS } from '@shared/built-in-avatars';
 import { Check, Clock, X, ExternalLink, EyeOff } from 'lucide-react';
 import { speakText } from '../utils/speech';
 import { applyTheme } from '../utils/theme';
-
-const getSvgMarkup = (src: string): string | null => {
-  if (!src || !src.startsWith('data:image/svg+xml')) return null;
-  const commaIdx = src.indexOf(',');
-  if (commaIdx === -1) return null;
-  try {
-    return decodeURIComponent(src.substring(commaIdx + 1));
-  } catch {
-    return null;
-  }
-};
+import { AnimatedCharacter } from './AnimatedCharacter';
 
 interface LanguageStrings {
   greeting: string;
@@ -129,6 +119,7 @@ export const CompanionApp: React.FC = () => {
   const [speechText, setSpeechText] = useState<string>('Stay refreshed!');
   const [isWaving, setIsWaving] = useState<boolean>(false);
   const [isWalking, setIsWalking] = useState<boolean>(true);
+  const [isCelebrating, setIsCelebrating] = useState<boolean>(false);
 
   const lang: 'en' | 'ta' = prefs?.language === 'ta' ? 'ta' : 'en';
   const t = STRINGS[lang];
@@ -252,18 +243,19 @@ export const CompanionApp: React.FC = () => {
 
   const currentAvatar =
     avatars.find((a) => a.id === prefs?.selectedAvatarId) || BUILT_IN_AVATARS[0];
-  const svgMarkup = getSvgMarkup(currentAvatar.src);
 
   const handleDone = async () => {
     if (!activePrompt) return;
     await api.completeReminder(activePrompt.occurrenceId, activePrompt.type);
+    setIsCelebrating(true);
     setSpeechText(t.done);
     playSpeech(t.done);
     setActivePrompt(null);
     setTimeout(() => {
+      setIsCelebrating(false);
       setSpeechText(t.keepItUp);
       setTimeout(() => setSpeechText(''), 3000);
-    }, 2000);
+    }, 3200);
   };
 
   const handleSnooze = async () => {
@@ -428,43 +420,17 @@ export const CompanionApp: React.FC = () => {
         </div>
 
         {/* Mascot Avatar Container (Walkable & Draggable) */}
-        <div className={`transition-transform duration-500 ${isWalking && !isWaving ? 'animate-companion-walk' : ''}`}>
-          <div
+        <div className={`transition-transform duration-500 ${isWalking && !isWaving && !isCelebrating ? 'animate-companion-walk' : ''}`}>
+          <AnimatedCharacter
+            avatar={currentAvatar}
+            isWalking={isWalking}
+            isWaving={isWaving}
+            isSpeaking={isSpeaking}
+            isCelebrating={isCelebrating}
+            isDrinking={Boolean(activePrompt && activePrompt.type === 'water')}
+            sizeClasses={sizeClasses}
             onClick={handleMascotClick}
-            className={`drag-region cursor-grab active:cursor-grabbing transition-all duration-300 rounded-2xl filter drop-shadow-xl flex items-center justify-center ${sizeClasses} ${
-              isWaving
-                ? 'animate-mascot-celebrate'
-                : isSpeaking
-                ? 'animate-talking-speech'
-                : 'hover:scale-105'
-            }`}
-          >
-            {/* Realtime hardware-accelerated animated inline SVG */}
-            {svgMarkup ? (
-              <div
-                className={`w-full h-full flex items-center justify-center select-none pointer-events-none [&>svg]:w-full [&>svg]:h-full [&>svg]:overflow-visible ${
-                  !isWalking ? 'avatar-stationary-pose' : ''
-                }`}
-                dangerouslySetInnerHTML={{ __html: svgMarkup }}
-              />
-            ) : (
-              <img
-                src={currentAvatar.src}
-                alt={currentAvatar.name}
-                className={`w-full h-full object-contain pointer-events-none drop-shadow-md select-none ${
-                  !isWalking ? 'avatar-stationary-pose' : ''
-                }`}
-                draggable={false}
-              />
-            )}
-            {/* Accessible screen-reader & test fixture img element */}
-            <img
-              src={currentAvatar.src}
-              alt={currentAvatar.name}
-              className="sr-only"
-              draggable={false}
-            />
-          </div>
+          />
         </div>
       </div>
     </div>

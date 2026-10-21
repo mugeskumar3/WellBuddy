@@ -167,6 +167,123 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     `)}`,
   },
   {
+    id: 'pixel-buddy',
+    name: 'Pranjali the Pixel Desk Buddy',
+    type: 'builtin',
+    description: 'Cozy pixel-art desktop companion with natural walking steps, water drinking animation on hydration alerts, and celebration jumps with hearts and sparkles.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" shape-rendering="crispEdges">
+        <defs>
+          <style>
+            @keyframes pixelBlink { 0%, 94%, 100% { opacity: 1; } 95%, 99% { opacity: 0; } }
+            @keyframes pixelBlinkClosed { 0%, 94%, 100% { opacity: 0; } 95%, 99% { opacity: 1; } }
+            @keyframes pixelBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
+            @keyframes pixelWalkL { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+            @keyframes pixelWalkR { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(0); } }
+            .px-eyes-open { animation: pixelBlink 3.6s infinite; }
+            .px-eyes-shut { animation: pixelBlinkClosed 3.6s infinite; }
+            .px-bounce { animation: pixelBob 0.8s steps(2, end) infinite; }
+            .px-leg-l { animation: pixelWalkL 0.6s steps(2, end) infinite; }
+            .px-leg-r { animation: pixelWalkR 0.6s steps(2, end) infinite; }
+          </style>
+        </defs>
+        <ellipse cx="16" cy="28" rx="8" ry="2" fill="#0f172a" opacity="0.25"/>
+        <g class="px-bounce">
+          <rect x="9" y="8" width="4" height="7" fill="#18181b"/>
+          <rect x="8" y="12" width="3" height="5" fill="#27272a"/>
+          <rect x="11" y="14" width="10" height="8" fill="#c084fc"/>
+          <rect x="11" y="21" width="10" height="1" fill="#9333ea"/>
+          <rect x="13" y="18" width="6" height="3" fill="#a855f7"/>
+          <rect x="14" y="15" width="1" height="3" fill="#f8fafc"/>
+          <rect x="17" y="15" width="1" height="3" fill="#f8fafc"/>
+          <rect x="12" y="22" width="8" height="3" fill="#2563eb"/>
+          <g class="px-leg-l">
+            <rect x="12" y="24" width="3" height="3" fill="#fed7aa"/>
+            <rect x="11" y="26" width="4" height="2" fill="#ffffff"/>
+            <rect x="11" y="28" width="4" height="1" fill="#0284c7"/>
+          </g>
+          <g class="px-leg-r">
+            <rect x="17" y="24" width="3" height="3" fill="#fed7aa"/>
+            <rect x="17" y="26" width="4" height="2" fill="#ffffff"/>
+            <rect x="17" y="28" width="4" height="1" fill="#0284c7"/>
+          </g>
+          <rect x="9" y="15" width="2" height="5" fill="#a855f7"/>
+          <rect x="21" y="15" width="2" height="5" fill="#a855f7"/>
+          <rect x="21" y="17" width="3" height="4" rx="0.5" fill="#38bdf8"/>
+          <rect x="22" y="16" width="1" height="1" fill="#ffffff"/>
+          <rect x="12" y="8" width="8" height="7" fill="#fed7aa"/>
+          <rect x="11" y="5" width="10" height="4" fill="#18181b"/>
+          <rect x="10" y="7" width="2" height="6" fill="#27272a"/>
+          <rect x="20" y="7" width="2" height="6" fill="#27272a"/>
+          <rect x="12" y="7" width="3" height="2" fill="#18181b"/>
+          <rect x="16" y="7" width="4" height="2" fill="#18181b"/>
+          <g class="px-eyes-open">
+            <rect x="13" y="10" width="2" height="2" fill="#18181b"/>
+            <rect x="13" y="10" width="1" height="1" fill="#ffffff"/>
+            <rect x="17" y="10" width="2" height="2" fill="#18181b"/>
+            <rect x="17" y="10" width="1" height="1" fill="#ffffff"/>
+          </g>
+          <g class="px-eyes-shut">
+            <rect x="13" y="11" width="2" height="1" fill="#18181b"/>
+            <rect x="17" y="11" width="2" height="1" fill="#18181b"/>
+          </g>
+          <rect x="12" y="12" width="2" height="1" fill="#fb7185" opacity="0.85"/>
+          <rect x="18" y="12" width="2" height="1" fill="#fb7185" opacity="0.85"/>
+          <rect x="15" y="13" width="2" height="1" fill="#e11d48"/>
+        </g>
+      </svg>
+    `)}`,
+  },
+  {
+    id: 'pixel-cat',
+    name: 'Mochi the Pixel Cat',
+    type: 'builtin',
+    description: 'Charming retro ginger tabby cat desktop companion that walks, wags its tail, and drinks from its saucer.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" shape-rendering="crispEdges">
+        <defs>
+          <style>
+            @keyframes catTail { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
+            @keyframes catBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
+            .px-cat-body { animation: catBob 0.8s steps(2, end) infinite; }
+            .px-cat-tail { animation: catTail 1s ease-in-out infinite; transform-origin: 8px 19px; }
+          </style>
+        </defs>
+        <ellipse cx="16" cy="27" rx="8" ry="2" fill="#0f172a" opacity="0.25"/>
+        <g class="px-cat-body">
+          <path class="px-cat-tail" d="M8 19 H6 V15 H5 V12 H7 V15 H8 Z" fill="#ea580c"/>
+          <rect x="5" y="12" width="2" height="2" fill="#fed7aa"/>
+          <rect x="9" y="17" width="13" height="7" fill="#f97316"/>
+          <rect x="11" y="17" width="2" height="4" fill="#c2410c"/>
+          <rect x="15" y="17" width="2" height="4" fill="#c2410c"/>
+          <rect x="10" y="21" width="10" height="3" fill="#ffedd5"/>
+          <rect x="9" y="24" width="2" height="3" fill="#ea580c"/>
+          <rect x="9" y="27" width="3" height="1" fill="#ffedd5"/>
+          <rect x="13" y="24" width="2" height="3" fill="#ea580c"/>
+          <rect x="13" y="27" width="3" height="1" fill="#ffedd5"/>
+          <rect x="17" y="24" width="2" height="3" fill="#ea580c"/>
+          <rect x="17" y="27" width="3" height="1" fill="#ffedd5"/>
+          <rect x="20" y="24" width="2" height="3" fill="#ea580c"/>
+          <rect x="20" y="27" width="3" height="1" fill="#ffedd5"/>
+          <rect x="17" y="11" width="10" height="8" fill="#f97316"/>
+          <rect x="19" y="15" width="6" height="4" fill="#ffedd5"/>
+          <polygon points="17,11 17,7 20,11" fill="#ea580c"/>
+          <polygon points="18,10 18,8 19,10" fill="#f43f5e"/>
+          <polygon points="24,11 27,7 27,11" fill="#ea580c"/>
+          <polygon points="25,10 26,8 26,10" fill="#f43f5e"/>
+          <rect x="19" y="13" width="2" height="2" fill="#15803d"/>
+          <rect x="19" y="13" width="1" height="1" fill="#ffffff"/>
+          <rect x="24" y="13" width="2" height="2" fill="#15803d"/>
+          <rect x="24" y="13" width="1" height="1" fill="#ffffff"/>
+          <rect x="22" y="15" width="1" height="1" fill="#f43f5e"/>
+          <rect x="21" y="16" width="3" height="1" fill="#c2410c"/>
+          <rect x="18" y="16" width="2" height="1" fill="#fb7185" opacity="0.8"/>
+          <rect x="25" y="16" width="2" height="1" fill="#fb7185" opacity="0.8"/>
+        </g>
+      </svg>
+    `)}`,
+  },
+  {
     id: 'robobuddy',
     name: 'Bolt the RoboBuddy',
     type: 'builtin',
@@ -1333,281 +1450,271 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     id: 'human-buddy',
     name: 'Dr. Buddy (நலன் நண்பன்)',
     type: 'builtin',
-    description: 'Wellness companion who walks in side profile with a glass of water, turns front to toast you, and shares healthy reminders.',
+    description: '3D animated AI-style wellness mentor in full front perspective, holding a refreshing glass of water with walking strides and gentle encouragement.',
     src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="100%" height="100%">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="100%" height="100%">
         <defs>
-          <linearGradient id="hbHair" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#94a3b8"/>
-            <stop offset="50%" stop-color="#475569"/>
-            <stop offset="100%" stop-color="#334155"/>
+          <!-- Volumetric 3D Skin Gradient -->
+          <radialGradient id="hb3dHead" cx="42%" cy="32%" r="68%">
+            <stop offset="0%" stop-color="#ffedd5"/>
+            <stop offset="45%" stop-color="#fba068"/>
+            <stop offset="100%" stop-color="#c2410c"/>
+          </radialGradient>
+          <linearGradient id="hb3dNeck" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ea580c"/>
+            <stop offset="50%" stop-color="#fed7aa"/>
+            <stop offset="100%" stop-color="#c2410c"/>
           </linearGradient>
-          <linearGradient id="hbSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#fed7aa"/>
-            <stop offset="100%" stop-color="#fba068"/>
-          </linearGradient>
-          <linearGradient id="hbShirt" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#bfdbfe"/>
-            <stop offset="100%" stop-color="#60a5fa"/>
-          </linearGradient>
-          <linearGradient id="hbPants" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#334155"/>
+
+          <!-- Volumetric 3D Salt-and-Pepper Hair -->
+          <linearGradient id="hb3dHair" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f1f5f9"/>
+            <stop offset="25%" stop-color="#cbd5e1"/>
+            <stop offset="60%" stop-color="#64748b"/>
             <stop offset="100%" stop-color="#1e293b"/>
           </linearGradient>
-          <linearGradient id="hbShoe" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#78350f"/>
-            <stop offset="100%" stop-color="#451a03"/>
+
+          <!-- 3D Polo Shirt with Cylindrical Rounding -->
+          <radialGradient id="hb3dShirt" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#dbeafe"/>
+            <stop offset="40%" stop-color="#60a5fa"/>
+            <stop offset="85%" stop-color="#2563eb"/>
+            <stop offset="100%" stop-color="#1e40af"/>
+          </radialGradient>
+          <linearGradient id="hb3dArmL" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="50%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
           </linearGradient>
-          <linearGradient id="waterGlass" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
-            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9"/>
+          <linearGradient id="hb3dArmR" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="50%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
           </linearGradient>
-          <filter id="hbShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
+
+          <!-- 3D Cylindrical Trousers Legs -->
+          <linearGradient id="hb3dPantsL" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#64748b"/>
+            <stop offset="40%" stop-color="#334155"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+          <linearGradient id="hb3dPantsR" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#64748b"/>
+            <stop offset="40%" stop-color="#334155"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+
+          <!-- 3D Leather Loafers -->
+          <linearGradient id="hb3dShoe" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#b45309"/>
+            <stop offset="40%" stop-color="#78350f"/>
+            <stop offset="100%" stop-color="#291102"/>
+          </linearGradient>
+
+          <!-- 3D Crystal Water Glass with Shimmer -->
+          <linearGradient id="hb3dGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+            <stop offset="35%" stop-color="#bae6fd" stop-opacity="0.55"/>
+            <stop offset="80%" stop-color="#38bdf8" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.85"/>
+          </linearGradient>
+          <linearGradient id="hb3dWater" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#7dd3fc"/>
+            <stop offset="50%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#0369a1"/>
+          </linearGradient>
+
+          <!-- Realistic Soft Ambient Occlusion and Ground Shadow -->
+          <filter id="hb3dShadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.32"/>
+          </filter>
+          <filter id="hbWaterGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#38bdf8" flood-opacity="0.65"/>
           </filter>
         </defs>
         <style>
-          /* Toggle Side Profile Walk vs Front Posing View */
-          @keyframes toggleSideWalk {
-            0%, 28% { opacity: 1; visibility: visible; }
-            28.1%, 49.9% { opacity: 0; visibility: hidden; }
-            50%, 78% { opacity: 1; visibility: visible; }
-            78.1%, 100% { opacity: 0; visibility: hidden; }
+          /* 3D Front Perspective Walk Cycle (Continuous 3D Front View - No Side Profile!) */
+          @keyframes hb3dWalkBob {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-4px) rotate(-1.5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-4px) rotate(1.5deg); }
           }
-          @keyframes toggleFrontPose {
-            0%, 28% { opacity: 0; visibility: hidden; }
-            28.1%, 49.9% { opacity: 1; visibility: visible; }
-            50%, 78% { opacity: 0; visibility: hidden; }
-            78.1%, 100% { opacity: 1; visibility: visible; }
+          /* Left Leg Front Stepping (Forward Plant and Lift) */
+          @keyframes hb3dLegL {
+            0%, 100% { transform: translateY(0px) scale(1, 1); }
+            25% { transform: translateY(-6px) scale(0.96, 1.04); }
+            50% { transform: translateY(0px) scale(1.02, 0.98); }
+            75% { transform: translateY(2px) scale(1, 1); }
           }
-
-          /* Side Profile Stride: Front Leg */
-          @keyframes sideLegFrontStride {
-            0% { transform: rotate(24deg) translateY(0px); }
-            3.5% { transform: rotate(0deg) translateY(0px); }
-            7% { transform: rotate(-24deg) translateY(-2px); }
-            10.5% { transform: rotate(6deg) translateY(-6px); }
-            14% { transform: rotate(24deg) translateY(0px); }
-            17.5% { transform: rotate(0deg) translateY(0px); }
-            21% { transform: rotate(-24deg) translateY(-2px); }
-            24.5% { transform: rotate(6deg) translateY(-6px); }
-            28%, 50% { transform: rotate(0deg) translateY(0px); }
-            53.5% { transform: rotate(24deg) translateY(0px); }
-            57% { transform: rotate(0deg) translateY(0px); }
-            60.5% { transform: rotate(-24deg) translateY(-2px); }
-            64% { transform: rotate(6deg) translateY(-6px); }
-            67.5% { transform: rotate(24deg) translateY(0px); }
-            71% { transform: rotate(0deg) translateY(0px); }
-            74.5% { transform: rotate(-24deg) translateY(-2px); }
-            78%, 100% { transform: rotate(0deg) translateY(0px); }
+          /* Right Leg Front Stepping (Counter-Step) */
+          @keyframes hb3dLegR {
+            0%, 100% { transform: translateY(0px) scale(1.02, 0.98); }
+            25% { transform: translateY(2px) scale(1, 1); }
+            50% { transform: translateY(0px) scale(1, 1); }
+            75% { transform: translateY(-6px) scale(0.96, 1.04); }
           }
-
-          /* Side Profile Stride: Back Leg */
-          @keyframes sideLegBackStride {
-            0% { transform: rotate(-24deg) translateY(-2px); }
-            3.5% { transform: rotate(6deg) translateY(-6px); }
-            7% { transform: rotate(24deg) translateY(0px); }
-            10.5% { transform: rotate(0deg) translateY(0px); }
-            14% { transform: rotate(-24deg) translateY(-2px); }
-            17.5% { transform: rotate(6deg) translateY(-6px); }
-            21% { transform: rotate(24deg) translateY(0px); }
-            24.5% { transform: rotate(0deg) translateY(0px); }
-            28%, 50% { transform: rotate(0deg) translateY(0px); }
-            53.5% { transform: rotate(-24deg) translateY(-2px); }
-            57% { transform: rotate(6deg) translateY(-6px); }
-            60.5% { transform: rotate(24deg) translateY(0px); }
-            64% { transform: rotate(0deg) translateY(0px); }
-            67.5% { transform: rotate(-24deg) translateY(-2px); }
-            71% { transform: rotate(6deg) translateY(-6px); }
-            74.5% { transform: rotate(24deg) translateY(0px); }
-            78%, 100% { transform: rotate(0deg) translateY(0px); }
+          /* Left Arm Natural Stride Sway */
+          @keyframes hb3dArmSwayL {
+            0%, 100% { transform: rotate(-6deg); }
+            50% { transform: rotate(10deg); }
           }
-
-          /* Side Body Step Bobbing */
-          @keyframes sideBodyBob {
-            0%, 7%, 14%, 21%, 28%, 50%, 57%, 64%, 71%, 78% { transform: translateY(0px); }
-            3.5%, 10.5%, 17.5%, 24.5%, 53.5%, 60.5%, 67.5%, 74.5% { transform: translateY(-3px); }
+          /* Right Arm Cheerful Glass Toast with Sloshing Liquid */
+          @keyframes hb3dToastArm {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            35% { transform: rotate(-8deg) translateY(-4px); }
+            70% { transform: rotate(5deg) translateY(-2px); }
           }
-
-          /* Front Pose Idle Breathing and Toast */
-          @keyframes frontPoseIdle {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            35%, 85% { transform: translateY(-2px) scale(1.02); }
-            42%, 92% { transform: translateY(-1px) scale(1.01); }
+          /* Sloshing Liquid and Ice Float */
+          @keyframes hb3dWaterWave {
+            0%, 100% { transform: rotate(-4deg); }
+            50% { transform: rotate(5deg); }
           }
-
-          /* Eye Blink */
-          @keyframes hbBlink {
+          /* Ground Soft Contact Shadow Pulse */
+          @keyframes hb3dShadowPulse {
+            0%, 50%, 100% { rx: 34px; opacity: 0.28; }
+            25%, 75% { rx: 29px; opacity: 0.2; }
+          }
+          /* Natural Eye Blink */
+          @keyframes hb3dEyeBlink {
             0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
-            48%, 98% { transform: scaleY(0.1); }
+            48%, 98% { transform: scaleY(0.12); }
           }
-
-          /* Speaking Mouth */
-          @keyframes hbSpeak {
+          /* Expressive Speaking Mouth */
+          @keyframes hb3dLipSync {
             0%, 100% { transform: scale(1, 1); }
-            25% { transform: scale(1.15, 1.4); }
-            50% { transform: scale(0.95, 0.85); }
-            75% { transform: scale(1.1, 1.3); }
+            25% { transform: scale(1.18, 1.6); }
+            50% { transform: scale(0.92, 0.75); }
+            75% { transform: scale(1.12, 1.4); }
           }
-
-          .side-walk-view { animation: toggleSideWalk 12s linear infinite; }
-          .front-pose-view { animation: toggleFrontPose 12s linear infinite; }
-          .side-leg-front-elem { animation: sideLegFrontStride 12s linear infinite; transform-origin: 72px 84px; }
-          .side-leg-back-elem { animation: sideLegBackStride 12s linear infinite; transform-origin: 66px 84px; }
-          .side-body-elem { animation: sideBodyBob 12s linear infinite; transform-origin: 70px 100px; }
-          .front-pose-body { animation: frontPoseIdle 12s linear infinite; transform-origin: 65px 115px; }
-          .hb-eyes { animation: hbBlink 3.8s ease-in-out infinite; transform-origin: 65px 44px; }
-          .hb-mouth { animation: hbSpeak 0.38s ease-in-out infinite; transform-origin: 65px 52px; }
+          .hb3d-body-all { animation: hb3dWalkBob 0.8s ease-in-out infinite; transform-origin: 70px 105px; }
+          .hb3d-leg-l { animation: hb3dLegL 0.8s ease-in-out infinite; transform-origin: 55px 86px; }
+          .hb3d-leg-r { animation: hb3dLegR 0.8s ease-in-out infinite; transform-origin: 85px 86px; }
+          .hb3d-arm-l { animation: hb3dArmSwayL 0.8s ease-in-out infinite; transform-origin: 43px 60px; }
+          .hb3d-arm-r { animation: hb3dToastArm 2.6s ease-in-out infinite; transform-origin: 97px 60px; }
+          .hb3d-slosh { animation: hb3dWaterWave 2.6s ease-in-out infinite; transform-origin: 106px 74px; }
+          .hb3d-shadow { animation: hb3dShadowPulse 0.8s ease-in-out infinite; transform-origin: 70px 125px; }
+          .hb3d-eyes { animation: hb3dEyeBlink 3.8s ease-in-out infinite; transform-origin: 70px 42px; }
+          .hb3d-mouth { animation: hb3dLipSync 0.4s ease-in-out infinite; transform-origin: 70px 52px; }
         </style>
 
-        <!-- Ground Shadow -->
-        <ellipse cx="68" cy="123" rx="30" ry="4" fill="#000000" opacity="0.18"/>
+        <!-- Dynamic Ground Contact Shadow -->
+        <ellipse class="hb3d-shadow" cx="70" cy="125" rx="34" ry="4.5" fill="#0f172a"/>
 
-        <!-- ============================================== -->
-        <!-- 1. SIDE-PROFILE WALKING VIEW (Active during Walk) -->
-        <!-- ============================================== -->
-        <g class="side-walk-view" filter="url(#hbShadow)">
-          <!-- Side Back Leg -->
-          <g class="side-leg-back-elem">
-            <path d="M62 82 L58 102 L56 116 L65 116 L68 102 L70 82 Z" fill="#1e293b"/>
-            <!-- Back Shoe -->
-            <path d="M52 115 L68 115 Q72 115 72 118 L72 122 L48 122 Q48 118 52 115 Z" fill="#451a03"/>
-          </g>
-
-          <!-- Side Front Leg -->
-          <g class="side-leg-front-elem">
-            <path d="M68 82 L72 102 L74 116 L83 116 L80 102 L76 82 Z" fill="url(#hbPants)"/>
-            <!-- Front Shoe -->
-            <path d="M68 115 L86 115 Q90 115 90 118 L90 122 L64 122 Q64 118 68 115 Z" fill="url(#hbShoe)"/>
-          </g>
-
-          <!-- Side Body, Head, and Arm holding water -->
-          <g class="side-body-elem">
-            <!-- Torso: Side Blue Shirt -->
-            <path d="M56 56 L78 56 L82 84 L58 84 Z" fill="url(#hbShirt)" stroke="#0f172a" stroke-width="1.8"/>
-            <path d="M58 82 L82 82 L82 86 L58 86 Z" fill="#0f172a"/>
-
-            <!-- Arm holding Water Glass -->
-            <g>
-              <path d="M68 58 L82 72 L88 70" stroke="url(#hbShirt)" stroke-width="10" stroke-linecap="round" fill="none"/>
-              <circle cx="89" cy="70" r="4.5" fill="url(#hbSkin)"/>
-              <!-- Water Glass with Ice in Side View -->
-              <path d="M86 60 L98 60 L96 74 L88 74 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4" opacity="0.9"/>
-              <path d="M87 64 L97 64 L95 73 L89 73 Z" fill="url(#waterGlass)"/>
-              <rect x="89" y="66" width="3" height="3" rx="0.5" fill="white" opacity="0.8"/>
-            </g>
-
-            <!-- Neck in Side View -->
-            <rect x="64" y="48" width="9" height="9" fill="url(#hbSkin)"/>
-            <!-- White Collar -->
-            <polygon points="63,56 74,56 71,51" fill="white"/>
-
-            <!-- Head in Side Profile -->
-            <path d="M56 36 C56 22 70 18 80 26 C86 31 87 40 85 48 C81 54 70 54 62 50 C58 46 56 41 56 36 Z" 
-                  fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.8"/>
-
-            <!-- Beard and Mustache in Side View -->
-            <path d="M72 44 Q83 45 80 50 Q73 54 66 52 Z" fill="#64748b"/>
-            <path d="M75 42 Q83 42 81 45 Z" fill="#475569"/>
-
-            <!-- Side Hair (Swept Back Grey) -->
-            <path d="M54 36 C52 20 66 14 78 14 C84 14 86 19 82 23 C76 21 68 22 62 27 C58 31 56 36 54 36 Z" 
-                  fill="url(#hbHair)"/>
-
-            <!-- Glasses in Side View -->
-            <rect x="73" y="32" width="12" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
-            <line x1="64" y1="34" x2="73" y2="34" stroke="#0f172a" stroke-width="1.8"/>
-            <!-- Eye behind glasses -->
-            <circle cx="78" cy="36" r="1.8" fill="#0f172a"/>
-
-            <!-- Ear -->
-            <ellipse cx="62" cy="38" rx="3.5" ry="4.5" fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.2"/>
-          </g>
+        <!-- 3D Front Left Leg and Shoe (Forward Stepping) -->
+        <g class="hb3d-leg-l">
+          <rect x="49" y="84" width="13" height="32" rx="6.5" fill="url(#hb3dPantsL)" stroke="#0f172a" stroke-width="1.2"/>
+          <!-- 3D Shoe with Highlight and Heel -->
+          <path d="M44 116 L64 116 Q69 116 69 120 L69 124 L42 124 Q42 120 44 116 Z" fill="url(#hb3dShoe)" stroke="#1c1917" stroke-width="1.2"/>
+          <ellipse cx="55" cy="117.5" rx="7" ry="1.8" fill="#f59e0b" opacity="0.35"/>
         </g>
 
-        <!-- ============================================== -->
-        <!-- 2. FRONT-FACING POSE VIEW (Active during Pose) -->
-        <!-- ============================================== -->
-        <g class="front-pose-view" filter="url(#hbShadow)">
-          <g class="front-pose-body">
-            <!-- Both Legs Planted Side by Side -->
-            <g>
-              <rect x="48" y="82" width="12" height="34" rx="4" fill="url(#hbPants)"/>
-              <rect x="68" y="82" width="12" height="34" rx="4" fill="url(#hbPants)"/>
-              <!-- Shoes Planted -->
-              <path d="M44 114 L62 114 Q66 114 66 118 L66 122 L42 122 Q42 118 44 114 Z" fill="url(#hbShoe)"/>
-              <path d="M66 114 L84 114 Q88 114 88 118 L88 122 L64 122 Q64 118 66 114 Z" fill="url(#hbShoe)"/>
-            </g>
+        <!-- 3D Front Right Leg and Shoe (Counter Stepping) -->
+        <g class="hb3d-leg-r">
+          <rect x="78" y="84" width="13" height="32" rx="6.5" fill="url(#hb3dPantsR)" stroke="#0f172a" stroke-width="1.2"/>
+          <!-- 3D Shoe with Highlight and Heel -->
+          <path d="M73 116 L93 116 Q98 116 98 120 L98 124 L71 124 Q71 120 73 116 Z" fill="url(#hb3dShoe)" stroke="#1c1917" stroke-width="1.2"/>
+          <ellipse cx="84" cy="117.5" rx="7" ry="1.8" fill="#f59e0b" opacity="0.35"/>
+        </g>
 
-            <!-- Torso: Light Blue Polo Shirt with Placket -->
-            <path d="M43 56 L85 56 L88 84 L40 84 Z" fill="url(#hbShirt)" stroke="#0f172a" stroke-width="1.8"/>
-            <rect x="40" y="82" width="48" height="5" fill="#0f172a"/>
-            <!-- Placket and Pen in Pocket -->
-            <rect x="62" y="56" width="4" height="15" fill="#93c5fd"/>
-            <circle cx="64" cy="62" r="1" fill="#1e293b"/>
-            <circle cx="64" cy="68" r="1" fill="#1e293b"/>
-            <!-- Pocket with Pen -->
-            <path d="M72 65 L81 65 L80 73 L73 73 Z" fill="#93c5fd" stroke="#3b82f6" stroke-width="1"/>
-            <line x1="77" y1="62" x2="77" y2="67" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round"/>
-
-            <!-- Left Arm: Resting at Waist / Hip -->
-            <g>
-              <path d="M42 58 L32 72 L36 78" stroke="url(#hbShirt)" stroke-width="9" stroke-linecap="round" fill="none"/>
-              <circle cx="37" cy="80" r="4.5" fill="url(#hbSkin)"/>
-              <!-- Watch -->
-              <rect x="33" y="74" width="7" height="2.5" rx="1" fill="#0f172a"/>
-            </g>
-
-            <!-- Right Arm: Raised Holding Water Glass in Cheers / Toast -->
-            <g>
-              <path d="M85 58 L98 64 L96 74" stroke="url(#hbShirt)" stroke-width="9" stroke-linecap="round" fill="none"/>
-              <circle cx="95" cy="76" r="4.5" fill="url(#hbSkin)"/>
-              <!-- Glass of Water with Ice -->
-              <path d="M91 62 L105 62 L103 76 L93 76 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.6" opacity="0.95"/>
-              <path d="M92 66 L104 66 L102 75 L94 75 Z" fill="url(#waterGlass)"/>
-              <rect x="94" y="68" width="3.5" height="3.5" rx="0.5" fill="white" opacity="0.85"/>
-              <rect x="99" y="70" width="2.5" height="2.5" rx="0.5" fill="white" opacity="0.75"/>
-            </g>
-
-            <!-- Neck and White Collar -->
-            <rect x="59" y="48" width="10" height="9" fill="url(#hbSkin)"/>
-            <polygon points="56,56 64,56 60,50" fill="white"/>
-            <polygon points="72,56 64,56 68,50" fill="white"/>
-
-            <!-- Head: Facing Front -->
-            <ellipse cx="64" cy="40" rx="18" ry="17" fill="url(#hbSkin)" stroke="#0f172a" stroke-width="1.8"/>
-
-            <!-- Salt-and-Pepper Hair -->
-            <path d="M46 36 C44 20 54 13 64 13 C74 13 84 20 82 36 C78 28 72 26 64 26 C56 26 50 28 46 36 Z" 
-                  fill="url(#hbHair)"/>
-            <!-- Side Hair Volume -->
-            <path d="M45 36 C43 40 45 44 47 46" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M83 36 C85 40 83 44 81 46" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-            <!-- Beard and Mustache -->
-            <path d="M52 42 C52 53 76 53 76 42 C74 48 70 51 64 51 C58 51 54 48 52 42 Z" fill="#64748b"/>
-            <path d="M57 43 Q64 41 71 43 Q64 46 57 43 Z" fill="#475569"/>
-
-            <!-- Glasses (Rectangular Black Frames) -->
-            <rect x="51" y="32" width="11" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
-            <rect x="66" y="32" width="11" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
-            <line x1="62" y1="36" x2="66" y2="36" stroke="#0f172a" stroke-width="2"/>
-
-            <!-- Eyes behind Glasses with Blink -->
-            <g class="hb-eyes">
-              <circle cx="56.5" cy="36" r="2.2" fill="#0f172a"/>
-              <circle cx="71.5" cy="36" r="2.2" fill="#0f172a"/>
-              <circle cx="57.5" cy="35" r="0.9" fill="white"/>
-              <circle cx="72.5" cy="35" r="0.9" fill="white"/>
-            </g>
-
-            <!-- Warm Friendly Smile -->
-            <path class="hb-mouth" d="M59 46 Q64 50 69 46" stroke="#0f172a" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-            <!-- Cheeks -->
-            <ellipse cx="50" cy="40" rx="3" ry="2" fill="#f43f5e" opacity="0.3"/>
-            <ellipse cx="78" cy="40" rx="3" ry="2" fill="#f43f5e" opacity="0.3"/>
+        <!-- 3D Torso, Arms, and Head (Walk Bobbing in Front Perspective) -->
+        <g class="hb3d-body-all" filter="url(#hb3dShadow)">
+          <!-- Left Arm Swaying in 3D Perspective -->
+          <g class="hb3d-arm-l">
+            <path d="M44 60 L32 75 L36 82" stroke="url(#hb3dArmL)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M44 60 L32 75 L36 82" stroke="#1d4ed8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <!-- 3D Hand Resting / Clenched softly -->
+            <circle cx="37" cy="84" r="5" fill="url(#hb3dHead)"/>
+            <!-- Metallic Smartwatch -->
+            <rect x="32" y="77" width="9" height="3.5" rx="1.5" fill="#0f172a"/>
+            <rect x="34.5" y="78" width="4" height="2" rx="0.5" fill="#38bdf8"/>
           </g>
+
+          <!-- Right Arm Raised in Cheerful Toast Holding 3D Water Glass -->
+          <g class="hb3d-arm-r">
+            <path d="M96 60 L110 68 L107 78" stroke="url(#hb3dArmR)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M96 60 L110 68 L107 78" stroke="#1d4ed8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <!-- 3D Hand Grasping Glass -->
+            <circle cx="106" cy="80" r="5" fill="url(#hb3dHead)"/>
+
+            <!-- 3D Sparkling Crystal Glass with Ice &amp; Water -->
+            <g class="hb3d-slosh" filter="url(#hbWaterGlow)">
+              <!-- Glass Outline and Translucency -->
+              <path d="M100 64 L117 64 L114 81 L103 81 Z" fill="url(#hb3dGlass)" stroke="#0284c7" stroke-width="1.4"/>
+              <!-- Refreshing Blue Water Level -->
+              <path d="M101.5 68 L115.5 68 L113.2 80 L103.8 80 Z" fill="url(#hb3dWater)"/>
+              <!-- Floating Ice Cubes in 3D -->
+              <rect x="103.5" y="70" width="4" height="4" rx="1" fill="#ffffff" opacity="0.85"/>
+              <rect x="110" y="72" width="3" height="3" rx="0.8" fill="#ffffff" opacity="0.75"/>
+              <!-- Specular Glass Highlights (Vertical Sheen) -->
+              <path d="M102 65 L104 80" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.85"/>
+              <circle cx="114" cy="67" r="1" fill="#ffffff" opacity="0.9"/>
+            </g>
+          </g>
+
+          <!-- Volumetric 3D Polo Shirt (Torso) -->
+          <path d="M43 58 L97 58 L100 86 L40 86 Z" fill="url(#hb3dShirt)" stroke="#1e3a8a" stroke-width="1.4"/>
+          <!-- Belt Line -->
+          <rect x="40" y="84" width="60" height="4.5" rx="1" fill="#0f172a"/>
+          <rect x="67" y="84" width="6" height="4.5" rx="1" fill="#facc15"/>
+
+          <!-- Polo Collar and Center Placket -->
+          <rect x="68" y="58" width="4" height="15" fill="#93c5fd"/>
+          <circle cx="70" cy="64" r="1.2" fill="#1e293b"/>
+          <circle cx="70" cy="70" r="1.2" fill="#1e293b"/>
+          <!-- 3D Collar Flaps -->
+          <polygon points="56,58 68,58 62,51" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+          <polygon points="84,58 72,58 78,51" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
+
+          <!-- Chest Pocket with Stylus / Pen -->
+          <path d="M80 67 L90 67 L89 76 L81 76 Z" fill="#60a5fa" stroke="#2563eb" stroke-width="1"/>
+          <line x1="85" y1="64" x2="85" y2="69" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
+
+          <!-- Volumetric 3D Neck -->
+          <rect x="65" y="49" width="10" height="10" fill="url(#hb3dNeck)"/>
+
+          <!-- 3D Character Head (Spherical Depth and Warm Lighting) -->
+          <ellipse cx="70" cy="41" rx="20" ry="19" fill="url(#hb3dHead)" stroke="#c2410c" stroke-width="1.4"/>
+
+          <!-- 3D Ears with Inner Depth -->
+          <ellipse cx="49" cy="42" rx="3.5" ry="5" fill="url(#hb3dHead)" stroke="#c2410c" stroke-width="1"/>
+          <ellipse cx="91" cy="42" rx="3.5" ry="5" fill="url(#hb3dHead)" stroke="#c2410c" stroke-width="1"/>
+
+          <!-- 3D Salt-and-Pepper Styled Volumetric Hair -->
+          <path d="M49 37 C47 20 59 12 70 12 C81 12 93 20 91 37 C87 29 80 27 70 27 C60 27 53 29 49 37 Z" 
+                fill="url(#hb3dHair)" filter="url(#hb3dShadow)"/>
+          <!-- Hair Specular Highlights (Top Sheen) -->
+          <path d="M57 20 Q70 16 83 20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <!-- Side Hair Volume Swirls -->
+          <path d="M48 37 C46 41 48 45 50 47" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M92 37 C94 41 92 45 90 47" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+          <!-- 3D Groomed Mustache and Beard with Shadow -->
+          <path d="M57 43 C57 55 83 55 83 43 C81 50 77 53 70 53 C63 53 59 50 57 43 Z" fill="#475569" stroke="#334155" stroke-width="1.2"/>
+          <path d="M62 44 Q70 41 78 44 Q70 48 62 44 Z" fill="#334155"/>
+
+          <!-- 3D Glasses (Modern Dark Frames with Glossy Glare) -->
+          <rect x="56" y="33" width="12" height="9" rx="2.5" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+          <rect x="72" y="33" width="12" height="9" rx="2.5" fill="none" stroke="#0f172a" stroke-width="2.2"/>
+          <line x1="68" y1="37" x2="72" y2="37" stroke="#0f172a" stroke-width="2.2"/>
+          <!-- Glasses Diagonal Glare -->
+          <line x1="58" y1="40" x2="63" y2="35" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+          <line x1="74" y1="40" x2="79" y2="35" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+
+          <!-- Eyes with Natural Blink -->
+          <g class="hb3d-eyes">
+            <circle cx="62" cy="37.5" r="2.4" fill="#0f172a"/>
+            <circle cx="78" cy="37.5" r="2.4" fill="#0f172a"/>
+            <circle cx="63" cy="36.5" r="0.9" fill="#ffffff"/>
+            <circle cx="79" cy="36.5" r="0.9" fill="#ffffff"/>
+          </g>
+
+          <!-- 3D Expressive Speaking Smile -->
+          <path class="hb3d-mouth" d="M64 47 Q70 52 76 47" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+          <!-- Rosy Cheeks -->
+          <ellipse cx="55" cy="42" rx="3.5" ry="2.2" fill="#f43f5e" opacity="0.35"/>
+          <ellipse cx="85" cy="42" rx="3.5" ry="2.2" fill="#f43f5e" opacity="0.35"/>
         </g>
       </svg>
     `)}`,
