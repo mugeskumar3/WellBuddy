@@ -1,4 +1,5 @@
 import { Tray, Menu, nativeImage, app } from 'electron';
+import path from 'path';
 import { ReminderScheduler } from '../engine/scheduler';
 import { DatabaseService } from '../../database';
 
@@ -21,15 +22,21 @@ export class TrayManager {
   initialize(): void {
     if (this.tray) return;
 
-    // Create crisp 16x16 / 32x32 tray icon from SVG data URL
-    const iconSvg = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="14" fill="#0d9488"/>
-        <path d="M16 6 C16 6 9 14.5 9 19.5 C9 23.36 12.14 26.5 16 26.5 C19.86 26.5 23 23.36 23 19.5 C23 14.5 16 6 16 6 Z" fill="#ffffff"/>
-      </svg>
-    `;
-    const iconDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(iconSvg)}`;
-    const icon = nativeImage.createFromDataURL(iconDataUrl);
+    // Use high-fidelity branded app icon with SVG fallback
+    const iconFile = path.join(app.getAppPath(), 'public/icon.png');
+    let icon = nativeImage.createFromPath(iconFile);
+    if (!icon.isEmpty()) {
+      icon = icon.resize({ width: 22, height: 22 });
+    } else {
+      const iconSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <circle cx="16" cy="16" r="14" fill="#0d9488"/>
+          <path d="M16 6 C16 6 9 14.5 9 19.5 C9 23.36 12.14 26.5 16 26.5 C19.86 26.5 23 23.36 23 19.5 C23 14.5 16 6 16 6 Z" fill="#ffffff"/>
+        </svg>
+      `;
+      const iconDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(iconSvg)}`;
+      icon = nativeImage.createFromDataURL(iconDataUrl);
+    }
 
     this.tray = new Tray(icon);
     this.tray.setToolTip('WellBuddy — Desktop Wellness Companion');

@@ -19,6 +19,8 @@ export class DashboardWindowManager {
       return this.window;
     }
 
+    const iconPath = path.join(app.getAppPath(), 'public/icon.png');
+
     this.window = new BrowserWindow({
       width: 1040,
       height: 720,
@@ -27,6 +29,7 @@ export class DashboardWindowManager {
       title: 'WellBuddy — Desktop Wellness Companion',
       backgroundColor: '#f8fafc',
       show: true,
+      icon: iconPath,
       webPreferences: {
         preload: this.preloadPath,
         contextIsolation: true,

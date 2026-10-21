@@ -59,6 +59,7 @@ export interface AvatarInfo {
   name: string;
   type: AvatarType;
   src: string; // data URI or local path
+  modelSrc?: string; // Optional 3D GLTF / GLB model path for 3D companions
   description: string;
 }
 

@@ -132,8 +132,12 @@ export const DashboardApp: React.FC = () => {
         <div>
           {/* Logo & App Brand */}
           <div className="flex items-center gap-3 px-2 py-3 mb-4">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center text-white shadow-sm font-black text-lg">
-              W
+            <div className="relative w-10 h-10 rounded-2xl overflow-hidden shadow-md ring-1 ring-slate-900/10 dark:ring-white/10 flex-shrink-0 group">
+              <img
+                src="./logo.png"
+                alt="WellBuddy Logo"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
             <div>
               <h1 className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white leading-none">

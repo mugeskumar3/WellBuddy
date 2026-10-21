@@ -18,6 +18,9 @@ if (!gotTheLock) {
   process.exit(0);
 }
 
+// Increase Chromium's max active WebGL contexts so all 3D model cards in the gallery render smoothly
+app.commandLine.appendSwitch('max-active-webgl-contexts', '64');
+
 let isQuitting = false;
 
 async function bootstrap() {
@@ -29,7 +32,7 @@ async function bootstrap() {
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': [
-          "default-src 'self' 'unsafe-inline' data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;",
+          "default-src 'self' 'unsafe-inline' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' data: blob: https:;",
         ],
       },
     });

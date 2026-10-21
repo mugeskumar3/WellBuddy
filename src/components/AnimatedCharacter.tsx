@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { AvatarInfo } from '@shared/types';
 import { LottieLight } from 'lottie-react';
 import { PixelCompanion } from './PixelCompanion';
+import { ModelViewerCompanion } from './ModelViewerCompanion';
 
 interface AnimatedCharacterProps {
   avatar: AvatarInfo;
@@ -50,6 +51,12 @@ export const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
   sizeClasses = 'w-28 h-28',
   onClick,
 }) => {
+  const is3DModel = Boolean(
+    avatar.modelSrc ||
+    avatar.src?.endsWith('.glb') ||
+    avatar.src?.endsWith('.gltf') ||
+    avatar.id?.startsWith('3d-')
+  );
   const isPixel = Boolean(
     avatar.id?.startsWith('pixel-') ||
     avatar.src?.includes('shape-rendering="crispEdges"') ||
@@ -69,7 +76,7 @@ export const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`drag-region cursor-grab active:cursor-grabbing transition-all duration-300 rounded-2xl filter drop-shadow-xl flex items-center justify-center ${sizeClasses} ${
+      className={`interactive-area pointer-events-auto cursor-pointer transition-all duration-300 rounded-2xl filter drop-shadow-xl flex items-center justify-center ${sizeClasses} ${
         isWaving
           ? 'animate-mascot-celebrate'
           : isSpeaking
@@ -77,8 +84,20 @@ export const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           : 'hover:scale-105'
       }`}
     >
-      {/* 1. Interactive Retro Pixel Art Companion (Match for Desktop Pet Video) */}
-      {isPixel ? (
+      {/* 1. Real 3D Skeletal Mesh Companion (Google <model-viewer>) */}
+      {is3DModel ? (
+        <ModelViewerCompanion
+          src={avatar.modelSrc || avatar.src}
+          alt={avatar.name}
+          isWalking={isWalking}
+          isWaving={isWaving}
+          isSpeaking={isSpeaking}
+          isCelebrating={isCelebrating}
+          isDrinking={isDrinking}
+          className="w-full h-full"
+        />
+      ) : isPixel ? (
+        /* 2. Interactive Retro Pixel Art Companion */
         <PixelCompanion
           id={avatar.id}
           isWalking={isWalking}

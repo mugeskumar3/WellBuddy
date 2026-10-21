@@ -4,6 +4,7 @@ import { AvatarInfo } from './types';
 export const BUILT_IN_AVATARS: AvatarInfo[] = [
   {
     id: 'water-drop',
+    modelSrc: './models/duck.glb',
     name: 'Aqua the Droplet',
     type: 'builtin',
     description: 'Active water companion with splashing droplets, sloshing liquid waves, and bouncy walking steps.',
@@ -167,7 +168,113 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
     `)}`,
   },
   {
+    id: '3d-shiba',
+    name: 'Shiba Inu 3D Pet',
+    type: 'builtin',
+    modelSrc: './models/shiba-pet.glb',
+    description: 'Delightful 3D Shiba Inu pet companion rendered with Google model-viewer. Features Idle breathing, Walk, Gallop celebration jump, and Eating/Drinking bowl animations.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+        <defs>
+          <linearGradient id="shibaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#d97706"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="#0f172a"/>
+        <polygon points="50,26 76,58 24,58" fill="url(#shibaGrad)"/>
+        <polygon points="32,32 26,14 42,26" fill="#b45309"/>
+        <polygon points="68,32 74,14 58,26" fill="#b45309"/>
+        <polygon points="40,46 60,46 50,58" fill="#ffffff"/>
+        <circle cx="42" cy="40" r="3.5" fill="#18181b"/>
+        <circle cx="58" cy="40" r="3.5" fill="#18181b"/>
+        <circle cx="43" cy="39" r="1" fill="#ffffff"/>
+        <circle cx="59" cy="39" r="1" fill="#ffffff"/>
+        <polygon points="50,50 46,46 54,46" fill="#18181b"/>
+        <rect x="24" y="70" width="52" height="16" rx="4" fill="#f59e0b"/>
+        <text x="50" y="82" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold" font-family="sans-serif">3D SHIBA</text>
+      </svg>
+    `)}`,
+  },
+  {
+    id: '3d-human',
+    name: 'Alex the 3D Hero',
+    type: 'builtin',
+    modelSrc: './models/platformer-buddy.glb',
+    description: 'Stylized 3D platformer companion rendered with Google model-viewer. Features Idle, Walk, Run, Wave greeting, Yes encouragement, and Jump celebration.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+        <defs>
+          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec4899"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="#0f172a"/>
+        <circle cx="50" cy="38" r="18" fill="#fed7aa"/>
+        <path d="M32 32 C32 18 68 18 68 32 C68 24 32 24 32 32 Z" fill="#3b82f6"/>
+        <circle cx="44" cy="38" r="3" fill="#0f172a"/>
+        <circle cx="56" cy="38" r="3" fill="#0f172a"/>
+        <path d="M46 45 Q50 49 54 45" stroke="#e11d48" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <rect x="34" y="52" width="32" height="15" rx="6" fill="url(#heroGrad)"/>
+        <rect x="24" y="70" width="52" height="16" rx="4" fill="#ec4899"/>
+        <text x="50" y="82" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold" font-family="sans-serif">3D HUMAN</text>
+      </svg>
+    `)}`,
+  },
+  {
+    id: '3d-chibi',
+    name: 'Chibi Bot 3D',
+    type: 'builtin',
+    modelSrc: './models/chibi-companion.glb',
+    description: 'Proper 3D animated companion rendered with Google model-viewer. Features 3D skeletal animations: Walking, Idle, Dance celebration, Wave, Jump, and ThumbsUp.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+        <defs>
+          <linearGradient id="chibi3dGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="#0f172a"/>
+        <rect x="25" y="24" width="50" height="38" rx="12" fill="url(#chibi3dGrad)"/>
+        <circle cx="38" cy="40" r="4.5" fill="#ffffff"/>
+        <circle cx="62" cy="40" r="4.5" fill="#ffffff"/>
+        <path d="M42 51 Q50 58 58 51" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <rect x="24" y="70" width="52" height="16" rx="4" fill="#38bdf8"/>
+        <text x="50" y="82" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold" font-family="sans-serif">3D MODEL</text>
+      </svg>
+    `)}`,
+  },
+  {
+    id: '3d-fox',
+    name: 'Kitsune the 3D Fox',
+    type: 'builtin',
+    modelSrc: './models/pet-fox.glb',
+    description: '3D animated cute fox companion rendered with Google model-viewer. Features 3D skeletal animations: Survey idle, Walk, and Run.',
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+        <defs>
+          <linearGradient id="fox3dGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fb923c"/>
+            <stop offset="100%" stop-color="#ea580c"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="#0f172a"/>
+        <polygon points="50,22 75,60 25,60" fill="url(#fox3dGrad)"/>
+        <polygon points="30,28 25,15 40,24" fill="#ea580c"/>
+        <polygon points="70,28 75,15 60,24" fill="#ea580c"/>
+        <circle cx="42" cy="42" r="3.5" fill="#ffffff"/>
+        <circle cx="58" cy="42" r="3.5" fill="#ffffff"/>
+        <polygon points="50,52 46,47 54,47" fill="#1e293b"/>
+        <rect x="24" y="70" width="52" height="16" rx="4" fill="#fb923c"/>
+        <text x="50" y="82" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold" font-family="sans-serif">3D MODEL</text>
+      </svg>
+    `)}`,
+  },
+  {
     id: 'pixel-buddy',
+    modelSrc: './models/platformer-buddy.glb',
     name: 'Pranjali the Pixel Desk Buddy',
     type: 'builtin',
     description: 'Cozy pixel-art desktop companion with natural walking steps, water drinking animation on hydration alerts, and celebration jumps with hearts and sparkles.',
@@ -236,6 +343,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'pixel-cat',
+    modelSrc: './models/cat-tabby.glb',
     name: 'Mochi the Pixel Cat',
     type: 'builtin',
     description: 'Charming retro ginger tabby cat desktop companion that walks, wags its tail, and drinks from its saucer.',
@@ -285,6 +393,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'robobuddy',
+    modelSrc: './models/robot-expressive.glb',
     name: 'Bolt the RoboBuddy',
     type: 'builtin',
     description: 'Robotic cyber buddy with marching walkable mechanical legs, rocket jet thrusters, swinging arms, and scanner beam.',
@@ -471,6 +580,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'sprout',
+    modelSrc: './models/plant.glb',
     name: 'Sprout the Seedling',
     type: 'builtin',
     description: 'Active plant buddy with growing stretch posture, blooming vibrant flower, dancing leaves, and stepping roots.',
@@ -630,6 +740,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'pippy-cat',
+    modelSrc: './models/cat-tabby.glb',
     name: 'Pippy the Kitty',
     type: 'builtin',
     description: 'Walkable 4-legged animated kitten mascot who trots in side profile, turns front to sit and wave playfully.',
@@ -919,6 +1030,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'zen-pebble',
+    modelSrc: './models/dragon.glb',
     name: 'Zen the Pebble',
     type: 'builtin',
     description: 'Levitating meditation stone with 3 revolving energy chakra orbs, pulsing lotus crown, and expanding aura rings.',
@@ -1025,6 +1137,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'sparky-star',
+    modelSrc: './models/astronaut.glb',
     name: 'Sparky the Star',
     type: 'builtin',
     description: 'Dynamic cosmic star with stepping rocket boots, rotating celestial corona, and shooting sparkles.',
@@ -1126,6 +1239,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'doraemon',
+    modelSrc: './models/doraemon.glb',
     name: 'Doraemon (டோரேமான்)',
     type: 'builtin',
     description: 'Beloved robotic cat who walks in side profile with counter-swinging arms, turns front to wave cheerfully and speak.',
@@ -1448,6 +1562,7 @@ export const BUILT_IN_AVATARS: AvatarInfo[] = [
   },
   {
     id: 'human-buddy',
+    modelSrc: './models/cesium-man.glb',
     name: 'Dr. Buddy (நலன் நண்பன்)',
     type: 'builtin',
     description: '3D animated AI-style wellness mentor in full front perspective, holding a refreshing glass of water with walking strides and gentle encouragement.',

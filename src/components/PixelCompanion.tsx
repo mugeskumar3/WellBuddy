@@ -65,7 +65,7 @@ export const PixelCompanion: React.FC<PixelCompanionProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`relative select-none pointer-events-auto flex items-center justify-center cursor-pointer transition-transform duration-200 active:scale-95 ${className}`}
+      className={`relative select-none pointer-events-auto flex items-center justify-center cursor-pointer transition-transform duration-200 ${className}`}
       style={{ imageRendering: 'pixelated' }}
     >
       {isCat ? (

@@ -34,11 +34,14 @@ export class CompanionWindowManager {
       posY = screenHeight - winHeight - 30;
     }
 
+    const iconPath = path.join(app.getAppPath(), 'public/icon.png');
+
     this.window = new BrowserWindow({
       width: winWidth,
       height: winHeight,
       x: posX,
       y: posY,
+      icon: iconPath,
       transparent: true,
       backgroundColor: '#00000000',
       frame: false,

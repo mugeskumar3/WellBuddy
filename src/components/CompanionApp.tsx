@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { api } from '../services/api';
 import { ActivePromptInfo, AvatarInfo, UserPreferences } from '@shared/types';
 import { BUILT_IN_AVATARS } from '@shared/built-in-avatars';
@@ -120,6 +120,12 @@ export const CompanionApp: React.FC = () => {
   const [isWaving, setIsWaving] = useState<boolean>(false);
   const [isWalking, setIsWalking] = useState<boolean>(true);
   const [isCelebrating, setIsCelebrating] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  const mascotRef = useRef<HTMLDivElement | null>(null);
+  const isDraggingRef = useRef<boolean>(false);
+  const dragStartRef = useRef<{ mouseX: number; mouseY: number; winX: number; winY: number } | null>(null);
+  const windowPosRef = useRef<{ x: number; y: number }>({ x: 100, y: 100 });
 
   const lang: 'en' | 'ta' = prefs?.language === 'ta' ? 'ta' : 'en';
   const t = STRINGS[lang];
@@ -154,10 +160,16 @@ export const CompanionApp: React.FC = () => {
     // Initial fetch
     api.getPreferences().then((loadedPrefs) => {
       setPrefs(loadedPrefs);
+      if (loadedPrefs?.companionPosition) {
+        windowPosRef.current = loadedPrefs.companionPosition;
+      }
       const currentLang = loadedPrefs?.language === 'ta' ? 'ta' : 'en';
       const initialGreeting = STRINGS[currentLang].greeting;
       setSpeechText(initialGreeting);
       playSpeech(initialGreeting, currentLang, loadedPrefs);
+    });
+    api.getCompanionPosition().then((pos) => {
+      if (pos) windowPosRef.current = pos;
     });
     api.getAvatars().then(setAvatars);
 
@@ -202,15 +214,45 @@ export const CompanionApp: React.FC = () => {
     let isIgnoring = true;
 
     const handleMouseMove = (event: MouseEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (!target) return;
+      let isInteractive = false;
 
-      const isInteractive = Boolean(
-        target.closest('.interactive-area') ||
-        target.closest('button') ||
-        target.closest('.drag-region') ||
-        target.closest('.no-drag-region')
-      );
+      // 1. Dynamic real-time bounding box test for the moving mascot (tracks CSS transforms accurately)
+      if (mascotRef.current) {
+        const rect = mascotRef.current.getBoundingClientRect();
+        if (
+          event.clientX >= rect.left - 8 &&
+          event.clientX <= rect.right + 8 &&
+          event.clientY >= rect.top - 8 &&
+          event.clientY <= rect.bottom + 8
+        ) {
+          isInteractive = true;
+        }
+      }
+
+      // 2. Standard DOM check for speech bubble, controls bar, and buttons
+      if (!isInteractive) {
+        const target = event.target as HTMLElement | null;
+        if (target) {
+          isInteractive = Boolean(
+            target.closest('.interactive-area') ||
+            target.closest('button') ||
+            target.closest('.drag-region') ||
+            target.closest('.no-drag-region')
+          );
+        }
+
+        if (!isInteractive) {
+          const elemUnderMouse = document.elementFromPoint(event.clientX, event.clientY) as HTMLElement | null;
+          if (elemUnderMouse) {
+            isInteractive = Boolean(
+              elemUnderMouse.closest('.interactive-area') ||
+              elemUnderMouse.closest('button') ||
+              elemUnderMouse.closest('.drag-region') ||
+              elemUnderMouse.closest('.no-drag-region')
+            );
+          }
+        }
+      }
 
       if (isInteractive) {
         if (isIgnoring) {
@@ -218,7 +260,7 @@ export const CompanionApp: React.FC = () => {
           api.setIgnoreMouseEvents(false);
         }
       } else {
-        if (!isIgnoring) {
+        if (!isDraggingRef.current && !isIgnoring) {
           isIgnoring = true;
           api.setIgnoreMouseEvents(true, true);
         }
@@ -226,7 +268,7 @@ export const CompanionApp: React.FC = () => {
     };
 
     const handleMouseLeave = () => {
-      if (!isIgnoring) {
+      if (!isDraggingRef.current && !isIgnoring) {
         isIgnoring = true;
         api.setIgnoreMouseEvents(true, true);
       }
@@ -286,6 +328,67 @@ export const CompanionApp: React.FC = () => {
     setTimeout(() => setSpeechText(''), 4500);
   };
 
+  const handleMascotMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+
+    const startX = e.screenX;
+    const startY = e.screenY;
+    const initialWinPos = { ...windowPosRef.current };
+
+    dragStartRef.current = {
+      mouseX: startX,
+      mouseY: startY,
+      winX: initialWinPos.x,
+      winY: initialWinPos.y,
+    };
+    isDraggingRef.current = false;
+
+    // Refresh position in background without blocking interaction
+    api.getCompanionPosition().then((pos) => {
+      if (pos && dragStartRef.current && !isDraggingRef.current) {
+        dragStartRef.current.winX = pos.x;
+        dragStartRef.current.winY = pos.y;
+        windowPosRef.current = pos;
+      }
+    });
+
+    const onWindowMouseMove = (moveEvent: MouseEvent) => {
+      if (!dragStartRef.current) return;
+      const dx = moveEvent.screenX - dragStartRef.current.mouseX;
+      const dy = moveEvent.screenY - dragStartRef.current.mouseY;
+
+      // Substantial 12px threshold: A click never exceeds 12px, eliminating accidental moves
+      if (Math.hypot(dx, dy) > 12) {
+        if (!isDraggingRef.current) {
+          isDraggingRef.current = true;
+          setIsDragging(true);
+        }
+        const newX = Math.round(dragStartRef.current.winX + dx);
+        const newY = Math.round(dragStartRef.current.winY + dy);
+        windowPosRef.current = { x: newX, y: newY };
+        api.setCompanionPosition({ x: newX, y: newY });
+      }
+    };
+
+    const onWindowMouseUp = () => {
+      window.removeEventListener('mousemove', onWindowMouseMove);
+      window.removeEventListener('mouseup', onWindowMouseUp);
+
+      if (!isDraggingRef.current) {
+        // Pure click: position was NEVER touched
+        handleMascotClick();
+      }
+
+      dragStartRef.current = null;
+      isDraggingRef.current = false;
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', onWindowMouseMove);
+    window.addEventListener('mouseup', onWindowMouseUp);
+  };
+
   const toggleLanguage = async () => {
     const nextLang: 'en' | 'ta' = lang === 'en' ? 'ta' : 'en';
     const updated = await api.updatePreferences({ language: nextLang });
@@ -297,6 +400,7 @@ export const CompanionApp: React.FC = () => {
   };
 
   const isSpeaking = Boolean(activePrompt || speechText || speechActive);
+  const isWalkActive = isWalking && !isDragging && !isWaving && !isCelebrating;
 
   const size = prefs?.companionSize || 'standard';
   const sizeClasses = {
@@ -383,9 +487,9 @@ export const CompanionApp: React.FC = () => {
       )}
 
       {/* Mascot & Controls Container */}
-      <div className="interactive-area pointer-events-auto relative group flex flex-col items-center">
+      <div className="relative group flex flex-col items-center">
         {/* Floating Controls Bar (Appears on hover) */}
-        <div className="no-drag-region absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1 bg-slate-900/85 backdrop-blur-sm text-white px-2 py-0.5 rounded-full text-[10px] shadow-lg">
+        <div className="no-drag-region interactive-area pointer-events-auto absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1 bg-slate-900/85 backdrop-blur-sm text-white px-2 py-0.5 rounded-full text-[10px] shadow-lg">
           <button
             onClick={() => setIsWalking(!isWalking)}
             title={isWalking ? 'Switch to Stationary' : 'Switch to Walking'}
@@ -419,17 +523,23 @@ export const CompanionApp: React.FC = () => {
           </button>
         </div>
 
-        {/* Mascot Avatar Container (Walkable & Draggable) */}
-        <div className={`transition-transform duration-500 ${isWalking && !isWaving && !isCelebrating ? 'animate-companion-walk' : ''}`}>
+        {/* Mascot Avatar Container (Walkable, Clickable wherever it moves, & Draggable) */}
+        <div
+          ref={mascotRef}
+          data-interactive="true"
+          onMouseDown={handleMascotMouseDown}
+          className={`interactive-area pointer-events-auto cursor-grab active:cursor-grabbing ${
+            isWalking ? 'animate-companion-walk' : ''
+          } ${!isWalkActive ? 'animate-companion-walk-paused' : ''}`}
+        >
           <AnimatedCharacter
             avatar={currentAvatar}
-            isWalking={isWalking}
+            isWalking={isWalkActive}
             isWaving={isWaving}
             isSpeaking={isSpeaking}
             isCelebrating={isCelebrating}
             isDrinking={Boolean(activePrompt && activePrompt.type === 'water')}
             sizeClasses={sizeClasses}
-            onClick={handleMascotClick}
           />
         </div>
       </div>

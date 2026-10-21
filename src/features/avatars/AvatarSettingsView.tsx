@@ -17,6 +17,8 @@ export const AvatarSettingsView: React.FC<AvatarSettingsViewProps> = ({
 }) => {
   const selectedId = prefs?.selectedAvatarId || 'water-drop';
 
+  const [hoveredId, setHoveredId] = React.useState<string | null>(null);
+
   const handleSelect = async (avatarId: string) => {
     await api.selectAvatar(avatarId);
     onRefresh();
@@ -114,6 +116,8 @@ export const AvatarSettingsView: React.FC<AvatarSettingsViewProps> = ({
                 <div
                   key={avatar.id}
                   onClick={() => handleSelect(avatar.id)}
+                  onMouseEnter={() => setHoveredId(avatar.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                   className={`bg-white dark:bg-slate-800 rounded-2xl p-4 border cursor-pointer transition-all flex flex-col items-center text-center group ${
                     isSelected
                       ? 'border-teal-500 ring-2 ring-teal-400/30 shadow-md'
@@ -124,12 +128,19 @@ export const AvatarSettingsView: React.FC<AvatarSettingsViewProps> = ({
                     <AnimatedCharacter
                       avatar={avatar}
                       sizeClasses="w-full h-full"
-                      isWalking={isSelected}
+                      isWalking={isSelected || hoveredId === avatar.id}
                     />
                   </div>
-                  <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">
-                    {avatar.name}
-                  </h4>
+                  <div className="flex items-center gap-1.5 justify-center mb-1">
+                    <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">
+                      {avatar.name}
+                    </h4>
+                    {avatar.modelSrc && (
+                      <span className="bg-sky-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                        3D
+                      </span>
+                    )}
+                  </div>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                     {avatar.description}
                   </p>
