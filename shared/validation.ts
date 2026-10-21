@@ -48,7 +48,14 @@ export const userPreferencesSchema = z.object({
   remindersPaused: z.boolean().optional(),
   pauseUntil: z.number().nullable().optional(),
   language: z.enum(['en', 'ta']).optional(),
-  ladyVoiceId: z.enum(['lily_cheerful', 'maya_gentle', 'chloe_energetic', 'tara_zen']).optional(),
+  ladyVoiceId: z.enum([
+    'lily_cheerful',
+    'maya_gentle',
+    'chloe_energetic',
+    'tara_zen',
+    'samantha_star',
+    'trisha_classic',
+  ]).optional(),
   selectedVoiceName: z.string().optional(),
 });
 

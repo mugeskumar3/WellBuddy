@@ -63,7 +63,13 @@ export interface AvatarInfo {
   description: string;
 }
 
-export type LadyVoiceId = 'lily_cheerful' | 'maya_gentle' | 'chloe_energetic' | 'tara_zen';
+export type LadyVoiceId =
+  | 'lily_cheerful'
+  | 'maya_gentle'
+  | 'chloe_energetic'
+  | 'tara_zen'
+  | 'samantha_star'
+  | 'trisha_classic';
 
 export interface UserPreferences {
   theme: 'light' | 'dark' | 'system';
